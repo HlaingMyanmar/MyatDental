@@ -18,7 +18,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/treatmentslayout/treatmentregister.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/appointmentlayouts/appointmentinsertview.fxml"));
         fxmlLoader.setControllerFactory(context::getBean);
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");

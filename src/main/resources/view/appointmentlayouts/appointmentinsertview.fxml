@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #f5f7fa; -fx-padding: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.appointmentsoptions.controller.AppointmentController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="800.0" style="-fx-background-color: #f5f7fa; -fx-padding: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.appointmentsoptions.controller.AppointmentController">
    <children>
       <HBox prefHeight="80.0" prefWidth="800.0" style="-fx-alignment: center; -fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
          <children>
@@ -39,9 +39,9 @@
             </VBox>
          </children>
       </HBox>
-      <HBox prefHeight="550.0" prefWidth="800.0" style="-fx-padding: 20;">
+      <HBox prefHeight="562.0" prefWidth="760.0" style="-fx-padding: 20;">
          <children>
-            <VBox prefHeight="510.0" prefWidth="380.0" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+            <VBox prefHeight="522.0" prefWidth="382.0" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
                <children>
                   <Label text="Patient Name" textFill="#2c3e50">
                      <font>
@@ -51,9 +51,9 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField prefHeight="40.0" prefWidth="350.0" promptText="Enter Patient Name" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <TextField fx:id="patientnametxt" prefHeight="40.0" prefWidth="350.0" promptText="Enter Patient Name" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                      <font>
-                        <Font name="System" size="14.0" />
+                        <Font name="Pyidaungsu" size="12.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
@@ -67,9 +67,9 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField prefHeight="40.0" prefWidth="350.0" promptText="Enter Phone Number" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <TextField fx:id="phonetxt" prefHeight="40.0" prefWidth="350.0" promptText="Enter Phone Number" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                      <font>
-                        <Font name="System" size="14.0" />
+                        <Font name="Pyidaungsu" size="12.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
@@ -85,22 +85,22 @@
                   </Label>
                   <HBox prefHeight="50.0" prefWidth="350.0">
                      <children>
-                        <DatePicker prefHeight="40.0" prefWidth="150.0" promptText="Select Date" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                        <DatePicker fx:id="dateofbirthbox" prefHeight="40.0" prefWidth="150.0" promptText="Select Date" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                            <HBox.margin>
                               <Insets right="5.0" top="5.0" />
                            </HBox.margin>
                         </DatePicker>
-                        <TextField prefHeight="40.0" prefWidth="60.0" promptText="Age" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                        <TextField fx:id="agetxt" prefHeight="40.0" prefWidth="60.0" promptText="Age" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                            <HBox.margin>
                               <Insets right="5.0" top="5.0" />
                            </HBox.margin>
                         </TextField>
-                        <JFXCheckBox text="Male" textFill="#2c3e50">
+                        <JFXCheckBox fx:id="malecheck" text="Male" textFill="#2c3e50">
                            <HBox.margin>
                               <Insets right="10.0" top="10.0" />
                            </HBox.margin>
                         </JFXCheckBox>
-                        <JFXCheckBox text="Female" textFill="#2c3e50">
+                        <JFXCheckBox fx:id="femalecheck" text="Female" textFill="#2c3e50">
                            <HBox.margin>
                               <Insets top="10.0" />
                            </HBox.margin>
@@ -118,7 +118,7 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox editable="true" prefHeight="40.0" prefWidth="350.0" promptText="Select Township" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <ComboBox fx:id="townshipconbo" editable="true" prefHeight="56.0" prefWidth="273.0" promptText="Select Township" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -131,9 +131,9 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextArea prefHeight="80.0" prefWidth="350.0" promptText="Enter Medical History" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <TextArea fx:id="medicaltxt" prefHeight="80.0" prefWidth="350.0" promptText="Enter Medical History" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                      <font>
-                        <Font name="System" size="14.0" />
+                        <Font name="Pyidaungsu" size="12.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
@@ -147,9 +147,9 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextArea prefHeight="80.0" prefWidth="350.0" promptText="Enter Address" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <TextArea fx:id="addresstxt" prefHeight="75.0" prefWidth="283.0" promptText="Enter Address" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                      <font>
-                        <Font name="System" size="14.0" />
+                        <Font name="Pyidaungsu" size="12.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
@@ -175,7 +175,7 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox editable="true" prefHeight="40.0" prefWidth="350.0" promptText="Select Doctor" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <ComboBox fx:id="doctorlistconbo" editable="true" prefHeight="40.0" prefWidth="350.0" promptText="Select Doctor" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -190,15 +190,18 @@
                   </Label>
                   <HBox prefHeight="50.0" prefWidth="350.0">
                      <children>
-                        <DatePicker editable="false" prefHeight="40.0" prefWidth="170.0" promptText="Select Date" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                        <DatePicker fx:id="appdatebox" editable="false" prefHeight="40.0" prefWidth="170.0" promptText="Select Date" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                            <HBox.margin>
                               <Insets right="5.0" top="5.0" />
                            </HBox.margin>
                         </DatePicker>
-                        <TextField prefHeight="40.0" prefWidth="170.0" promptText="Enter Time (e.g., 10:00 AM)" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                        <TextField fx:id="apptimetxt" prefHeight="40.0" prefWidth="170.0" promptText="Enter Time (e.g., 10:00 AM)" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                            <HBox.margin>
                               <Insets top="5.0" />
                            </HBox.margin>
+                           <font>
+                              <Font name="Pyidaungsu" size="12.0" />
+                           </font>
                         </TextField>
                      </children>
                      <VBox.margin>
@@ -213,7 +216,7 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox editable="true" prefHeight="40.0" prefWidth="350.0" promptText="Select Status" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <ComboBox fx:id="appstatusbox" editable="true" prefHeight="40.0" prefWidth="350.0" promptText="Select Status" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -226,9 +229,9 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextArea prefHeight="80.0" prefWidth="350.0" promptText="Enter Purpose of Visit" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <TextArea fx:id="apppurposetxt" prefHeight="80.0" prefWidth="350.0" promptText="Enter Purpose of Visit" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                      <font>
-                        <Font name="System" size="14.0" />
+                        <Font name="Pyidaungsu" size="12.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
@@ -242,9 +245,9 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextArea prefHeight="80.0" prefWidth="350.0" promptText="Enter Any Notes" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <TextArea fx:id="appnotetxt" prefHeight="80.0" prefWidth="350.0" promptText="Enter Any Notes" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                      <font>
-                        <Font name="System" size="14.0" />
+                        <Font name="Pyidaungsu" size="12.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
