@@ -1,0 +1,83 @@
+/* Main DatePicker Field */
+.date-picker {
+    -fx-background-color: linear-gradient(to right, #c6f1ff, #e6fffa);
+    -fx-border-color: #00bcd4;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 8px;
+    -fx-font-family: "Comic Sans MS", "Segoe UI", "Pyidaungsu";
+    -fx-font-size: 14px;
+    -fx-text-fill: #006064;
+}
+
+/* Arrow Button */
+.date-picker > .arrow-button {
+    -fx-background-color: #00bcd4;
+    -fx-background-radius: 0 10px 10px 0;
+}
+
+.date-picker > .arrow-button > .arrow {
+    -fx-background-color: white;
+}
+
+/* Popup calendar */
+.date-picker-popup {
+    -fx-background-color: #e0f7fa;
+    -fx-border-color: #00acc1;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/* Month-Year header bar */
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: #00bcd4;
+    -fx-padding: 8px;
+}
+
+.date-picker-popup > .month-year-pane > .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Comic Sans MS", "Pyidaungsu";
+}
+
+/* Navigation arrows */
+.date-picker-popup > .month-year-pane > .spinner > .left-arrow,
+.date-picker-popup > .month-year-pane > .spinner > .right-arrow {
+    -fx-background-color: white;
+    -fx-padding: 5px;
+    -fx-shape: "M0,0 L0,6 L6,3 Z"; /* triangle */
+}
+
+/* Calendar grid background */
+.date-picker-popup > .calendar-grid {
+    -fx-background-color: #ffffff;
+}
+
+/* Day cells */
+.date-picker-popup > .calendar-grid > .day-cell {
+    -fx-text-fill: #006064;
+    -fx-font-family: "Comic Sans MS", "Pyidaungsu";
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+    -fx-alignment: center;
+}
+
+.date-picker-popup > .calendar-grid > .day-cell:hover {
+    -fx-background-color: #80deea;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.date-picker-popup > .calendar-grid > .day-cell:focused {
+    -fx-background-color: #00bcd4;
+    -fx-text-fill: white;
+}
+
+/* Today’s date */
+.date-picker-popup > .calendar-grid > .day-cell:today {
+    -fx-background-color: #b2ebf2;
+    -fx-text-fill: #006064;
+    -fx-border-color: #00acc1;
+    -fx-border-width: 2px;
+    -fx-border-radius: 50%;
+}

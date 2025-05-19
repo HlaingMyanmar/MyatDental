@@ -5,15 +5,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.StringConverter;
 import org.springframework.stereotype.Controller;
+import org.sspd.myatdental.dentistsoptions.model.Dentist;
+import org.sspd.myatdental.dentistsoptions.service.DentistServices;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Controller
@@ -64,17 +66,135 @@ public class AppointmentController implements Initializable {
     @FXML
     private ComboBox<String> townshipconbo;
 
+    private final DentistServices dentistServices;
+
+    public AppointmentController(DentistServices dentistServices) {
+        this.dentistServices = dentistServices;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 
         townshipFilter();
+        textFormatter();
+        checkgender();
 
+        limitallFuturedate();
+
+        setTooltip();
+
+        doctorFilter();
+
+        limitAppointmentDate();
+
+        limitAppointmentTimeWithAmPm();
 
 
     }
 
+    private void setTooltip() {
+
+        Tooltip dobTooltip = new Tooltip("Date of Birth must be between 5 and 120 years ago.");
+        dateofbirthbox.setTooltip(dobTooltip);
+
+        Tooltip ageTooltip = new Tooltip("Age must be number.");
+        agetxt.setTooltip(ageTooltip);
+
+
+    }
+
+    private void limitallFuturedate(){
+
+        dateofbirthbox.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+
+                if (empty) return;
+
+                LocalDate today = LocalDate.now();
+                LocalDate minDate = today.minusYears(120);
+                LocalDate maxDate = today.minusYears(5);
+
+                if (date.isAfter(maxDate) || date.isBefore(minDate)) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: #ffc0cb; -fx-opacity: 0.5;");
+                }
+            }
+        });
+    }
+
+    private void limitAppointmentDate() {
+        appdatebox.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+
+                if (empty) return;
+
+                LocalDate today = LocalDate.now();
+
+                // ယနေ့မတိုင်သေးတဲ့ နေ့တွေပဲ ရွေးလို့ရမယ်
+                if (date.isBefore(today)) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: #ffcccc; -fx-opacity: 0.5;");
+                }
+            }
+        });
+
+        // Tooltip for explanation
+        Tooltip appTooltip = new Tooltip("Only today or future dates are allowed for appointment.");
+        appdatebox.setTooltip(appTooltip);
+    }
+
+    private void checkgender(){
+
+        malecheck.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
+            if (isSelected) {
+                femalecheck.setSelected(false);
+            }
+        });
+
+        femalecheck.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
+            if (isSelected) {
+                malecheck.setSelected(false);
+            }
+        });
+    }
+
+    private void textFormatter(){
+
+        UnaryOperator<TextFormatter.Change> numberFilter = change -> {
+            String newText = change.getControlNewText();
+
+            if (Pattern.matches("\\d{0,3}", newText) && (newText.isEmpty() || Integer.parseInt(newText) <= 150)) {
+                return change;
+            }
+            return null;
+        };
+
+        TextFormatter<Integer> textFormatter = new TextFormatter<>(new StringConverter<Integer>() {
+            @Override
+            public String toString(Integer value) {
+                return value == null ? "" : value.toString();
+            }
+
+            @Override
+            public Integer fromString(String string) {
+                try {
+                    return string.isEmpty() ? null : Integer.parseInt(string);
+                } catch (NumberFormatException e) {
+                    return null;
+                }
+            }
+        }, null, numberFilter);
+
+        agetxt.setTextFormatter(textFormatter);
+    }
+
     private void townshipFilter(){
+
         townshipconbo.setEditable(true);
 
 
@@ -108,6 +228,100 @@ public class AppointmentController implements Initializable {
             }
         });
     }
+
+    private void doctorFilter(){
+
+        doctorlistconbo.setEditable(true);
+
+
+        doctorlistconbo.setItems(getDentistlist());
+
+
+        doctorlistconbo.setConverter(new StringConverter<String>() {
+            @Override
+            public String toString(String object) {
+                return object == null ? "" : object;
+            }
+
+            @Override
+            public String fromString(String string) {
+                return string;
+            }
+        });
+
+
+        TextField editor = doctorlistconbo.getEditor();
+        editor.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue == null || newValue.isEmpty()) {
+                doctorlistconbo.setItems(getDentistlist());
+            } else {
+                String filter = newValue.toLowerCase();
+                ObservableList<String> filteredList = getDentistlist().stream()
+                        .filter(township -> township.toLowerCase().contains(filter))
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                doctorlistconbo.setItems(filteredList);
+                doctorlistconbo.show();
+            }
+        });
+    }
+
+    private void limitAppointmentTimeWithAmPm() {
+        // Regex for partial input support: hh:mm AM/PM (case-insensitive)
+        Pattern partialPattern = Pattern.compile("(?i)(1[0-2]|0?[1-9])?(:?)([0-5]?\\d?)?\\s?([AP]?[M]?)?");
+
+        TextFormatter<String> timeFormatter = new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+
+            if (newText.isEmpty()) {
+                return change; // allow clearing input
+            }
+
+            if (!partialPattern.matcher(newText).matches()) {
+                return null; // reject invalid characters early
+            }
+
+            // When fully typed, validate hour, minute, and AM/PM
+            if (newText.length() >= 7) { // minimal length: e.g., "9:00 AM"
+                try {
+                    // Split by space to separate time and AM/PM
+                    String[] parts = newText.split("\\s+");
+                    if (parts.length < 2) return null;
+
+                    String timePart = parts[0];
+                    String ampmPart = parts[1].toUpperCase();
+
+                    if (!ampmPart.equals("AM") && !ampmPart.equals("PM")) {
+                        return null;
+                    }
+
+                    String[] timeSplit = timePart.split(":");
+                    if (timeSplit.length != 2) return null;
+
+                    int hour = Integer.parseInt(timeSplit[0]);
+                    int minute = Integer.parseInt(timeSplit[1]);
+
+                    if (hour < 1 || hour > 12) return null;
+                    if (minute < 0 || minute > 59) return null;
+
+                    // Optional: limit appointment time between 9:00 AM and 5:00 PM
+                    int hour24 = ampmPart.equals("AM") ? (hour == 12 ? 0 : hour) : (hour == 12 ? 12 : hour + 12);
+                    if (hour24 < 9 || hour24 > 17) return null;
+                    if (hour24 == 17 && minute > 0) return null;
+
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+
+            return change;
+        });
+
+        apptimetxt.setTextFormatter(timeFormatter);
+    }
+
+
+
+
 
     private ObservableList<String> townshiplist(){
         ObservableList<String> list = FXCollections.observableArrayList();
@@ -147,5 +361,12 @@ public class AppointmentController implements Initializable {
 
 
         return list;
+    }
+
+    private ObservableList<String>getDentistlist(){
+
+        return dentistServices.getDentists().stream()
+                .map(Dentist::getName).collect(Collectors.toCollection(FXCollections::observableArrayList));
+
     }
 }
