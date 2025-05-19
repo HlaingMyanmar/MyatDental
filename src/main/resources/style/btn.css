@@ -1,0 +1,58 @@
+/* Compact Button Styles */
+.button {
+    -fx-padding: 8px 16px;
+    -fx-font-size: 12px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 6, 0.1, 0, 1);
+    -fx-border-width: 1.5px;
+}
+
+/* Small Primary Button */
+.primary-button {
+    -fx-background-color: linear-gradient(to bottom right, #7F00FF, #E100FF);
+    -fx-padding: 6px 12px;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(gaussian, rgba(127,0,255,0.3), 8, 0.2, 0, 1);
+}
+
+/* Mini Secondary Button */
+.secondary-button {
+    -fx-padding: 5px 10px;
+    -fx-font-size: 12px;
+    -fx-background-color: linear-gradient(to bottom right, #00F2FE, #4FACFE);
+}
+
+/* Compact Icon Button */
+.icon-button {
+    -fx-padding: 4px;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+    -fx-max-width: 32px;
+    -fx-max-height: 32px;
+    -fx-font-size: 14px;
+}
+
+/* Small FAB Button */
+.fab-button {
+    -fx-min-width: 48px;
+    -fx-min-height: 48px;
+    -fx-font-size: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(255,65,129,0.4), 8, 0.3, 0, 2);
+}
+
+/* Tiny Success Button */
+.success-button {
+    -fx-padding: 4px 8px;
+    -fx-font-size: 11px;
+    -fx-background-color: linear-gradient(to bottom right, #00FF87, #60EFFF);
+}
+
+/* Hover Effects Adjustment */
+.button:hover {
+    -fx-translate-y: -0.5px;
+}
+
+.button:pressed {
+    -fx-translate-y: 0;
+}

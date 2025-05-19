@@ -1,0 +1,32 @@
+
+.button{
+
+    -fx-text-fill: black;
+
+}
+
+
+
+.button:hover{
+
+    -fx-text-fill: #FFEB3B;
+    -fx-background-color:#546E7A ;
+
+
+}
+
+.button:pressed {
+    -fx-background-color: #37474F;      /* Even darker background when pressed */
+    -fx-border-color: #263238;          /* Dark border when pressed */
+    -fx-text-fill: #FFC107;             /* Text color changes to Amber when pressed */
+
+    /* Shadow effect for button press */
+    -fx-effect: dropshadow(gaussian, black, 15, 0.3, 0, 5);  /* Stronger shadow with slight downward offset */
+
+    /* Optional: Slightly enlarge the button to simulate a "pressing" effect */
+    -fx-scale-x: 1;  /* Scale down the button width */
+    -fx-scale-y: 1;  /* Scale down the button height */
+
+    /* Optional: Add a subtle vibration or shake animation */
+    -fx-transition: all 0.1s ease-in-out;  /* Smooth transition for all changes */
+}

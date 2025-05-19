@@ -1,0 +1,59 @@
+module org.sspd.myatdental {
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires mysql.connector.j;
+    requires spring.context;
+    requires org.hibernate.orm.core;
+    requires spring.beans;
+    requires jakarta.persistence;
+    requires java.naming;
+    requires com.zaxxer.hikari;
+    requires spring.tx;
+    requires spring.orm;
+    requires spring.core;
+    requires jakarta.validation;
+    requires org.hibernate.validator;
+    requires spring.jdbc;
+    requires org.apache.poi.ooxml;
+    requires de.jensd.fx.glyphs.commons;
+    requires de.jensd.fx.glyphs.fontawesome;
+    requires com.jfoenix;
+    requires java.desktop;
+    requires static lombok;
+    requires org.slf4j;
+    requires jakarta.transaction;
+    requires jakarta.cdi;
+    requires jfxtras.controls;
+    requires com.google.protobuf;
+    requires kotlin.stdlib;
+    requires javafx.graphics;
+
+
+
+    opens org.sspd.myatdental.App to javafx.fxml ,spring.core, spring.beans, org.hibernate.orm.core;
+    exports org.sspd.myatdental.App;
+
+    opens org.sspd.myatdental.Configuration to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core;
+    exports org.sspd.myatdental.Configuration;
+
+    opens org.sspd.myatdental.dentistsoptions.model to javafx.fxml,javafx.base, spring.core, spring.beans, org.hibernate.orm.core,org.hibernate.validator;
+    exports org.sspd.myatdental.dentistsoptions.model to javafx.fxml;
+
+    opens org.sspd.myatdental.dentistsoptions.controller to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core,org.hibernate.validator;
+    exports org.sspd.myatdental.dentistsoptions.controller to javafx.fxml;
+
+    opens org.sspd.myatdental.dentistsoptions.impl to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core,org.hibernate.validator;
+    exports org.sspd.myatdental.dentistsoptions.impl to javafx.fxml;
+
+    opens org.sspd.myatdental.dentistsoptions.service to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core,org.hibernate.validator;
+    exports org.sspd.myatdental.dentistsoptions.service to javafx.fxml;
+
+    opens org.sspd.myatdental.ErrorHandler.Validation to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core,org.hibernate.validator;
+    exports org.sspd.myatdental.ErrorHandler.Validation to javafx.fxml;
+
+    opens org.sspd.myatdental.alert to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core,org.hibernate.validator;
+    exports org.sspd.myatdental.alert to javafx.fxml;
+
+
+
+}

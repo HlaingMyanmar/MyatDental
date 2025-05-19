@@ -1,0 +1,162 @@
+/* General Styling */
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #f4f4f4;
+}
+
+/* Toolbar */
+.toolbar {
+    -fx-background-color: linear-gradient(to bottom, #4a90e2, #357abd);
+    -fx-padding: 10;
+}
+
+.toolbar-button {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #357abd;
+    -fx-font-weight: bold;
+    -fx-padding: 5 15;
+    -fx-background-radius: 5;
+}
+
+.toolbar-button:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+/* Search Field and Button */
+.search-field {
+    -fx-pref-width: 200;
+    -fx-background-radius: 15;
+    -fx-padding: 5;
+}
+
+.search-button {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #357abd;
+    -fx-font-size: 14;
+    -fx-background-radius: 50%;
+}
+
+/* Filter Pane */
+.filter-pane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 15;
+    -fx-border-color: #d3d3d3;
+    -fx-border-width: 1;
+}
+
+.pane-title {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.date-picker {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d3d3d3;
+    -fx-border-radius: 5;
+}
+
+.filter-button {
+    -fx-background-color: #4a90e2;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+}
+
+.filter-button:hover {
+    -fx-background-color: #357abd;
+}
+
+/* Tables */
+.custom-table {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d3d3d3;
+    -fx-table-cell-border-color: #e0e0e0;
+}
+
+.table-title {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-padding: 5 0;
+}
+
+/* Details Section */
+.details-section {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+    -fx-border-color: #d3d3d3;
+    -fx-border-width: 1 0 0 0;
+}
+
+.total-label {
+    -fx-font-size: 14;
+    -fx-text-fill: #4a90e2;
+    -fx-font-weight: bold;
+}
+
+.status-label {
+    -fx-font-size: 12;
+    -fx-text-fill: #666666;
+}
+
+/* Dialog Styling */
+.dialog-title {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.text-field, .text-area {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d3d3d3;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+.section-title {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.details-grid {
+    -fx-background-color: #fafafa;
+    -fx-padding: 10;
+    -fx-border-color: #d3d3d3;
+    -fx-border-radius: 5;
+}
+
+.grid-header {
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a90e2;
+}
+
+.add-button {
+    -fx-background-color: #28a745;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+}
+
+.add-button:hover {
+    -fx-background-color: #218838;
+}
+
+.save-button {
+    -fx-background-color: #4a90e2;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+}
+
+.save-button:hover {
+    -fx-background-color: #357abd;
+}
+
+.cancel-button {
+    -fx-background-color: #dc3545;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #c82333;
+}

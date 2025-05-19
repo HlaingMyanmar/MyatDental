@@ -1,0 +1,44 @@
+/* Base TextField Style */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Pyidaungsu";
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 2, 0, 0, 1);
+}
+
+/* Hover Effect */
+.text-field:hover {
+    -fx-border-color: #4CAF50;
+    -fx-cursor: text;
+}
+
+/* Focused State */
+.text-field:focused {
+    -fx-border-color: #45a049;
+    -fx-border-width: 2px;
+    -fx-background-color: #f8fff8;
+}
+
+/* Error State (Optional) */
+.text-field:error {
+    -fx-border-color: #ff4444;
+    -fx-background-color: #fff8f8;
+}
+
+/* Prompt Text Style */
+.text-field .prompt-text {
+    -fx-font-style: italic;
+    -fx-fill: #888888;
+    -fx-font-size: 13px;
+}
+
+/* Disabled State */
+.text-field:disabled {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #eeeeee;
+    -fx-opacity: 1;
+}

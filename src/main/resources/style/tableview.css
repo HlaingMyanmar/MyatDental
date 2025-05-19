@@ -1,0 +1,100 @@
+/* General TableView Styling */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 4);
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 0;
+    -fx-clip: auto; /* Ensures rounded corners are visible */
+    -fx-table-cell-border-color: transparent; /* Removes cell borders */
+}
+
+/* Header Styling */
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #007ACC, #005B9F);
+    -fx-background-radius: 8px 8px 0 0; /* Rounded top corners */
+    -fx-padding: 8px 0;
+    -fx-border-insets: 0 0 1px 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: white; /* Changed from red to white for better contrast */
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-padding: 8px;
+}
+
+
+/* Row Styling */
+.table-row-cell {
+    -fx-background-color: #f8f9fa; /* Slightly lighter gray */
+    -fx-border-color: transparent;
+    -fx-cell-size: 40px; /* Uniform row height */
+    -fx-background-insets: 0, 0 0 1px 0;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #b3d7ff; /* More visible selection color */
+    -fx-text-background-color: #1a1a1a;
+}
+
+/* Alternate Row Color */
+.table-row-cell:odd:filled {
+    -fx-background-color: #ffffff;
+}
+
+/* Hover Effect */
+.table-row-cell:hover {
+    -fx-background-color: #e3f2fd !important; /* More pronounced hover effect */
+}
+
+/* Cell Styling */
+.table-cell {
+    -fx-padding: 10px;
+    -fx-font-size: 13px;
+    -fx-text-fill: #4a4a4a;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: transparent;
+}
+
+/* Scroll Bar Styling */
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #c1c1c1;
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #a8a8a8; /* Hover effect for thumb */
+}
+
+.scroll-bar .track {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 0;
+}
+
+/* Remove focus highlight */
+.table-view:focused, .table-row-cell:focused {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+/* Corner between scrollbars */
+.scroll-pane .corner {
+    -fx-background-color: transparent;
+}
+.table-row-cell:selected:hover {
+    -fx-background-color: #a3c7ef !important; /* Slightly darker blue for selected rows on hover */
+}
+

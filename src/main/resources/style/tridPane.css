@@ -1,0 +1,33 @@
+/* Style for the entire TitledPane */
+.titled-pane {
+    -fx-background-color: #FFFFFF; /* White background for the entire TitledPane */
+    -fx-border-color: #FFFFFF; /* Lighter border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-padding: 10px; /* Padding inside the TitledPane */
+    -fx-background-radius: 8px; /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(200, 200, 200, 0.3), 5, 0.0, 0, 3); /* Soft shadow effect */
+}
+
+/* Style for the title of the TitledPane (header) */
+.titled-pane .titled-pane-label {
+    -fx-text-fill: #0000FF; /* Blue text color for the title */
+    -fx-font-size: 16px; /* Font size */
+    -fx-font-weight: bold; /* Bold font for the title */
+    -fx-background-color: #FFFFFF; /* White background for the title */
+    -fx-padding: 5px 10px; /* Padding around the title */
+    -fx-background-radius: 8px; /* Rounded corners for title */
+    -fx-border-color: #FFFFFF; /* Border around the title */
+    -fx-border-width: 1px; /* Border width for the title */
+}
+
+/* Hover effect for the TitledPane header */
+.titled-pane:hover .titled-pane-label {
+    -fx-background-color: #FF9800; /* Orange background when hovered */
+}
+
+/* Style for the content of the TitledPane */
+.titled-pane .content {
+    -fx-background-color: #FFFFFF; /* White background for content */
+    -fx-padding: 10px; /* Padding inside the content */
+    -fx-border-radius: 8px; /* Rounded corners for content */
+}

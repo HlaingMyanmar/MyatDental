@@ -1,0 +1,5 @@
+/* Style for ComboBox */
+.combo-box {
+    -fx-font-family: "Zawgyi-One"; /* Set the font to Zawgyi */
+    -fx-font-size: 12px; /* Set the font size to 12px */
+}
