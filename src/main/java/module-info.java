@@ -81,6 +81,14 @@ module org.sspd.myatdental {
     opens org.sspd.myatdental.patientoptions.model to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core,org.hibernate.validator;
     exports org.sspd.myatdental.patientoptions.model to javafx.fxml;
 
+    exports org.sspd.myatdental.patientoptions.controller to javafx.fxml;
+    opens org.sspd.myatdental.patientoptions.controller to javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
+
+    exports org.sspd.myatdental.patientoptions.impl to javafx.fxml;
+    opens org.sspd.myatdental.patientoptions.impl to javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
+
+    exports org.sspd.myatdental.patientoptions.service to javafx.fxml;
+    opens org.sspd.myatdental.patientoptions.service to javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
 
 
 }
