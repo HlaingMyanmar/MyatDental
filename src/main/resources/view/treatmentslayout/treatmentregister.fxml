@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.treatmentoptions.controller.TreatmentController">
    <top>
       <ToolBar prefHeight="58.0" prefWidth="915.0" BorderPane.alignment="CENTER">
          <items>
             <HBox prefHeight="48.0" prefWidth="669.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="96.0" stylesheets="@../../style/btn2.css" text="Save">
+                  <Button fx:id="savebtn" mnemonicParsing="false" prefHeight="28.0" prefWidth="96.0" stylesheets="@../../style/btn2.css" text="Save">
                      <graphic>
                         <FontAwesomeIconView glyphName="SAVE" glyphStyle="-fx-fill:white" size="20" />
                      </graphic>
@@ -28,7 +28,7 @@
                         <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="99.0" stylesheets="@../../style/btn2.css" text="Delete">
+                  <Button fx:id="deletebtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="99.0" stylesheets="@../../style/btn2.css" text="Delete">
                      <graphic>
                         <FontAwesomeIconView glyphName="REMOVE" glyphStyle="-fx-fill:white" size="20" />
                      </graphic>
@@ -41,7 +41,7 @@
                         <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
                      </HBox.margin>
                   </Separator>
-                  <TextField prefHeight="32.0" prefWidth="220.0" promptText="Search By Treatment">
+                  <TextField fx:id="searchtxt" prefHeight="32.0" prefWidth="220.0" promptText="Search By Treatment">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
                      </HBox.margin>
@@ -49,18 +49,10 @@
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="55.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" stylesheets="@../../style/btn2.css">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill:white" size="20" />
-                     </graphic>
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
                </children>
             </HBox>
             <Label prefHeight="17.0" prefWidth="43.0" text="Count : " textFill="RED" />
-            <Label layoutX="683.0" layoutY="26.0" prefHeight="17.0" prefWidth="53.0" text="7" textFill="#0400ff" />
+            <Label fx:id="countxt" layoutX="683.0" layoutY="26.0" prefHeight="17.0" prefWidth="53.0" text="7" textFill="#0400ff" />
          </items>
       </ToolBar>
    </top>
@@ -75,7 +67,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <TextField layoutX="10.0" layoutY="27.0" prefHeight="40.0" prefWidth="193.0" promptText="Treatment Name">
+            <TextField fx:id="nametxt" layoutX="10.0" layoutY="27.0" prefHeight="40.0" prefWidth="193.0" promptText="Treatment Name">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -83,7 +75,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField layoutX="20.0" layoutY="57.0" prefHeight="40.0" prefWidth="193.0" promptText="Description">
+            <TextField fx:id="desctxt" layoutX="20.0" layoutY="57.0" prefHeight="40.0" prefWidth="193.0" promptText="Description">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -91,7 +83,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField layoutX="10.0" layoutY="99.0" prefHeight="40.0" prefWidth="193.0" promptText="Standard Price">
+            <TextField fx:id="pricetxt" layoutX="10.0" layoutY="99.0" prefHeight="40.0" prefWidth="193.0" promptText="Standard Price">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -103,11 +95,11 @@
       </VBox>
    </left>
    <center>
-      <TableView prefHeight="351.0" prefWidth="604.0" stylesheets="@../../style/tableview.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="treatmenttable" prefHeight="351.0" prefWidth="604.0" stylesheets="@../../style/tableview.css" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="154.0" text="Name" />
-          <TableColumn prefWidth="339.0" text="Description" />
-            <TableColumn prefWidth="133.0" text="Standard Price" />
+          <TableColumn fx:id="nameCol" prefWidth="154.0" text="Name" />
+          <TableColumn fx:id="descCol" prefWidth="339.0" text="Description" />
+            <TableColumn fx:id="priceCol" prefWidth="133.0" text="Standard Price" />
         </columns>
       </TableView>
    </center>
