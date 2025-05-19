@@ -1,0 +1,68 @@
+/* Root styling for the alert dialog */
+.alert {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);
+    -fx-padding: 15px;
+}
+
+/* Header text (e.g., "Success" or "Error") */
+.alert .header-text {
+    -fx-font-family: "System Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Content text */
+.alert .content-text {
+    -fx-font-family: "System";
+    -fx-font-size: 14px;
+    -fx-text-fill: #2c3e50;
+    -fx-wrap-text: true;
+}
+
+/* Information alert specific styling */
+.alert:information .header-text {
+    -fx-text-fill: #3498db;
+}
+
+/* Error alert specific styling */
+.alert:error .header-text {
+    -fx-text-fill: #e74c3c;
+}
+
+/* Buttons */
+.alert .button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "System Bold";
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 15px;
+    -fx-cursor: hand;
+}
+
+.alert .button:hover {
+    -fx-background-color: #2980b9;
+}
+
+/* Error alert button styling */
+.alert:error .button {
+    -fx-background-color: #e74c3c;
+}
+
+.alert:error .button:hover {
+    -fx-background-color: #c0392b;
+}
+
+/* Dialog pane (container for alert content) */
+.alert .dialog-pane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20px;
+}
+
+/* Icon container (for custom icons) */
+.alert .graphic-container {
+    -fx-padding: 10px;
+}

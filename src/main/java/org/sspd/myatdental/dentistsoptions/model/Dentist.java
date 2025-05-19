@@ -7,6 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.stereotype.Component;
+import org.sspd.myatdental.appointmentsoptions.model.Appointment;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "dentists")
@@ -38,6 +41,9 @@ public class Dentist {
     @Email
     @Column(name = "email",length = 100 , nullable = false)
     private String email;
+
+    @OneToMany(mappedBy = "dentist", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Appointment> appointmentSet;
 
 
     public Dentist(String name, String specialization, String phone, String email) {

@@ -1,0 +1,91 @@
+/* General TableView styling */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-font-family: "System";
+    -fx-font-size: 14px;
+}
+
+/* Column headers */
+.table-view .column-header-background {
+    -fx-background-color: #3498db;
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "System Bold";
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff;
+    -fx-alignment: center;
+}
+
+/* Table cells */
+.table-view .table-cell {
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 10px;
+    -fx-alignment: center-left;
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* Selected row */
+.table-view .table-row-cell:selected {
+    -fx-background-color: #3498db;
+    -fx-text-fill: #ffffff;
+}
+
+.table-view .table-row-cell:selected .table-cell {
+    -fx-text-fill: red;
+}
+
+/* Hover effect on rows */
+.table-view .table-row-cell:hover {
+    -fx-background-color: #e8f0fe;
+}
+
+/* Alternating row colors for readability */
+.table-view .table-row-cell:odd {
+    -fx-background-color: #f5f7fa;
+}
+
+.table-view .table-row-cell:even {
+    -fx-background-color: #ffffff;
+}
+
+/* Scroll bars */
+.table-view .scroll-bar:horizontal,
+.table-view .scroll-bar:vertical {
+    -fx-background-color: #f5f7fa;
+}
+
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #3498db;
+    -fx-background-radius: 5px;
+}
+
+.table-view .scroll-bar .track {
+    -fx-background-color: #dcdcdc;
+    -fx-background-radius: 5px;
+}
+
+/* Placeholder for empty table */
+.table-view .placeholder .label {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-family: "System";
+    -fx-font-size: 14px;
+}
+
+/* Filler for empty header space */
+.table-view .filler {
+    -fx-background-color: #3498db;
+}

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -14,93 +14,140 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.treatmentoptions.controller.TreatmentController">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="950.0" style="-fx-background-color: #f5f7fa;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.treatmentoptions.controller.TreatmentController">
    <top>
-      <ToolBar prefHeight="58.0" prefWidth="915.0" BorderPane.alignment="CENTER">
+      <ToolBar prefHeight="60.0" prefWidth="950.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
          <items>
-            <HBox prefHeight="48.0" prefWidth="669.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="750.0" spacing="10">
                <children>
-                  <Button fx:id="savebtn" mnemonicParsing="false" prefHeight="28.0" prefWidth="96.0" stylesheets="@../../style/btn2.css" text="Save">
+                  <JFXButton fx:id="savebtn" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Save">
                      <graphic>
-                        <FontAwesomeIconView glyphName="SAVE" glyphStyle="-fx-fill:white" size="20" />
+                        <FontAwesomeIconView glyphName="SAVE" glyphStyle="-fx-fill: #ffffff" size="18" />
                      </graphic>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+                        <Insets left="10.0" />
                      </HBox.margin>
-                  </Button>
-                  <Button fx:id="deletebtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="99.0" stylesheets="@../../style/btn2.css" text="Delete">
+                  </JFXButton>
+                  <JFXButton fx:id="deletebtn" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #e74c3c; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Delete">
                      <graphic>
-                        <FontAwesomeIconView glyphName="REMOVE" glyphStyle="-fx-fill:white" size="20" />
+                        <FontAwesomeIconView glyphName="REMOVE" glyphStyle="-fx-fill: #ffffff" size="18" />
                      </graphic>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+                        <Insets left="10.0" />
                      </HBox.margin>
-                  </Button>
-                  <Separator orientation="VERTICAL" prefHeight="200.0">
+                  </JFXButton>
+                  <Separator orientation="VERTICAL" prefHeight="40.0" style="-fx-background-color: #dcdcdc;">
                      <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+                        <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Separator>
-                  <TextField fx:id="searchtxt" prefHeight="32.0" prefWidth="220.0" promptText="Search By Treatment">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
-                     </HBox.margin>
+                  <TextField fx:id="searchtxt" prefHeight="40.0" prefWidth="250.0" promptText="Search by Treatment Name" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                      <font>
-                        <Font name="Pyidaungsu" size="12.0" />
+                        <Font name="System" size="14.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                   </TextField>
+                  <JFXButton prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: #3498db; -fx-background-radius: 5;">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill: #ffffff" size="18" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
                </children>
             </HBox>
-            <Label prefHeight="17.0" prefWidth="43.0" text="Count : " textFill="RED" />
-            <Label fx:id="countxt" layoutX="683.0" layoutY="26.0" prefHeight="17.0" prefWidth="53.0" text="7" textFill="#0400ff" />
+            <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Total Count:" textFill="#2c3e50">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="countxt" text="7" textFill="#3498db">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </items>
       </ToolBar>
    </top>
    <left>
-      <VBox prefHeight="371.0" prefWidth="279.0" stylesheets="@../../css/tableview.css" BorderPane.alignment="CENTER">
+      <VBox prefHeight="390.0" prefWidth="300.0" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); -fx-background-radius: 5;" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="17.0" prefWidth="120.0" text="Treatment Register">
+            <Label text="Treatment Registration" textFill="#2c3e50">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="15.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="nametxt" layoutX="10.0" layoutY="27.0" prefHeight="40.0" prefWidth="193.0" promptText="Treatment Name">
+            <Label text="Treatment Name" textFill="#2c3e50">
                <font>
-                  <Font name="Pyidaungsu" size="12.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="nametxt" prefHeight="40.0" prefWidth="270.0" promptText="Enter Treatment Name" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="desctxt" layoutX="20.0" layoutY="57.0" prefHeight="40.0" prefWidth="193.0" promptText="Description">
+            <Label text="Description" textFill="#2c3e50">
                <font>
-                  <Font name="Pyidaungsu" size="12.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="desctxt" prefHeight="40.0" prefWidth="270.0" promptText="Enter Description" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="pricetxt" layoutX="10.0" layoutY="99.0" prefHeight="40.0" prefWidth="193.0" promptText="Standard Price">
+            <Label text="Standard Price" textFill="#2c3e50">
                <font>
-                  <Font name="Pyidaungsu" size="12.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="pricetxt" prefHeight="40.0" prefWidth="270.0" promptText="Enter Standard Price" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
                </VBox.margin>
             </TextField>
          </children>
       </VBox>
    </left>
    <center>
-      <TableView fx:id="treatmenttable" prefHeight="351.0" prefWidth="604.0" stylesheets="@../../style/tableview.css" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="nameCol" prefWidth="154.0" text="Name" />
-          <TableColumn fx:id="descCol" prefWidth="339.0" text="Description" />
-            <TableColumn fx:id="priceCol" prefWidth="133.0" text="Standard Price" />
-        </columns>
+      <TableView fx:id="treatmenttable" prefHeight="390.0" prefWidth="650.0" stylesheets="@../../style/table.css" BorderPane.alignment="CENTER">
+         <columns>
+            <TableColumn fx:id="nameCol" prefWidth="200.0" text="Treatment Name" />
+            <TableColumn fx:id="descCol" prefWidth="300.0" text="Description" />
+            <TableColumn fx:id="priceCol" prefWidth="150.0" text="Standard Price" />
+         </columns>
       </TableView>
    </center>
 </BorderPane>
