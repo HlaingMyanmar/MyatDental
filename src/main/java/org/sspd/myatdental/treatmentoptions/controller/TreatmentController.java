@@ -28,6 +28,7 @@ import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static org.sspd.myatdental.alert.AlertBox.showErrorDialog;
 import static org.sspd.myatdental.alert.AlertBox.showInformationDialog;
 
 @Controller
@@ -218,7 +219,15 @@ public class TreatmentController implements Initializable {
 
         String name =  nametxt.getText();
         String desc =  desctxt.getText();
-        double price =  Double.parseDouble(pricetxt.getText());
+        double price = 0;
+        if(pricetxt.getText().isEmpty()){
+
+            showErrorDialog("Treatment","Notice","Please Fill Standard Price");return;
+        }
+        else {
+            price =  Double.parseDouble(pricetxt.getText());
+        }
+
 
 
        Treatment treatment = new Treatment(name, desc, price);
