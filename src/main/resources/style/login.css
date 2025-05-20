@@ -1,0 +1,54 @@
+/* login.css */
+.login-pane {
+    -fx-background-color: linear-gradient(to bottom, #E6FFFA, #F7FAFC);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 15, 0.3, 0, 4);
+    -fx-alignment: center;
+}
+
+.title-label {
+    -fx-text-fill: #1E40AF; /* Dark blue for contrast */
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
+.input-label {
+    -fx-text-fill: #1F2937; /* Dark gray for readability */
+    -fx-font-size: 14px;
+}
+
+.input-field {
+    -fx-background-color: #FFFFFF; /* White background */
+    -fx-border-color: #E2E8F0; /* Light gray border */
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 12;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #94A3B8; /* Light gray prompt text */
+    -fx-text-fill: #1F2937; /* Dark text for input */
+}
+
+.input-field:focused {
+    -fx-border-color: #2DD4BF; /* Teal border on focus */
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(45, 212, 191, 0.3), 8, 0, 0, 2);
+}
+
+.primary-button {
+    -fx-background-color: #2DD4BF; /* Teal button */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10;
+    -fx-padding: 12 24;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.primary-button:hover {
+    -fx-background-color: #26A69A; /* Darker teal on hover */
+    -fx-effect: dropshadow(gaussian, rgba(38, 166, 154, 0.5), 10, 0, 0, 2);
+}
+
+.primary-button:pressed {
+    -fx-background-color: #1D8A80; /* Even darker teal when pressed */
+}

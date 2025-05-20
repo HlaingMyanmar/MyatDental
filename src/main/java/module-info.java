@@ -94,5 +94,8 @@ module org.sspd.myatdental {
     exports org.sspd.myatdental.ErrorHandler to javafx.fxml;
     opens org.sspd.myatdental.ErrorHandler to java.base, javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
 
+    exports org.sspd.myatdental.useroptions to javafx.fxml;
+    opens org.sspd.myatdental.useroptions  to javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
+
 
 }
