@@ -265,55 +265,48 @@ public class AppointmentController implements Initializable {
         });
     }
 
+
+
     private void limitAppointmentTimeWithAmPm() {
-        // Regex for partial input support: hh:mm AM/PM (case-insensitive)
-        Pattern partialPattern = Pattern.compile("(?i)(1[0-2]|0?[1-9])?(:?)([0-5]?\\d?)?\\s?([AP]?[M]?)?");
+        // Regex for partial input: supports hh, hh:, hh:mm, hh:mm A, hh:mm AM/PM
+        Pattern partialPattern = Pattern.compile("(?i)^(1[0-2]|0?[1-9])(:([0-5]\\d?)?)?\\s*(A|P|AM|PM)?$");
 
         TextFormatter<String> timeFormatter = new TextFormatter<>(change -> {
             String newText = change.getControlNewText();
 
             if (newText.isEmpty()) {
-                return change; // allow clearing input
+                return change; // Allow clearing the field
             }
 
+            // Check if the input matches the partial pattern
             if (!partialPattern.matcher(newText).matches()) {
-                return null; // reject invalid characters early
+                return null; // Reject invalid input
             }
 
-            // When fully typed, validate hour, minute, and AM/PM
-            if (newText.length() >= 7) { // minimal length: e.g., "9:00 AM"
+            // Validate complete input (e.g., "9:00 AM" or "12:00 PM")
+            if (newText.matches("(?i)^(1[0-2]|0?[1-9]):[0-5]\\d\\s+(AM|PM)$")) {
                 try {
-                    // Split by space to separate time and AM/PM
                     String[] parts = newText.split("\\s+");
-                    if (parts.length < 2) return null;
-
                     String timePart = parts[0];
                     String ampmPart = parts[1].toUpperCase();
 
-                    if (!ampmPart.equals("AM") && !ampmPart.equals("PM")) {
-                        return null;
-                    }
-
                     String[] timeSplit = timePart.split(":");
-                    if (timeSplit.length != 2) return null;
-
                     int hour = Integer.parseInt(timeSplit[0]);
                     int minute = Integer.parseInt(timeSplit[1]);
 
-                    if (hour < 1 || hour > 12) return null;
-                    if (minute < 0 || minute > 59) return null;
-
-                    // Optional: limit appointment time between 9:00 AM and 5:00 PM
+                    // Convert to 24-hour format for time range validation
                     int hour24 = ampmPart.equals("AM") ? (hour == 12 ? 0 : hour) : (hour == 12 ? 12 : hour + 12);
-                    if (hour24 < 9 || hour24 > 17) return null;
-                    if (hour24 == 17 && minute > 0) return null;
 
+                    // Restrict to 9:00 AM - 5:00 PM
+                    if (hour24 < 9 || hour24 > 17 || (hour24 == 17 && minute > 0)) {
+                        return null; // Reject times outside 9:00 AM - 5:00 PM
+                    }
                 } catch (Exception e) {
-                    return null;
+                    return null; // Handle parsing errors
                 }
             }
 
-            return change;
+            return change; // Accept valid partial or complete input
         });
 
         apptimetxt.setTextFormatter(timeFormatter);
@@ -324,6 +317,7 @@ public class AppointmentController implements Initializable {
 
 
     private ObservableList<String> townshiplist(){
+
         ObservableList<String> list = FXCollections.observableArrayList();
         list.add("Ahlone");
         list.add("Bahan");

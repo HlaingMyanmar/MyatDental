@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import jfxtras.scene.control.LocalTimePicker?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="857.0" style="-fx-background-color: #f5f7fa; -fx-padding: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.appointmentsoptions.controller.AppointmentController">
    <children>
@@ -190,24 +191,17 @@
                   </Label>
                   <HBox prefHeight="50.0" prefWidth="350.0">
                      <children>
-                        <DatePicker fx:id="appdatebox" editable="false" prefHeight="40.0" prefWidth="170.0" promptText="Select Date" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;" stylesheets="@../../style/datepicker-style.css">
+                        <DatePicker fx:id="appdatebox" editable="false" prefHeight="49.0" prefWidth="337.0" promptText="Select Date" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;" stylesheets="@../../style/datepicker-style.css">
                            <HBox.margin>
                               <Insets right="5.0" top="5.0" />
                            </HBox.margin>
                         </DatePicker>
-                        <TextField fx:id="apptimetxt" prefHeight="46.0" prefWidth="163.0" promptText="Enter Time (e.g., 10:00 AM)" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
-                           <HBox.margin>
-                              <Insets top="5.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
+                  <LocalTimePicker prefHeight="54.0" prefWidth="365.0" />
                   <Label text="Appointment Status" textFill="#2c3e50">
                      <font>
                         <Font name="System Bold" size="14.0" />
