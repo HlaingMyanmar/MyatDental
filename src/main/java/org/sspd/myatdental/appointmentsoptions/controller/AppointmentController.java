@@ -13,6 +13,7 @@ import jfxtras.scene.control.LocalTimePicker;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
+import org.sspd.myatdental.ErrorHandler.AppointmentConflictException;
 import org.sspd.myatdental.ErrorHandler.Validation.GenericValidator;
 import org.sspd.myatdental.alert.AlertBox;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
@@ -29,6 +30,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
 import java.util.HashSet;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.function.UnaryOperator;
@@ -86,6 +88,9 @@ public class AppointmentController implements Initializable {
 
 
     @FXML
+    private Button appointSearchbtn;
+
+    @FXML
     private JFXButton submitbtn;
 
     private final DentistServices dentistServices;
@@ -135,7 +140,37 @@ public class AppointmentController implements Initializable {
 
     }
 
+    private void displayDentistAppointments(int dentistId,String status) {
+        List<Appointment[]> appointments = patientAppointmentService.getDentistAppointments(dentistId,status);
+        if (appointments.isEmpty()) {
+            AlertBox.showInformationDialog("Availability", "No scheduled appointments for this doctor.", "");
+        } else {
+            StringBuilder message = new StringBuilder("Scheduled appointments for the selected doctor:\n");
+            for (Object[] appt : appointments) {
+                Date date = (Date) appt[0];
+                Time time = (Time) appt[1];
+                message.append(date).append(" at ").append(time).append("\n");
+            }
+            AlertBox.showInformationDialog("Scheduled Appointments", message.toString(), "");
+        }
+    }
+
     private void actionEvent() {
+
+        appointSearchbtn.setOnAction(event -> {
+            // Option 1: Use selected dentist from doctorlistconbo
+            String selectedDoctor = doctorlistconbo.getValue();
+            if (selectedDoctor == null) {
+                AlertBox.showErrorDialog("Error", "Please select a doctor first.", "");
+                return;
+            }
+            int dentistId = getDentistid(selectedDoctor);
+
+            // Option 2: Hard-code dentist_id = 1 (uncomment if preferred)
+            // int dentistId = 1;
+
+            displayDentistAppointments(dentistId,appstatusbox.getValue());
+        });
 
 
 
@@ -149,6 +184,8 @@ public class AppointmentController implements Initializable {
         });
 
         submitbtn.setOnAction(event -> {
+
+
             try {
                 // Patient Information
                 String patientname = patientnametxt.getText();
@@ -163,7 +200,8 @@ public class AppointmentController implements Initializable {
                 // Appointment Information
                 int dentistId = getDentistid(doctorlistconbo.getValue());
                 Date apDate = Date.valueOf(appdatebox.getValue());
-                Time apTime = Time.valueOf(timepicker.getLocalTime());
+                LocalTime localTime = timepicker.getLocalTime().withSecond(0);
+                Time apTime = Time.valueOf(localTime);
                 String status = appstatusbox.getValue();
                 String purpose = apppurposetxt.getText();
                 String note = appnotetxt.getText();
@@ -175,7 +213,7 @@ public class AppointmentController implements Initializable {
                 boolean appresult = new GenericValidator<Appointment>(validator).validate(appointment);
 
                 if (presult && appresult) {
-                    // No need to open a session here; the service handles it
+
                     boolean result = patientAppointmentService.addPatientAppointment(patient, appointment);
                     if (result) {
                         AlertBox.showInformationDialog("Success", "Appointment added successfully.", "");
@@ -187,6 +225,8 @@ public class AppointmentController implements Initializable {
                 }
             } catch (NullPointerException e) {
                 AlertBox.showErrorDialog("Error", "Please select a Dr., appointment time, and date of birth.", "");
+            } catch (IllegalStateException | AppointmentConflictException e) {
+                AlertBox.showErrorDialog("Error", "Please Select other Time.", "");
             }
         });
 
