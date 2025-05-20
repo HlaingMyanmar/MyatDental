@@ -1,19 +1,36 @@
 package org.sspd.myatdental.appointmentsoptions.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import jakarta.validation.Validator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.util.StringConverter;
+import jfxtras.scene.control.LocalTimePicker;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
+import org.sspd.myatdental.ErrorHandler.Validation.GenericValidator;
+import org.sspd.myatdental.alert.AlertBox;
+import org.sspd.myatdental.appointmentsoptions.model.Appointment;
+import org.sspd.myatdental.appointmentsoptions.service.PatientAppointmentService;
 import org.sspd.myatdental.dentistsoptions.model.Dentist;
 import org.sspd.myatdental.dentistsoptions.service.DentistServices;
+import org.sspd.myatdental.patientoptions.model.Patient;
+import org.sspd.myatdental.patientoptions.service.PatientService;
 
 import java.net.URL;
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Period;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -39,8 +56,9 @@ public class AppointmentController implements Initializable {
     @FXML
     private ComboBox<String> appstatusbox;
 
+
     @FXML
-    private TextField apptimetxt;
+    private LocalTimePicker timepicker;
 
     @FXML
     private DatePicker dateofbirthbox;
@@ -66,10 +84,22 @@ public class AppointmentController implements Initializable {
     @FXML
     private ComboBox<String> townshipconbo;
 
-    private final DentistServices dentistServices;
 
-    public AppointmentController(DentistServices dentistServices) {
+    @FXML
+    private JFXButton submitbtn;
+
+    private final DentistServices dentistServices;
+    private final Validator validator;
+    private final PatientService patientService;
+    private final PatientAppointmentService patientAppointmentService;
+    private final SessionFactory sessionFactory;
+
+    public AppointmentController(DentistServices dentistServices, Validator validator, PatientService patientService, PatientAppointmentService patientAppointmentService, SessionFactory sessionFactory) {
         this.dentistServices = dentistServices;
+        this.validator = validator;
+        this.patientService = patientService;
+        this.patientAppointmentService = patientAppointmentService;
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
@@ -88,9 +118,89 @@ public class AppointmentController implements Initializable {
 
         limitAppointmentDate();
 
-        limitAppointmentTimeWithAmPm();
+        appstatusbox.setItems(statuslist());
+
+        submitbtn.setOnAction(event -> {
+            System.out.println(Time.valueOf(timepicker.getLocalTime()));
+        });
 
 
+
+        actionEvent();
+
+
+
+
+
+
+    }
+
+    private void actionEvent() {
+
+
+
+        dateofbirthbox .valueProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                int age = calculateAge(newValue, LocalDate.now());
+                agetxt.setText(String.valueOf(age));
+            } else {
+                agetxt.setText("Age: Not calculated");
+            }
+        });
+
+        submitbtn.setOnAction(event -> {
+            try {
+                // Patient Information
+                String patientname = patientnametxt.getText();
+                String phone = phonetxt.getText();
+                Date dob = Date.valueOf(dateofbirthbox.getValue());
+                int age = Integer.parseInt(agetxt.getText());
+                String gender = checkgender();
+                String township = townshipconbo.getValue();
+                String mhistory = medicaltxt.getText();
+                String address = addresstxt.getText();
+
+                // Appointment Information
+                int dentistId = getDentistid(doctorlistconbo.getValue());
+                Date apDate = Date.valueOf(appdatebox.getValue());
+                Time apTime = Time.valueOf(timepicker.getLocalTime());
+                String status = appstatusbox.getValue();
+                String purpose = apppurposetxt.getText();
+                String note = appnotetxt.getText();
+
+                Appointment appointment = new Appointment(apDate, apTime, status, purpose, note, getDentist(dentistId));
+                Patient patient = new Patient(patientname, phone, township, address, dob, age, gender, mhistory);
+
+                boolean presult = new GenericValidator<Patient>(validator).validate(patient);
+                boolean appresult = new GenericValidator<Appointment>(validator).validate(appointment);
+
+                if (presult && appresult) {
+                    // No need to open a session here; the service handles it
+                    boolean result = patientAppointmentService.addPatientAppointment(patient, appointment);
+                    if (result) {
+                        AlertBox.showInformationDialog("Success", "Appointment added successfully.", "");
+                    } else {
+                        AlertBox.showErrorDialog("Error", "Failed to add appointment.", "");
+                    }
+                } else {
+                    AlertBox.showErrorDialog("Validation Error", "Invalid patient or appointment data.", "");
+                }
+            } catch (NullPointerException e) {
+                AlertBox.showErrorDialog("Error", "Please select a Dr., appointment time, and date of birth.", "");
+            }
+        });
+
+
+
+
+
+    }
+
+    private int calculateAge(LocalDate dob, LocalDate currentDate) {
+        if (dob == null || currentDate == null) {
+            return 0;
+        }
+        return Period.between(dob, currentDate).getYears();
     }
 
     private void setTooltip() {
@@ -148,7 +258,7 @@ public class AppointmentController implements Initializable {
         appdatebox.setTooltip(appTooltip);
     }
 
-    private void checkgender(){
+    private String  checkgender(){
 
         malecheck.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
             if (isSelected) {
@@ -161,6 +271,8 @@ public class AppointmentController implements Initializable {
                 malecheck.setSelected(false);
             }
         });
+
+        return malecheck.isSelected()  ? "Male" :"Female";
     }
 
     private void textFormatter(){
@@ -266,55 +378,12 @@ public class AppointmentController implements Initializable {
     }
 
 
+    private Dentist getDentist(int dentistID){
+        return dentistServices.getDentists().stream()
+                .filter(dentist1 -> dentist1.getDentist_id()==dentistID)
+                .findFirst().orElse(null);
 
-    private void limitAppointmentTimeWithAmPm() {
-        // Regex for partial input: supports hh, hh:, hh:mm, hh:mm A, hh:mm AM/PM
-        Pattern partialPattern = Pattern.compile("(?i)^(1[0-2]|0?[1-9])(:([0-5]\\d?)?)?\\s*(A|P|AM|PM)?$");
-
-        TextFormatter<String> timeFormatter = new TextFormatter<>(change -> {
-            String newText = change.getControlNewText();
-
-            if (newText.isEmpty()) {
-                return change; // Allow clearing the field
-            }
-
-            // Check if the input matches the partial pattern
-            if (!partialPattern.matcher(newText).matches()) {
-                return null; // Reject invalid input
-            }
-
-            // Validate complete input (e.g., "9:00 AM" or "12:00 PM")
-            if (newText.matches("(?i)^(1[0-2]|0?[1-9]):[0-5]\\d\\s+(AM|PM)$")) {
-                try {
-                    String[] parts = newText.split("\\s+");
-                    String timePart = parts[0];
-                    String ampmPart = parts[1].toUpperCase();
-
-                    String[] timeSplit = timePart.split(":");
-                    int hour = Integer.parseInt(timeSplit[0]);
-                    int minute = Integer.parseInt(timeSplit[1]);
-
-                    // Convert to 24-hour format for time range validation
-                    int hour24 = ampmPart.equals("AM") ? (hour == 12 ? 0 : hour) : (hour == 12 ? 12 : hour + 12);
-
-                    // Restrict to 9:00 AM - 5:00 PM
-                    if (hour24 < 9 || hour24 > 17 || (hour24 == 17 && minute > 0)) {
-                        return null; // Reject times outside 9:00 AM - 5:00 PM
-                    }
-                } catch (Exception e) {
-                    return null; // Handle parsing errors
-                }
-            }
-
-            return change; // Accept valid partial or complete input
-        });
-
-        apptimetxt.setTextFormatter(timeFormatter);
     }
-
-
-
-
 
     private ObservableList<String> townshiplist(){
 
@@ -355,6 +424,22 @@ public class AppointmentController implements Initializable {
 
 
         return list;
+    }
+
+    private ObservableList<String> statuslist(){
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+        list.add("Scheduled");
+        list.add("Completed");
+        list.add("Cancelled");
+
+        return list;
+    }
+
+    private int getDentistid(String dentist){
+       return dentistServices.getDentists().stream()
+                .filter(dentist1 -> dentist1.getName().equals(dentist))
+                .map(Dentist::getDentist_id).findFirst().orElse(-1);
     }
 
     private ObservableList<String>getDentistlist(){

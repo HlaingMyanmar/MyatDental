@@ -21,7 +21,7 @@ public class PatientService {
 
     }
 
-    public boolean addTreatment(Patient patient) {
+    public boolean addPatient(Patient patient) {
         return patientimpl.save(patient);
     }
 

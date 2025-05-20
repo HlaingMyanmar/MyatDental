@@ -1,5 +1,55 @@
-/* Style for ComboBox */
+/* Style the ComboBox itself */
 .combo-box {
-    -fx-font-family: "Zawgyi-One"; /* Set the font to Zawgyi */
-    -fx-font-size: 12px; /* Set the font size to 12px */
+    -fx-background-color: #f4f4f4;
+    -fx-border-color: #0078d7;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+}
+
+/* Style the selected item in the ComboBox */
+.combo-box .list-cell {
+    -fx-background-color: #f4f4f4;
+    -fx-text-fill: #333333;
+    -fx-padding: 5px;
+}
+
+/* Style the arrow button */
+.combo-box .arrow-button {
+    -fx-background-color: #0078d7;
+    -fx-background-radius: 0 5px 5px 0;
+}
+
+/* Style the arrow graphic */
+.combo-box .arrow {
+    -fx-background-color: #ffffff;
+}
+
+/* Style the dropdown popup */
+.combo-box-popup .list-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #0078d7;
+    -fx-border-width: 1px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.5, 0, 0);
+}
+
+/* Style individual items in the dropdown */
+.combo-box-popup .list-cell {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+    -fx-padding: 8px;
+}
+
+/* Hover effect for dropdown items */
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #e6f0fa;
+}
+
+/* Selected item in the dropdown */
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: #ffffff;
 }

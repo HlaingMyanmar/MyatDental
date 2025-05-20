@@ -119,7 +119,7 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="townshipconbo" editable="true" prefHeight="56.0" prefWidth="273.0" promptText="Select Township" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <ComboBox fx:id="townshipconbo" editable="true" prefHeight="56.0" prefWidth="273.0" promptText="Select Township" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;" stylesheets="@../../style/combobox.css">
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -176,7 +176,7 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="doctorlistconbo" editable="true" prefHeight="40.0" prefWidth="350.0" promptText="Select Doctor" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <ComboBox fx:id="doctorlistconbo" editable="true" prefHeight="40.0" prefWidth="350.0" promptText="Select Doctor" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;" stylesheets="@../../style/combobox.css">
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -201,7 +201,7 @@
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <LocalTimePicker prefHeight="54.0" prefWidth="365.0" />
+                  <LocalTimePicker fx:id="timepicker" prefHeight="54.0" prefWidth="365.0" />
                   <Label text="Appointment Status" textFill="#2c3e50">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -210,7 +210,7 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="appstatusbox" editable="true" prefHeight="40.0" prefWidth="350.0" promptText="Select Status" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <ComboBox fx:id="appstatusbox" editable="true" prefHeight="40.0" prefWidth="350.0" promptText="Select Status" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;" stylesheets="@../../style/combobox.css">
                      <VBox.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -247,7 +247,7 @@
                         <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </TextArea>
-                  <JFXButton style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Submit Appointment">
+                  <JFXButton fx:id="submitbtn" buttonType="RAISED" style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Submit Appointment">
                      <VBox.margin>
                         <Insets left="5.0" right="5.0" top="10.0" />
                      </VBox.margin>

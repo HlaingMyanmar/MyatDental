@@ -7,6 +7,7 @@ import lombok.*;
 import org.springframework.stereotype.Component;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
 
+import java.sql.Date;
 import java.util.Set;
 
 @Component
@@ -36,6 +37,10 @@ public class Patient {
     @Column(name = "address",length = 200)
     private String address;
 
+
+    @Column(name = "date_of_birth",length = 200)
+    private Date date_of_birth;
+
     @Column(name = "age",length = 3)
     private int age;
 
@@ -50,5 +55,14 @@ public class Patient {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Appointment> appointmentSet;
 
-
+    public Patient(String name, String phone, String township, String address, Date date_of_birth, int age, String gender, String medical_history) {
+        this.name = name;
+        this.phone = phone;
+        this.township = township;
+        this.address = address;
+        this.date_of_birth = date_of_birth;
+        this.age = age;
+        this.gender = gender;
+        this.medical_history = medical_history;
+    }
 }

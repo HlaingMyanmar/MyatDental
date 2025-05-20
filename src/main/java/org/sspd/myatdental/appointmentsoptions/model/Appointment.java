@@ -22,11 +22,9 @@ public class Appointment {
     private int appointment_id;
 
     @Column(name = "appointment_date")
-    @NotBlank(message = "Required Date")
     private Date appointment_date;
 
     @Column(name = "appointment_time")
-    @NotBlank(message = "Required Time")
     private Time appointment_time;
 
     @Column(name = "status",length = 15)
@@ -39,7 +37,7 @@ public class Appointment {
     @Column(name = "notes")
     private String notes;
 
-    @Column(name = "create_at")
+    @Column(name = "created_at")
     private Timestamp created_at;
 
     @ManyToOne()
@@ -50,8 +48,22 @@ public class Appointment {
     @JoinColumn(name="dentist_id", nullable = false)
     private Dentist dentist;
 
+    public Appointment(Date appointment_date, Time appointment_time, String status, String purpose, String notes, Patient patient, Dentist dentist) {
+        this.appointment_date = appointment_date;
+        this.appointment_time = appointment_time;
+        this.status = status;
+        this.purpose = purpose;
+        this.notes = notes;
+        this.patient = patient;
+        this.dentist = dentist;
+    }
 
-
-
-
+    public Appointment(Date appointment_date, Time appointment_time, String status, String purpose, String notes, Dentist dentist) {
+        this.appointment_date = appointment_date;
+        this.appointment_time = appointment_time;
+        this.status = status;
+        this.purpose = purpose;
+        this.notes = notes;
+        this.dentist = dentist;
+    }
 }
