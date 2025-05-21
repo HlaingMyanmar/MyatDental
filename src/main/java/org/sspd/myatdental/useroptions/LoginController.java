@@ -1,15 +1,24 @@
 package org.sspd.myatdental.useroptions;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.springframework.stereotype.Controller;
+import org.sspd.myatdental.App.App;
 import org.sspd.myatdental.alert.AlertBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static org.sspd.myatdental.App.App.context;
 
 @Controller
 public class LoginController implements Initializable {
@@ -44,8 +53,28 @@ public class LoginController implements Initializable {
 
             // Check if the entered password matches the user's password
             if (password.equals(selectedUser.getPassword())) {
-                AlertBox.showInformationDialog("အောင်မြင်ပါပြီ", "အကောင့်ဝင်ခြင်း အောင်မြင်ပါသည်: " + selectedUser.getDisplayName(), "");
-                // TODO: Navigate to main application or dashboard
+
+                Stage stage = new Stage();
+
+                // Load FXML with Spring's ApplicationContext
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/appointmentlayouts/appointmentdashboard.fxml"));
+                fxmlLoader.setControllerFactory(context::getBean); // Set before load()
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                // Configure stage
+                stage.initStyle(StageStyle.UTILITY);
+                stage.initModality(Modality.WINDOW_MODAL);
+                Stage mainStage = (Stage) loginbtn.getScene().getWindow();
+                stage.setTitle("ပင်မ စာမျက်နှာ");
+                stage.setScene(scene);
+                mainStage.close();
+                stage.show();
+
             } else {
                 AlertBox.showErrorDialog("အမှား", "အသုံးပြုသူအမည် သို့မဟုတ် စကားဝှက် မမှန်ကန်ပါ။", "");
             }

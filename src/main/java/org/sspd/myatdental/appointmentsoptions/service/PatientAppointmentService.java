@@ -6,7 +6,6 @@ import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.sspd.myatdental.ErrorHandler.AppointmentConflictException;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
 import org.sspd.myatdental.patientoptions.model.Patient;

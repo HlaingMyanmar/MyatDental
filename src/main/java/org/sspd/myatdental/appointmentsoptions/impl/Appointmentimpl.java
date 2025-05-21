@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
+import org.sspd.myatdental.appointmentsoptions.model.AppointmentView;
 import org.sspd.myatdental.dto.DataAccessObject;
 
 import java.util.List;
@@ -26,6 +27,31 @@ public class Appointmentimpl implements DataAccessObject<Appointment> {
             return session.createQuery("from Appointment ", Appointment.class).list();
         }
     }
+
+    public List<AppointmentView> getAppointments() {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "SELECT new org.sspd.myatdental.appointmentsoptions.model.AppointmentView(" +
+                    "a.appointment_id AS appointmentCode, " +
+                    "a.appointment_date AS date, " +
+                    "a.appointment_time AS time, " +
+                    "d.name AS doctorName, " +
+                    "p.name AS patientName, " +
+                    "p.phone AS patientPhone, " +
+                    "p.date_of_birth AS dateOfBirth, " +
+                    "p.gender AS gender, " +
+                    "a.status AS status, " +
+                    "a.purpose AS purpose, " +
+                    "p.township AS township) " +
+                    "FROM Appointment a " +
+                    "JOIN a.patient p " +
+                    "JOIN a.dentist d";
+
+            return session.createQuery(hql, AppointmentView.class).list();
+        }
+    }
+
+
+
 
     @Override
     public boolean save(Appointment appointment) {

@@ -4,6 +4,7 @@ package org.sspd.myatdental.appointmentsoptions.service;
 import org.springframework.stereotype.Service;
 import org.sspd.myatdental.appointmentsoptions.impl.Appointmentimpl;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
+import org.sspd.myatdental.appointmentsoptions.model.AppointmentView;
 
 import java.util.List;
 
@@ -20,6 +21,10 @@ public class AppointmentService {
 
         return appointmentimpl.findAll();
 
+    }
+
+    public List<AppointmentView> getAppointmentViews() {
+        return appointmentimpl.getAppointments();
     }
 
     public boolean addAppointment(Appointment appointment) {

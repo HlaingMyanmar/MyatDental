@@ -21,7 +21,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/loginview/loginform.fxml"));
         fxmlLoader.setControllerFactory(context::getBean);
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Login Form");
         stage.setScene(scene);
         stage.show();
     }
