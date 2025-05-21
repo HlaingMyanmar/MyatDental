@@ -2,6 +2,9 @@ package org.sspd.myatdental.appointmentsoptions.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
@@ -9,14 +12,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.springframework.stereotype.Controller;
 import org.sspd.myatdental.appointmentsoptions.model.AppointmentView;
 import org.sspd.myatdental.appointmentsoptions.service.AppointmentService;
+import org.sspd.myatdental.treatmentoptions.model.Treatment;
 
 import java.net.URL;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 @Controller
 public class AppointmentDashboardController implements Initializable {
@@ -129,7 +136,7 @@ public class AppointmentDashboardController implements Initializable {
     @FXML
     private TextField yeartxt;
 
-    private final AppointmentService  appointmentService;
+    private final AppointmentService appointmentService;
 
 
     public AppointmentDashboardController(AppointmentService appointmentService) {
@@ -139,6 +146,45 @@ public class AppointmentDashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        treatmentInitializable();
+
+        appdashboard.setItems(getAppdashboard());
+
 
     }
+
+    private void treatmentInitializable() {
+
+        codeCol.setCellValueFactory(new PropertyValueFactory<>("appointment_id"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("appointment_date"));
+        timeCol.setCellValueFactory(new PropertyValueFactory<>("appointment_time"));
+        drnameCol.setCellValueFactory(new PropertyValueFactory<>("doctor_name"));
+        patNameCol.setCellValueFactory(new PropertyValueFactory<>("patient_name"));
+        patPhoneCol.setCellValueFactory(new PropertyValueFactory<>("patient_phone"));
+
+        dobCol.setCellValueFactory(new PropertyValueFactory<>("date_of_birth"));
+        genderCol.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        purposeCol.setCellValueFactory(new PropertyValueFactory<>("purpose"));
+        townshipCol.setCellValueFactory(new PropertyValueFactory<>("township"));
+
+
+    }
+
+    private ObservableList<AppointmentView> getAppdashboard() {
+        return FXCollections.observableArrayList(appointmentService.getAppointmentViews());
+    }
+
+    private ObservableList<AppointmentView> getTodayAppdashboard() {
+        LocalDate today = LocalDate.now();
+        return FXCollections.observableArrayList(
+                appointmentService.getAppointmentViews().stream()
+                        .filter(app -> app.getAppointment_date().equals(today))
+                        .collect(Collectors.toList())
+        );
+    }
+
+
+
 }
