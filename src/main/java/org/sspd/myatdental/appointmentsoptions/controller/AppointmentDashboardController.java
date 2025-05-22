@@ -6,14 +6,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.springframework.stereotype.Controller;
 import org.sspd.myatdental.appointmentsoptions.model.AppointmentView;
 import org.sspd.myatdental.appointmentsoptions.service.AppointmentService;
 import org.sspd.myatdental.treatmentoptions.model.Treatment;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -21,6 +27,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+
+import static org.sspd.myatdental.App.App.context;
 
 @Controller
 public class AppointmentDashboardController implements Initializable {
@@ -183,6 +191,33 @@ public class AppointmentDashboardController implements Initializable {
             searchapDate.setValue(null); // Clear DatePicker
             filteredData.setPredicate(p -> true); // Show all appointments
             updateCountLabel(filteredData);
+        });
+
+
+        addAppbtn.setOnAction(event -> {
+
+            Stage stage = new Stage();
+            // Load FXML with Spring's ApplicationContext
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/appointmentlayouts/appointmentinsertview.fxml"));
+            fxmlLoader.setControllerFactory(context::getBean); // Set before load()
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            // Configure stage
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            Stage mainStage = (Stage) addAppbtn.getScene().getWindow();
+            stage.initOwner(mainStage);
+            stage.setTitle("New Appointment");
+            stage.setScene(scene);
+            stage.show();
+
+
+
         });
 
 
