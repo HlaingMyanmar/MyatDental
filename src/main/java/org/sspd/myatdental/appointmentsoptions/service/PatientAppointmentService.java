@@ -26,7 +26,7 @@ public class PatientAppointmentService {
         try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
             // Save the patient first if not already persisted
-            if (patient.getPatient_id() == null) { // Assuming Patient has an ID field
+            if (patient.getPatient_id() == 0) { // Assuming Patient has an ID field
                 session.persist(patient);
             }
             appointment.setPatient(patient);

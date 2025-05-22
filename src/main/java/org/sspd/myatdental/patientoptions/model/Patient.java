@@ -20,7 +20,7 @@ public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String patient_id;
+    private int patient_id;
 
     @Column(name = "name",length = 100)
     @NotBlank(message = "Please Fill Name")

@@ -125,9 +125,6 @@ public class AppointmentController implements Initializable {
 
         appstatusbox.setItems(statuslist());
 
-        submitbtn.setOnAction(event -> {
-            System.out.println(Time.valueOf(timepicker.getLocalTime()));
-        });
 
 
 

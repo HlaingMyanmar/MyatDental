@@ -14,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.springframework.stereotype.Controller;
+import org.sspd.myatdental.App.App;
 import org.sspd.myatdental.appointmentsoptions.model.AppointmentView;
 import org.sspd.myatdental.appointmentsoptions.service.AppointmentService;
 
@@ -118,13 +119,9 @@ public class AppointmentDashboardController implements Initializable {
 
         treatmentInitializable();
 
-        ini();
-
-
         actionEvent();
 
         getFilteredData();
-
 
 
 
@@ -132,8 +129,15 @@ public class AppointmentDashboardController implements Initializable {
 
     private void actionEvent() {
 
-
-        // Handle searchapDatebtn click to filter by selected date
+        editAppbtn.setOnAction(event -> {
+            AppointmentView selectedAppointment = appdashboard.getSelectionModel().getSelectedItem();
+            if (selectedAppointment != null) {
+                openEditChooseView(selectedAppointment.getAppointment_id());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "ကျေးဇူးပြု၍ တည်းဖြတ်ရန် ရက်ချိန်းတစ်ခုရွေးပါ။"); // "Please select an appointment to edit."
+                alert.showAndWait();
+            }
+        });
 
 
 
@@ -175,14 +179,26 @@ public class AppointmentDashboardController implements Initializable {
         });
     }
 
-    private void ini(){
+    private void openEditChooseView(int appointmentId) {
 
 
-
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/appointmentlayouts/Appointmenteditchooseview.fxml"));
+            fxmlLoader.setControllerFactory(App.context::getBean);
+            Scene scene = new Scene(fxmlLoader.load());
+            AppointmentChooseController controller = fxmlLoader.getController();
+            controller.setAppointmentId(appointmentId); // Use camelCase method name
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(editAppbtn.getScene().getWindow());
+            stage.setTitle("ရက်ချိန်းရွေးချယ်မှုများကို တည်းဖြတ်ရန်");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load Appointmenteditchooseview.fxml", e);
+        }
     }
-
-
 
     private void treatmentInitializable() {
 
@@ -254,6 +270,7 @@ public class AppointmentDashboardController implements Initializable {
                             appointment.getPurpose().toLowerCase().contains(lowerCaseFilter) ||
                             appointment.getTownship().toLowerCase().contains(lowerCaseFilter) ||
                             appointment.getGender().toLowerCase().contains(lowerCaseFilter) ||
+                            appointment.getAppointment_date().toString().contains(lowerCaseFilter) ||
                             appointment.getStatus().toLowerCase().contains(lowerCaseFilter);
                 }
 
@@ -283,6 +300,7 @@ public class AppointmentDashboardController implements Initializable {
             searchapDate.setValue(null);
             allsearchtxt.setText("");
             updatePredicate.run();
+            appdashboard.getSelectionModel().clearSelection();
         });
 
 
