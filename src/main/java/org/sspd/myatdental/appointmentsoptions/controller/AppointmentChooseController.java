@@ -47,7 +47,13 @@ public class AppointmentChooseController implements Initializable {
 
         appointmentInfoButton.setOnAction(event -> {
 
-
+            if(getAppointment(APPOINTMENT_ID)!=null){
+                openEditChooseView(getAppointment(APPOINTMENT_ID));
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "ကျေးဇူးပြု၍ တည်းဖြတ်ရန် ရက်ချိန်းတစ်ခုရွေးပါ။"); // "Please select an appointment to edit."
+                alert.showAndWait();
+            }
 
         });
 
@@ -95,14 +101,39 @@ public class AppointmentChooseController implements Initializable {
         }
     }
 
+    private void openEditChooseView(Appointment appointment) {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/appointmentlayouts/appointmenteditview.fxml"));
+            fxmlLoader.setControllerFactory(App.context::getBean);
+            Scene scene = new Scene(fxmlLoader.load());
+            AppointmentEditController controller = fxmlLoader.getController();
+            controller.setAppointment(appointment);
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(patientInfoButton.getScene().getWindow());
+            stage.setTitle("ရက်ချိန်းရွေးချယ်မှုများကို တည်းဖြတ်ရန်");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load Appointmenteditchooseview.fxml", e);
+        }
+    }
+
 
     private Patient  getPatientId(int appointmentId) {
 
-    Patient patient = getAppointments().stream()
+        Patient patient = getAppointments().stream()
             .filter(appointment -> appointment.getAppointment_id()==appointmentId)
             .map(Appointment::getPatient).findFirst().orElse(null);
 
         return  patient;
+    }
+    private Appointment getAppointment(int appointmentId) {
+       return getAppointments().stream().filter(appointment -> appointment.getAppointment_id()==appointmentId)
+               .findFirst().orElse(null);
+
     }
 
     private List<Appointment> getAppointments() {

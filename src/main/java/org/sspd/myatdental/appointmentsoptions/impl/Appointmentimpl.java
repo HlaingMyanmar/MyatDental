@@ -91,6 +91,7 @@ public class Appointmentimpl implements DataAccessObject<Appointment> {
             tx.commit();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

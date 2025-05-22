@@ -66,4 +66,15 @@ public class Appointment {
         this.notes = notes;
         this.dentist = dentist;
     }
+
+    public Appointment(int appointment_id, Date appointment_date, Time appointment_time, String status, String purpose, String notes, Patient patient, Dentist dentist) {
+        this.appointment_id = appointment_id;
+        this.appointment_date = appointment_date;
+        this.appointment_time = appointment_time;
+        this.status = status;
+        this.purpose = purpose;
+        this.notes = notes;
+        this.patient = patient;
+        this.dentist = dentist;
+    }
 }

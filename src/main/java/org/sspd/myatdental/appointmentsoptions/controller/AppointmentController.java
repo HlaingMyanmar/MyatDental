@@ -414,7 +414,6 @@ public class AppointmentController implements Initializable {
         });
     }
 
-
     private Dentist getDentist(int dentistID){
         return dentistServices.getDentists().stream()
                 .filter(dentist1 -> dentist1.getDentist_id()==dentistID)
