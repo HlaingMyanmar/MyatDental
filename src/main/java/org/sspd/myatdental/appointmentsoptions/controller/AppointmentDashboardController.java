@@ -224,25 +224,27 @@ public class AppointmentDashboardController implements Initializable {
     }
 
     private ObservableList<AppointmentView> getFilteredData() {
+
+
         ObservableList<AppointmentView> masterData = getAppdashboard();
 
-        // Create a FilteredList to wrap the master data
+
         FilteredList<AppointmentView> filteredData = new FilteredList<>(masterData, p -> true);
 
-        // Set the TableView to use the filtered data
+
         appdashboard.setItems(filteredData);
 
-        // Set placeholder for empty TableView
+
         appdashboard.setPlaceholder(new Label("ယနေ့အတွက် ရက်ချိန်းများ မရှိပါ။"));
 
-        // Helper method to update the predicate based on current filters
+
         Runnable updatePredicate = () -> {
             filteredData.setPredicate(appointment -> {
-                // Get current search text and date
+
                 String searchText = allsearchtxt.getText();
                 LocalDate selectedDate = searchapDate.getValue();
 
-                // Text filter logic
+
                 boolean textMatch = true;
                 if (searchText != null && !searchText.isEmpty()) {
                     String lowerCaseFilter = searchText.toLowerCase();
@@ -255,35 +257,35 @@ public class AppointmentDashboardController implements Initializable {
                             appointment.getStatus().toLowerCase().contains(lowerCaseFilter);
                 }
 
-                // Date filter logic
+
                 boolean dateMatch = true;
                 if (selectedDate != null) {
                     java.sql.Date sqlDate = java.sql.Date.valueOf(selectedDate);
                     dateMatch = appointment.getAppointment_date().equals(sqlDate);
                 }
 
-                // Combine both filters
+
                 return textMatch && dateMatch;
             });
 
-            // Update count label
+
             updateCountLabel(filteredData);
         };
 
-        // Add listener to allsearchtxt to update filter on text change
+
         allsearchtxt.textProperty().addListener((observable, oldValue, newValue) -> updatePredicate.run());
 
-        // Filter by selected date when searchapDatebtn is clicked
+
         searchapDatebtn.setOnAction(event -> updatePredicate.run());
 
-        // Handle reset button to clear filters
+
         allresetbtn.setOnAction(event -> {
-            searchapDate.setValue(null); // Clear DatePicker
-            allsearchtxt.setText(""); // Clear search text
-            updatePredicate.run(); // Update predicate
+            searchapDate.setValue(null);
+            allsearchtxt.setText("");
+            updatePredicate.run();
         });
 
-        // Update count label initially
+
         updateCountLabel(filteredData);
 
         return filteredData;
