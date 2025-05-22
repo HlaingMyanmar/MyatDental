@@ -153,45 +153,25 @@ public class AppointmentDashboardController implements Initializable {
 
         treatmentInitializable();
 
+        ini();
 
 
-        // Set placeholder for empty TableView
-        appdashboard.setPlaceholder(new Label("ယနေ့အတွက် ရက်ချိန်းများ မရှိပါ။"));
+        actionEvent();
 
-        ObservableList<AppointmentView> masterData = getAppdashboard();
+        getFilteredData();
 
-        // Create a FilteredList to wrap the master data
-        FilteredList<AppointmentView> filteredData = new FilteredList<>(masterData, p -> true);
 
-        // Set the TableView to use the filtered data
-        appdashboard.setItems(filteredData);
 
-        // Set placeholder for empty TableView
-        appdashboard.setPlaceholder(new Label("ယနေ့အတွက် ရက်ချိန်းများ မရှိပါ။"));
+
+    }
+
+    private void actionEvent() {
+
 
         // Handle searchapDatebtn click to filter by selected date
-        searchapDatebtn.setOnAction(event -> {
-            LocalDate selectedDate = searchapDate.getValue();
-            filteredData.setPredicate(appointment -> {
-                if (selectedDate == null) {
-                    return true; // Show all if no date is selected
-                }
-                java.sql.Date sqlDate = java.sql.Date.valueOf(selectedDate);
-                return appointment.getAppointment_date().equals(sqlDate);
-            });
-            // Update count label
-            updateCountLabel(filteredData);
-        });
-        appdashboard.setItems(filteredData);
 
-        updateCountLabel(filteredData);
 
-        // Optional: Handle reset button to clear filters
-        allresetbtn.setOnAction(event -> {
-            searchapDate.setValue(null); // Clear DatePicker
-            filteredData.setPredicate(p -> true); // Show all appointments
-            updateCountLabel(filteredData);
-        });
+
 
 
         addAppbtn.setOnAction(event -> {
@@ -217,14 +197,31 @@ public class AppointmentDashboardController implements Initializable {
             stage.show();
 
 
+            stage.setOnCloseRequest(event1 -> {
+
+
+                getFilteredData();
+
+
+            });
+
+
 
         });
+    }
+
+    private void ini(){
+
+
+
 
 
 
 
 
     }
+
+
 
     private void treatmentInitializable() {
 
@@ -263,6 +260,48 @@ public class AppointmentDashboardController implements Initializable {
 
     private void updateCountLabel(FilteredList<AppointmentView> filteredData) {
         counttxt.setText("Total Appointments: " + filteredData.size());
+    }
+
+    private ObservableList<AppointmentView> getFilteredData() {
+
+
+        ObservableList<AppointmentView> masterData = getAppdashboard();
+
+        // Create a FilteredList to wrap the master data
+        FilteredList<AppointmentView> filteredData = new FilteredList<>(masterData, p -> true);
+
+        // Set the TableView to use the filtered data
+        appdashboard.setItems(filteredData);
+
+        // Set placeholder for empty TableView
+        appdashboard.setPlaceholder(new Label("ယနေ့အတွက် ရက်ချိန်းများ မရှိပါ။"));
+
+        searchapDatebtn.setOnAction(event -> {
+            LocalDate selectedDate = searchapDate.getValue();
+            filteredData.setPredicate(appointment -> {
+                if (selectedDate == null) {
+                    return true; // Show all if no date is selected
+                }
+                java.sql.Date sqlDate = java.sql.Date.valueOf(selectedDate);
+                return appointment.getAppointment_date().equals(sqlDate);
+            });
+            // Update count label
+            updateCountLabel(filteredData);
+        });
+
+        // Optional: Handle reset button to clear filters
+        allresetbtn.setOnAction(event -> {
+            searchapDate.setValue(null); // Clear DatePicker
+            filteredData.setPredicate(p -> true); // Show all appointments
+            updateCountLabel(filteredData);
+        });
+
+
+        appdashboard.setItems(filteredData);
+
+        updateCountLabel(filteredData);
+
+        return filteredData;
     }
 
 
