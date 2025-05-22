@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -76,40 +75,20 @@
          <children>
             <HBox alignment="CENTER_LEFT" spacing="10">
                <children>
-                  <TextField fx:id="searchapCodetxt" prefHeight="40.0" prefWidth="200.0" promptText="Search by Appointment Code" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
-                     <font>
-                        <Font name="System" size="14.0" />
-                     </font>
-                  </TextField>
-                  <JFXButton fx:id="searchapCodebtn" prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: #3498db; -fx-background-radius: 5;">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill: #ffffff" size="20" />
-                     </graphic>
-                  </JFXButton>
                   <DatePicker fx:id="searchapDate" prefHeight="40.0" prefWidth="200.0" promptText="Search by Appointment Date" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;" />
-                  <JFXButton fx:id="searchapDatebtn" prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: #3498db; -fx-background-radius: 5;">
+                  <JFXButton fx:id="searchapDatebtn" prefHeight="40.0" prefWidth="114.0" style="-fx-background-color: #3498db; -fx-background-radius: 5;" text="Search">
                      <graphic>
                         <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill: #ffffff" size="20" />
                      </graphic>
                   </JFXButton>
-                  <TextField fx:id="searchapTimetxt" prefHeight="40.0" prefWidth="200.0" promptText="Search by Appointment Time" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+                  <TextField fx:id="allsearchtxt" prefHeight="40.0" prefWidth="505.0" promptText="Search by Appointment Time" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
                      <font>
                         <Font name="System" size="14.0" />
                      </font>
                   </TextField>
-                  <JFXButton fx:id="searchapTimebtn" prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: #3498db; -fx-background-radius: 5;">
+                  <JFXButton fx:id="allresetbtn" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #e74c3c; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Reset Filters">
                      <graphic>
-                        <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill: #ffffff" size="20" />
-                     </graphic>
-                  </JFXButton>
-                  <TextField fx:id="searchdbrNametxt" prefHeight="40.0" prefWidth="200.0" promptText="Search by Doctor Name" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
-                     <font>
-                        <Font name="System" size="14.0" />
-                     </font>
-                  </TextField>
-                  <JFXButton fx:id="searchdbrNamebtn" prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: #3498db; -fx-background-radius: 5;">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill: #ffffff" size="20" />
+                        <FontAwesomeIconView glyphName="REFRESH" glyphStyle="-fx-fill: #ffffff" size="20" />
                      </graphic>
                   </JFXButton>
                </children>
@@ -119,60 +98,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Separator>
-            <HBox alignment="CENTER_LEFT" spacing="15">
-               <children>
-                  <TextField fx:id="allsearchtxt" prefHeight="40.0" prefWidth="300.0" promptText="Search All Appointments" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
-                     <font>
-                        <Font name="System" size="14.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="monthtxt" prefHeight="40.0" prefWidth="100.0" promptText="Month" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
-                     <font>
-                        <Font name="System" size="14.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="yeartxt" prefHeight="40.0" prefWidth="100.0" promptText="Year" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
-                     <font>
-                        <Font name="System" size="14.0" />
-                     </font>
-                  </TextField>
-                  <JFXButton fx:id="datesearchbtn" prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: #3498db; -fx-background-radius: 5;">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill: #ffffff" size="20" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXCheckBox fx:id="malecheckbox" text="Male" textFill="#2c3e50">
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                  </JFXCheckBox>
-                  <JFXCheckBox fx:id="femalecheckbox" text="Female" textFill="#2c3e50">
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                  </JFXCheckBox>
-                  <JFXCheckBox fx:id="allcheckbox" text="All " textFill="#2c3e50">
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                  </JFXCheckBox>
-                  <TextField fx:id="searchbytownshiptxt" prefHeight="40.0" prefWidth="200.0" promptText="Search by Township" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
-                     <font>
-                        <Font name="System" size="14.0" />
-                     </font>
-                  </TextField>
-                  <JFXButton fx:id="searchbytownshipbtn" prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: #3498db; -fx-background-radius: 5;">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill: #ffffff" size="20" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="allresetbtn" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #e74c3c; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Reset Filters">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="REFRESH" glyphStyle="-fx-fill: #ffffff" size="20" />
-                     </graphic>
-                  </JFXButton>
-               </children>
-            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="15" />
          </children>
       </VBox>
       <!-- Table View -->

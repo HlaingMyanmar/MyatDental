@@ -1,7 +1,6 @@
 package org.sspd.myatdental.appointmentsoptions.controller;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,13 +16,11 @@ import javafx.stage.StageStyle;
 import org.springframework.stereotype.Controller;
 import org.sspd.myatdental.appointmentsoptions.model.AppointmentView;
 import org.sspd.myatdental.appointmentsoptions.service.AppointmentService;
-import org.sspd.myatdental.treatmentoptions.model.Treatment;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -35,9 +32,6 @@ public class AppointmentDashboardController implements Initializable {
 
     @FXML
     private JFXButton addAppbtn;
-
-    @FXML
-    private JFXCheckBox allcheckbox;
 
     @FXML
     private JFXButton allresetbtn;
@@ -57,8 +51,7 @@ public class AppointmentDashboardController implements Initializable {
     @FXML
     private TableColumn<AppointmentView, Date> dateCol;
 
-    @FXML
-    private JFXButton datesearchbtn;
+
 
     @FXML
     private JFXButton delAppbtn;
@@ -75,8 +68,7 @@ public class AppointmentDashboardController implements Initializable {
     @FXML
     private JFXButton editinvoicebtn;
 
-    @FXML
-    private JFXCheckBox femalecheckbox;
+
 
     @FXML
     private TableColumn<AppointmentView, String> genderCol;
@@ -84,11 +76,6 @@ public class AppointmentDashboardController implements Initializable {
     @FXML
     private JFXButton invoicebtn;
 
-    @FXML
-    private JFXCheckBox malecheckbox;
-
-    @FXML
-    private TextField monthtxt;
 
     @FXML
     private TableColumn<AppointmentView, String> patNameCol;
@@ -99,11 +86,6 @@ public class AppointmentDashboardController implements Initializable {
     @FXML
     private TableColumn<AppointmentView, String> purposeCol;
 
-    @FXML
-    private JFXButton searchapCodebtn;
-
-    @FXML
-    private TextField searchapCodetxt;
 
     @FXML
     private DatePicker searchapDate;
@@ -111,23 +93,6 @@ public class AppointmentDashboardController implements Initializable {
     @FXML
     private JFXButton searchapDatebtn;
 
-    @FXML
-    private JFXButton searchapTimebtn;
-
-    @FXML
-    private TextField searchapTimetxt;
-
-    @FXML
-    private JFXButton searchbytownshipbtn;
-
-    @FXML
-    private TextField searchbytownshiptxt;
-
-    @FXML
-    private JFXButton searchdbrNamebtn;
-
-    @FXML
-    private TextField searchdbrNametxt;
 
     @FXML
     private TableColumn<AppointmentView, String> statusCol;
@@ -215,10 +180,6 @@ public class AppointmentDashboardController implements Initializable {
 
 
 
-
-
-
-
     }
 
 
@@ -263,8 +224,6 @@ public class AppointmentDashboardController implements Initializable {
     }
 
     private ObservableList<AppointmentView> getFilteredData() {
-
-
         ObservableList<AppointmentView> masterData = getAppdashboard();
 
         // Create a FilteredList to wrap the master data
@@ -276,33 +235,65 @@ public class AppointmentDashboardController implements Initializable {
         // Set placeholder for empty TableView
         appdashboard.setPlaceholder(new Label("ယနေ့အတွက် ရက်ချိန်းများ မရှိပါ။"));
 
-        searchapDatebtn.setOnAction(event -> {
-            LocalDate selectedDate = searchapDate.getValue();
+        // Helper method to update the predicate based on current filters
+        Runnable updatePredicate = () -> {
             filteredData.setPredicate(appointment -> {
-                if (selectedDate == null) {
-                    return true; // Show all if no date is selected
+                // Get current search text and date
+                String searchText = allsearchtxt.getText();
+                LocalDate selectedDate = searchapDate.getValue();
+
+                // Text filter logic
+                boolean textMatch = true;
+                if (searchText != null && !searchText.isEmpty()) {
+                    String lowerCaseFilter = searchText.toLowerCase();
+                    textMatch = appointment.getPatient_name().toLowerCase().contains(lowerCaseFilter) ||
+                            appointment.getDoctor_name().toLowerCase().contains(lowerCaseFilter) ||
+                            appointment.getPatient_phone().toLowerCase().contains(lowerCaseFilter) ||
+                            appointment.getPurpose().toLowerCase().contains(lowerCaseFilter) ||
+                            appointment.getTownship().toLowerCase().contains(lowerCaseFilter) ||
+                            appointment.getGender().toLowerCase().contains(lowerCaseFilter) ||
+                            appointment.getStatus().toLowerCase().contains(lowerCaseFilter);
                 }
-                java.sql.Date sqlDate = java.sql.Date.valueOf(selectedDate);
-                return appointment.getAppointment_date().equals(sqlDate);
+
+                // Date filter logic
+                boolean dateMatch = true;
+                if (selectedDate != null) {
+                    java.sql.Date sqlDate = java.sql.Date.valueOf(selectedDate);
+                    dateMatch = appointment.getAppointment_date().equals(sqlDate);
+                }
+
+                // Combine both filters
+                return textMatch && dateMatch;
             });
+
             // Update count label
             updateCountLabel(filteredData);
-        });
+        };
 
-        // Optional: Handle reset button to clear filters
+        // Add listener to allsearchtxt to update filter on text change
+        allsearchtxt.textProperty().addListener((observable, oldValue, newValue) -> updatePredicate.run());
+
+        // Filter by selected date when searchapDatebtn is clicked
+        searchapDatebtn.setOnAction(event -> updatePredicate.run());
+
+        // Handle reset button to clear filters
         allresetbtn.setOnAction(event -> {
             searchapDate.setValue(null); // Clear DatePicker
-            filteredData.setPredicate(p -> true); // Show all appointments
-            updateCountLabel(filteredData);
+            allsearchtxt.setText(""); // Clear search text
+            updatePredicate.run(); // Update predicate
         });
 
-
-        appdashboard.setItems(filteredData);
-
+        // Update count label initially
         updateCountLabel(filteredData);
 
         return filteredData;
     }
+
+
+
+
+
+
 
 
 
