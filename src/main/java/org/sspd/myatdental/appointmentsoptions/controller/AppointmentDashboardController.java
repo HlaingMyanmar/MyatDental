@@ -195,6 +195,16 @@ public class AppointmentDashboardController implements Initializable {
             stage.setTitle("ရက်ချိန်းရွေးချယ်မှုများကို တည်းဖြတ်ရန်");
             stage.setScene(scene);
             stage.show();
+
+            stage.setOnCloseRequest(event1 -> {
+
+                getFilteredData();
+
+            });
+
+
+
+
         } catch (IOException e) {
             throw new RuntimeException("Failed to load Appointmenteditchooseview.fxml", e);
         }

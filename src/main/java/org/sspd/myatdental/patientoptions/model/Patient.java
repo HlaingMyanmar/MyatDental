@@ -65,4 +65,16 @@ public class Patient {
         this.gender = gender;
         this.medical_history = medical_history;
     }
+
+    public Patient(int patient_id, String name, String phone, String township, String address, Date date_of_birth, int age, String gender, String medical_history) {
+        this.patient_id = patient_id;
+        this.name = name;
+        this.phone = phone;
+        this.township = township;
+        this.address = address;
+        this.date_of_birth = date_of_birth;
+        this.age = age;
+        this.gender = gender;
+        this.medical_history = medical_history;
+    }
 }

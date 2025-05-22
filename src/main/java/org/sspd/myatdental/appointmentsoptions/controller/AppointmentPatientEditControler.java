@@ -1,21 +1,27 @@
 package org.sspd.myatdental.appointmentsoptions.controller;
 
 import com.jfoenix.controls.JFXCheckBox;
+import jakarta.validation.Validator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.springframework.stereotype.Controller;
+import org.sspd.myatdental.ErrorHandler.Validation.GenericValidator;
+import org.sspd.myatdental.alert.AlertBox;
 import org.sspd.myatdental.patientoptions.model.Patient;
 import org.sspd.myatdental.patientoptions.service.PatientService;
 
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -68,8 +74,11 @@ public class AppointmentPatientEditControler implements Initializable {
 
     private PatientService patientService;
 
-    public AppointmentPatientEditControler(PatientService patientService) {
+    private Validator validator;
+
+    public AppointmentPatientEditControler(PatientService patientService, Validator validator) {
         this.patientService = patientService;
+        this.validator = validator;
     }
 
     @Override
@@ -85,11 +94,82 @@ public class AppointmentPatientEditControler implements Initializable {
 
         KeyCodeCombination ctrlS = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
 
+        savebtn.setOnAction(event -> {
+            // Patient Information
+            String patientname = patientnametxt.getText();
+            String phone = phonetxt.getText();
+            Date dob = Date.valueOf(dateofbirthbox.getValue());
+            int age = Integer.parseInt(agetxt.getText());
+            String gender = checkgender();
+            String township = townshipconbo.getValue();
+            String mhistory = medicaltxt.getText();
+            String address = addresstxt.getText();
+
+            Patient patient = new Patient(PATIENT.getPatient_id(),patientname, phone, township, address, dob, age, gender, mhistory);
+
+
+            boolean presult = new GenericValidator<Patient>(validator).validate(patient);
+
+            if (presult) {
+
+                boolean result =  patientService.updatePatient(patient);
+
+                if (result) {
+                    AlertBox.showInformationDialog("Success", "Appointment Edit successfully.", "");
+                    Stage stage = (Stage) downbtn.getScene().getWindow();
+                    stage.close();
+
+
+                } else {
+                    AlertBox.showErrorDialog("Error", "Failed to Edit appointment.", "");
+                }
+
+            }
+            else {
+                AlertBox.showErrorDialog("Validation Error", "Invalid patient data.", "");
+            }
+
+
+        });
+
         mainPane.setOnKeyPressed(event -> {
             if (ctrlS.match(event)) {
 
 
-                System.out.println(PATIENT.getPatient_id());
+                // Patient Information
+                String patientname = patientnametxt.getText();
+                String phone = phonetxt.getText();
+                Date dob = Date.valueOf(dateofbirthbox.getValue());
+                int age = Integer.parseInt(agetxt.getText());
+                String gender = checkgender();
+                String township = townshipconbo.getValue();
+                String mhistory = medicaltxt.getText();
+                String address = addresstxt.getText();
+
+                Patient patient = new Patient(PATIENT.getPatient_id(),patientname, phone, township, address, dob, age, gender, mhistory);
+
+
+                boolean presult = new GenericValidator<Patient>(validator).validate(patient);
+
+               if (presult) {
+
+                   boolean result =  patientService.updatePatient(patient);
+
+                   if (result) {
+                       AlertBox.showInformationDialog("Success", "Appointment Edit successfully.", "");
+                       Stage stage = (Stage) downbtn.getScene().getWindow();
+                       stage.close();
+
+
+                   } else {
+                       AlertBox.showErrorDialog("Error", "Failed to Edit appointment.", "");
+                   }
+
+               }
+               else {
+                   AlertBox.showErrorDialog("Validation Error", "Invalid patient data.", "");
+               }
+
 
                 event.consume();
             }
