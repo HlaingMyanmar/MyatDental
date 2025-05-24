@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -31,6 +32,12 @@ public class LoginController implements Initializable {
 
     @FXML
     private ComboBox<Users> usernamecb;
+
+    @FXML
+    private VBox loginPane;
+
+    private double xOffset = 0;
+    private double yOffset = 0;
 
 
 
@@ -76,8 +83,18 @@ public class LoginController implements Initializable {
                     throw new RuntimeException(e);
                 }
 
+                scene.setOnMousePressed(event1 -> {
+                    xOffset = event1.getSceneX();
+                    yOffset = event1.getSceneY();
+                });
+
+                scene.setOnMouseDragged(event2 -> {
+                    stage.setX(event2.getScreenX() - xOffset);
+                    stage.setY(event2.getScreenY() - yOffset);
+                });
+
                 // Configure stage
-                stage.initStyle(StageStyle.UTILITY);
+                stage.initStyle(StageStyle.UNDECORATED);
                 stage.initModality(Modality.WINDOW_MODAL);
                 Stage mainStage = (Stage) loginbtn.getScene().getWindow();
                 stage.setTitle("ပင်မ စာမျက်နှာ");

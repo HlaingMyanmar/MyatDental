@@ -111,4 +111,8 @@ module org.sspd.myatdental {
     exports org.sspd.myatdental.deletion.service to javafx.fxml;
     opens org.sspd.myatdental.deletion.service to javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
 
+
+    exports org.sspd.myatdental.DateTime to javafx.fxml;
+    opens org.sspd.myatdental.DateTime to javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
+
 }

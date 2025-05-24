@@ -1,6 +1,7 @@
 package org.sspd.myatdental.appointmentsoptions.controller;
 
 import com.jfoenix.controls.JFXButton;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.springframework.stereotype.Controller;
 import org.sspd.myatdental.App.App;
+import org.sspd.myatdental.DateTime.TimeComponent;
 import org.sspd.myatdental.ErrorHandler.AppointmentConflictException;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
 import org.sspd.myatdental.appointmentsoptions.model.AppointmentView;
@@ -121,6 +123,12 @@ public class AppointmentDashboardController implements Initializable {
     @FXML
     private TextField yeartxt;
 
+    @FXML
+    private Label clockbtn;
+
+    @FXML
+    private FontAwesomeIconView closebtn;
+
     public static String _username  = "";
 
     private final AppointmentService appointmentService;
@@ -143,6 +151,10 @@ public class AppointmentDashboardController implements Initializable {
         actionEvent();
 
         getFilteredData();
+
+        Tooltip.install(closebtn, new Tooltip("Close application"));
+
+        new TimeComponent().initializeClock(clockbtn);
 
 
 
@@ -259,7 +271,9 @@ public class AppointmentDashboardController implements Initializable {
 
         });
 
-
+        closebtn.setOnMouseClicked(event -> {
+            Platform.exit(); // application thread ကို gracefully ပိတ်သည်
+        });
 
 
 
