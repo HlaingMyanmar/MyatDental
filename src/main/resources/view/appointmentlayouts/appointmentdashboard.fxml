@@ -30,6 +30,7 @@
                </font>
             </Label>
             <FontAwesomeIconView fx:id="closebtn" glyphName="TIMES_CIRCLE" glyphStyle="-fx-fill: #ffffff" layoutX="1344.0" layoutY="29.0" size="24" wrappingWidth="24.14285659790039" />
+            <FontAwesomeIconView fx:id="minimizebtn" glyphName="WINDOW_MINIMIZE" glyphStyle="-fx-fill: #ffffff" layoutX="1302.0" layoutY="22.0" size="24" wrappingWidth="24.14285659790039" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="-2.0" layoutY="736.0" prefHeight="32.0" prefWidth="1373.0" style="-fx-background-color: #1A237E;">

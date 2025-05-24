@@ -129,6 +129,9 @@ public class AppointmentDashboardController implements Initializable {
     @FXML
     private FontAwesomeIconView closebtn;
 
+    @FXML
+    private FontAwesomeIconView minimizebtn;
+
     public static String _username  = "";
 
     private final AppointmentService appointmentService;
@@ -153,6 +156,8 @@ public class AppointmentDashboardController implements Initializable {
         getFilteredData();
 
         Tooltip.install(closebtn, new Tooltip("Close application"));
+
+        Tooltip.install(minimizebtn, new Tooltip("Minimize application"));
 
         new TimeComponent().initializeClock(clockbtn);
 
@@ -277,6 +282,8 @@ public class AppointmentDashboardController implements Initializable {
 
 
 
+
+
         addAppbtn.setOnAction(event -> {
 
             Stage stage = new Stage();
@@ -312,6 +319,8 @@ public class AppointmentDashboardController implements Initializable {
 
         });
     }
+
+
 
     private Users getUser() {
         if (_username == null) {
