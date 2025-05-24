@@ -91,11 +91,24 @@ module org.sspd.myatdental {
 
     exports org.sspd.myatdental.patientoptions.service to javafx.fxml;
     opens org.sspd.myatdental.patientoptions.service to javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
+
     exports org.sspd.myatdental.ErrorHandler to javafx.fxml;
     opens org.sspd.myatdental.ErrorHandler to java.base, javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
 
     exports org.sspd.myatdental.useroptions to javafx.fxml;
     opens org.sspd.myatdental.useroptions  to javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
 
+
+    opens org.sspd.myatdental.deletion.model to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core,org.hibernate.validator;
+    exports org.sspd.myatdental.deletion.model to javafx.fxml;
+
+    exports org.sspd.myatdental.deletion.controller to javafx.fxml;
+    opens org.sspd.myatdental.deletion.controller to javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
+
+    exports org.sspd.myatdental.deletion.impl to javafx.fxml;
+    opens org.sspd.myatdental.deletion.impl to javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
+
+    exports org.sspd.myatdental.deletion.service to javafx.fxml;
+    opens org.sspd.myatdental.deletion.service to javafx.fxml, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
 
 }

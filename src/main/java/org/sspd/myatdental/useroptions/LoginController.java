@@ -11,7 +11,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.springframework.stereotype.Controller;
-import org.sspd.myatdental.App.App;
 import org.sspd.myatdental.alert.AlertBox;
 
 import java.io.IOException;
@@ -19,6 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static org.sspd.myatdental.App.App.context;
+import static org.sspd.myatdental.appointmentsoptions.controller.AppointmentDashboardController._username;
 
 @Controller
 public class LoginController implements Initializable {
@@ -31,6 +31,8 @@ public class LoginController implements Initializable {
 
     @FXML
     private ComboBox<Users> usernamecb;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,14 +56,22 @@ public class LoginController implements Initializable {
             // Check if the entered password matches the user's password
             if (password.equals(selectedUser.getPassword())) {
 
+
+
+                _username =selectedUser.getDisplayName();
+
+
                 Stage stage = new Stage();
 
                 // Load FXML with Spring's ApplicationContext
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/appointmentlayouts/appointmentdashboard.fxml"));
                 fxmlLoader.setControllerFactory(context::getBean); // Set before load()
+
                 Scene scene = null;
                 try {
                     scene = new Scene(fxmlLoader.load());
+
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -75,6 +85,7 @@ public class LoginController implements Initializable {
                 mainStage.close();
                 stage.show();
 
+
             } else {
                 AlertBox.showErrorDialog("အမှား", "အသုံးပြုသူအမည် သို့မဟုတ် စကားဝှက် မမှန်ကန်ပါ။", "");
             }
@@ -83,4 +94,6 @@ public class LoginController implements Initializable {
         // Enable Enter key to trigger login
         passwordtxt.setOnAction(event -> loginbtn.fire());
     }
+
+
 }

@@ -23,3 +23,37 @@ END IF;
 END;//
 
 DELIMITER ;
+
+    DELIMITER //
+
+DELIMITER //
+
+CREATE TRIGGER after_appointment_delete
+    AFTER DELETE ON appointments
+    FOR EACH ROW
+BEGIN
+    INSERT INTO appointment_deletion_log (
+        appointment_id,
+        patient_id,
+        user_name,
+        patient_name,
+        dentist_id,
+        appointment_date,
+        appointment_time,
+        deleted_at,
+        reason
+    )
+    VALUES (
+               OLD.appointment_id,
+               OLD.patient_id,
+               COALESCE(@current_user_name, 'System'),
+               (SELECT name FROM patients WHERE patient_id = OLD.patient_id LIMIT 1),
+        OLD.dentist_id,
+        OLD.appointment_date,
+        OLD.appointment_time,
+        NOW(),
+        COALESCE(@delete_reason, 'Appointment deleted by system')
+        );
+END//
+
+DELIMITER ;

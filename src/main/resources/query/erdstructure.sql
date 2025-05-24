@@ -80,3 +80,18 @@ CREATE TABLE payments (
                           notes TEXT,
                           FOREIGN KEY (invoice_id) REFERENCES invoices(invoice_id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE appointment_deletion_log (
+                                          id BIGINT PRIMARY KEY AUTO_INCREMENT,
+                                          appointment_id int NOT NULL,
+                                          patient_id int NOT NULL,
+                                          user_name VARCHAR(255) NOT NULL,
+                                          patient_name VARCHAR(255) NOT NULL,
+                                          dentist_id int NOT NULL,
+                                          appointment_date DATE NOT NULL,
+                                          appointment_time VARCHAR(50) NOT NULL,
+                                          deleted_at DATETIME NOT NULL,
+                                          reason TEXT
+
+
+);

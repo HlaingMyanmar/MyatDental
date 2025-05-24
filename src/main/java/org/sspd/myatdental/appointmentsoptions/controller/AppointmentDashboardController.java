@@ -1,6 +1,7 @@
 package org.sspd.myatdental.appointmentsoptions.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,18 +16,27 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.springframework.stereotype.Controller;
 import org.sspd.myatdental.App.App;
+import org.sspd.myatdental.ErrorHandler.AppointmentConflictException;
+import org.sspd.myatdental.appointmentsoptions.model.Appointment;
 import org.sspd.myatdental.appointmentsoptions.model.AppointmentView;
 import org.sspd.myatdental.appointmentsoptions.service.AppointmentService;
+import org.sspd.myatdental.appointmentsoptions.service.PatientAppointmentService;
+import org.sspd.myatdental.patientoptions.model.Patient;
+import org.sspd.myatdental.patientoptions.service.PatientService;
+import org.sspd.myatdental.useroptions.Users;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import static org.sspd.myatdental.App.App.context;
+import static org.sspd.myatdental.alert.AlertBox.showErrorDialog;
+import static org.sspd.myatdental.alert.AlertBox.showInformationDialog;
 
 @Controller
 public class AppointmentDashboardController implements Initializable {
@@ -89,6 +99,10 @@ public class AppointmentDashboardController implements Initializable {
 
 
     @FXML
+    private Label usernamelb;
+
+
+    @FXML
     private DatePicker searchapDate;
 
     @FXML
@@ -107,11 +121,18 @@ public class AppointmentDashboardController implements Initializable {
     @FXML
     private TextField yeartxt;
 
+    public static String _username  = "";
+
     private final AppointmentService appointmentService;
 
+    private final PatientService patientService;
 
-    public AppointmentDashboardController(AppointmentService appointmentService) {
+    private final PatientAppointmentService patientAppointmentService;
+
+    public AppointmentDashboardController(AppointmentService appointmentService, PatientService patientService, PatientAppointmentService patientAppointmentService) {
         this.appointmentService = appointmentService;
+        this.patientService = patientService;
+        this.patientAppointmentService = patientAppointmentService;
     }
 
     @Override
@@ -137,6 +158,105 @@ public class AppointmentDashboardController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "ကျေးဇူးပြု၍ တည်းဖြတ်ရန် ရက်ချိန်းတစ်ခုရွေးပါ။"); // "Please select an appointment to edit."
                 alert.showAndWait();
             }
+        });
+
+        appdashboard.setOnMouseClicked(event -> {
+
+            delAppbtn.setOnAction(event1 ->
+            {
+                try {
+
+               AppointmentView appointmentView  =  appdashboard.getSelectionModel().getSelectedItem();
+
+                Appointment selectedAppointment = getAppointment(appointmentView.getAppointment_id()); // Replace with your method to get the selected appointment
+                Patient patient = getPatient(selectedAppointment.getPatient().getPatient_id()); // Replace with your method to get the patient
+                Users currentUser  = getUser();
+
+
+
+                if (currentUser == null) {
+                    showErrorDialog( "Error", "Please select an appointment, patient, and ensure you are logged in.","");
+                    return;
+                }
+                Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmAlert.setTitle("Confirm Deletion");
+                confirmAlert.setHeaderText(null);
+                confirmAlert.setContentText("Are you sure you want to delete this appointment?");
+                Optional<ButtonType> result = confirmAlert.showAndWait();
+
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+
+                    Dialog<String> dialog = new Dialog<>();
+                    dialog.setTitle("Deletion Reason");
+                    dialog.setHeaderText("Why are you deleting this appointment?");
+
+                    TextArea textArea = new TextArea();
+                    textArea.setPromptText("Enter reason here...");
+                    textArea.setPrefRowCount(5);
+                    textArea.setPrefColumnCount(30);
+                    textArea.setWrapText(true);
+
+                    // Set the content of the dialog
+                    dialog.getDialogPane().setContent(textArea);
+
+                    // Request focus on the TextArea
+                    Platform.runLater(() -> textArea.requestFocus());
+
+                    ButtonType submitButtonType = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);
+                    dialog.getDialogPane().getButtonTypes().addAll(submitButtonType, ButtonType.CANCEL);
+
+                    // Convert the result to a string when Submit is clicked
+                    dialog.setResultConverter(dialogButton -> {
+                        if (dialogButton == submitButtonType) {
+                            return textArea.getText();
+                        }
+                        return null;
+                    });
+
+                    Optional<String> reasonResult = dialog.showAndWait();
+
+                    String reason = reasonResult.orElse("").trim();
+
+                    if (reasonResult.isPresent() && !reasonResult.get().trim().isEmpty()) {
+
+                        boolean deleted = patientAppointmentService.deletePatientAppointment(patient, selectedAppointment, currentUser,reason);
+
+                        if (deleted) {
+                            showInformationDialog( "Success", "Appointment deleted successfully.","");
+                            getFilteredData();
+                        } else {
+                            showErrorDialog( "Error", "Failed to delete the appointment.","");
+                        }
+
+                    }
+
+                    else {
+                        // No action taken if the user cancels or provides an empty reason
+                        showInformationDialog("Info", "Appointment deletion canceled.", "");
+                    }
+
+
+
+
+                }
+            } catch (AppointmentConflictException e) {
+                showErrorDialog( "Error", e.getMessage(),"");
+            } catch (Exception e) {
+                showErrorDialog( "Unexpected Error", "An unexpected error occurred: " + e.getMessage(),"");
+            }
+
+
+
+
+
+
+
+
+
+
+            });
+
+
         });
 
 
@@ -177,6 +297,18 @@ public class AppointmentDashboardController implements Initializable {
 
 
         });
+    }
+
+    private Users getUser() {
+        if (_username == null) {
+            return null;
+        }
+        return switch (_username) {
+            case "Admin" -> Users.ADMIN;
+            case "Staff" -> Users.DR_AUNG;
+            case "Dentist" -> Users.DR_MYINT;
+            default -> null;
+        };
     }
 
     private void openEditChooseView(int appointmentId) {
@@ -220,11 +352,11 @@ public class AppointmentDashboardController implements Initializable {
         patPhoneCol.setCellValueFactory(new PropertyValueFactory<>("patient_phone"));
 
         dobCol.setCellValueFactory(new PropertyValueFactory<>("date_of_birth"));
-        genderCol.setCellValueFactory(new PropertyValueFactory<>("gender"));
+
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         purposeCol.setCellValueFactory(new PropertyValueFactory<>("purpose"));
-        townshipCol.setCellValueFactory(new PropertyValueFactory<>("township"));
+
 
 
 
@@ -247,9 +379,16 @@ public class AppointmentDashboardController implements Initializable {
 
     private void updateCountLabel(FilteredList<AppointmentView> filteredData) {
         counttxt.setText("Total Appointments: " + filteredData.size());
+
+
     }
 
     private ObservableList<AppointmentView> getFilteredData() {
+
+
+        usernamelb.setText(_username);
+
+
 
 
         ObservableList<AppointmentView> masterData = getAppdashboard();
@@ -318,6 +457,21 @@ public class AppointmentDashboardController implements Initializable {
 
         return filteredData;
     }
+
+
+    private Appointment getAppointment(int id) {
+
+     return appointmentService.getAppointments().stream().filter(app -> app.getAppointment_id() == id).findFirst().orElse(null);
+
+    }
+
+    private Patient getPatient(int id) {
+
+        return patientService.getPatients().stream().filter(patient -> patient.getPatient_id() == id).findFirst().orElse(null);
+
+    }
+
+    
 
 
 
