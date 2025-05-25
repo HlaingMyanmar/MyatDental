@@ -132,6 +132,14 @@ public class AppointmentDashboardController implements Initializable {
     @FXML
     private FontAwesomeIconView minimizebtn;
 
+    @FXML
+    private JFXButton dentistbtn;
+
+
+    @FXML
+    private JFXButton treatementbtn;
+
+
     public static String _username  = "";
 
     private final AppointmentService appointmentService;
@@ -280,10 +288,6 @@ public class AppointmentDashboardController implements Initializable {
             Platform.exit(); // application thread ကို gracefully ပိတ်သည်
         });
 
-
-
-
-
         addAppbtn.setOnAction(event -> {
 
             Stage stage = new Stage();
@@ -318,6 +322,25 @@ public class AppointmentDashboardController implements Initializable {
 
 
         });
+
+        dentistbtn.setOnAction(event -> {
+
+
+            openDentistView();
+
+        });
+
+        treatementbtn.setOnAction(event -> {
+
+            openTreatmentView();
+        });
+
+        invoicebtn.setOnAction(event -> {
+
+
+
+        });
+
     }
 
 
@@ -332,6 +355,66 @@ public class AppointmentDashboardController implements Initializable {
             case "Dentist" -> Users.DR_MYINT;
             default -> null;
         };
+    }
+
+    private void openTreatmentView() {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/treatmentslayout/treatmentregister.fxml"));
+            fxmlLoader.setControllerFactory(App.context::getBean);
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(editAppbtn.getScene().getWindow());
+            stage.setTitle("Treatment Information");
+            stage.setScene(scene);
+            stage.show();
+
+            stage.setOnCloseRequest(event1 -> {
+
+                getFilteredData();
+
+            });
+
+
+
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load Appointmenteditchooseview.fxml", e);
+        }
+
+
+    }
+
+    private void openDentistView() {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/dentistlayout/dentailregister.fxml"));
+            fxmlLoader.setControllerFactory(App.context::getBean);
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(editAppbtn.getScene().getWindow());
+            stage.setTitle("Dentist Information");
+            stage.setScene(scene);
+            stage.show();
+
+            stage.setOnCloseRequest(event1 -> {
+
+                getFilteredData();
+
+            });
+
+
+
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load Appointmenteditchooseview.fxml", e);
+        }
+
+
     }
 
     private void openEditChooseView(int appointmentId) {
@@ -480,7 +563,6 @@ public class AppointmentDashboardController implements Initializable {
 
         return filteredData;
     }
-
 
     private Appointment getAppointment(int id) {
 
