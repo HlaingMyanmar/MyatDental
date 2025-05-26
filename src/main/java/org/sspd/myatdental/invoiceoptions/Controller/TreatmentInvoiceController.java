@@ -1,5 +1,6 @@
 package org.sspd.myatdental.invoiceoptions.Controller;
 
+import com.jfoenix.controls.JFXCheckBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.sspd.myatdental.alert.AlertBox;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
 import org.sspd.myatdental.invoiceoptions.service.TreatmentInvoiceService;
+import org.sspd.myatdental.paymentoptions.model.Payment;
 import org.sspd.myatdental.treatmentoptions.model.TreatRecordViewModel;
 import org.sspd.myatdental.treatmentoptions.model.Treatment;
 import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
@@ -22,12 +24,14 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 @Controller
 public class TreatmentInvoiceController implements Initializable {
 
+    private final Payment payment;
     @FXML
     private Label appointmentcodelb;
 
@@ -81,20 +85,54 @@ public class TreatmentInvoiceController implements Initializable {
     private Label totallb;
 
 
+    @FXML
+    private TextField discountxt;
+
+    @FXML
+    private TextField payamountxt;
+
+    @FXML
+    private JFXCheckBox bankbox;
+
+    @FXML
+    private JFXCheckBox cashbox;
+
+    @FXML
+    private JFXCheckBox mobilebox;
+
+
+    @FXML
+    private Label finaltotallb;
+
+    @FXML
+    private Label discountlb;
+
+    @FXML
+    private Label grandtotallb;
+
+
+    @FXML
+    private Button submitbtn;
+
+
+
     private final TreatmentService treatmentService;
     private final TreatmentInvoiceService invoiceService;
 
     private ObservableList<TreatmentRecord> treatments = FXCollections.observableArrayList();
 
     @Autowired
-    public TreatmentInvoiceController(TreatmentService treatmentService, TreatmentInvoiceService invoiceService) {
+    public TreatmentInvoiceController(TreatmentService treatmentService, TreatmentInvoiceService invoiceService, Payment payment) {
         this.treatmentService = treatmentService;
         this.invoiceService = invoiceService;
+        this.payment = payment;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
+        treatments.clear();
 
         if (appointment != null) {
             appointmentcodelb.setText(String.valueOf(appointment.getAppointment_id()));
@@ -108,6 +146,10 @@ public class TreatmentInvoiceController implements Initializable {
         actionEvent();
 
         initializeTable();
+
+        setupPaymentCheckBoxes();
+
+        finaltotallb.setText(String.valueOf(updateFinalTotal()));
 
 
 
@@ -129,6 +171,28 @@ public class TreatmentInvoiceController implements Initializable {
         });
         noteCol.setCellValueFactory(new PropertyValueFactory<>("notes"));
         recordtable.setItems(loadTreatmentRecords());
+    }
+
+    private void setupPaymentCheckBoxes() {
+        // Ensure only one checkbox can be selected at a time
+        bankbox.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal) {
+                cashbox.setSelected(false);
+                mobilebox.setSelected(false);
+            }
+        });
+        cashbox.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal) {
+                bankbox.setSelected(false);
+                mobilebox.setSelected(false);
+            }
+        });
+        mobilebox.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal) {
+                bankbox.setSelected(false);
+                cashbox.setSelected(false);
+            }
+        });
     }
 
     private void actionEvent() {
@@ -165,6 +229,8 @@ public class TreatmentInvoiceController implements Initializable {
             recordtable.setItems(loadTreatmentRecords());
             setCount(countlb);
             setTotal(totallb);
+            setTotal(finaltotallb);
+            grandtotallb.setText(String.valueOf(updateFinalTotal()));
             clearFields();
         });
 
@@ -182,11 +248,90 @@ public class TreatmentInvoiceController implements Initializable {
                     .findFirst().ifPresent(toDelete -> treatments.remove(toDelete));
             setCount(countlb);
                 setTotal(totallb);
+            setTotal(finaltotallb);
+            grandtotallb.setText(String.valueOf(updateFinalTotal()));
 
+        });
+
+        setupDiscountListener();
+
+        setupPayListener();
+
+        submitbtn.setOnAction(event -> {
+
+            if (treatments == null || treatments.isEmpty()) {
+                AlertBox.showErrorDialog("Submit Payment", "No Treatments", "Cannot submit payment without treatment records.");
+                return;
+            }
+
+            String payText = payamountxt.getText();
+            if (payText == null || payText.trim().isEmpty()) {
+                AlertBox.showErrorDialog("Submit Payment", "Invalid Payment Amount", "Please enter a valid payment amount.");
+                return;
+            }
+
+            double paymentAmount;
+            try {
+                paymentAmount = Double.parseDouble(payText.trim());
+                if (paymentAmount <= 0.0) {
+                    AlertBox.showErrorDialog("Submit Payment", "Invalid Payment Amount", "Payment amount must be greater than zero.");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                AlertBox.showErrorDialog("Submit Payment", "Invalid Input", "Please enter a valid number for payment amount.");
+                return;
+            }
+
+            if (!bankbox.isSelected() && !cashbox.isSelected() && !mobilebox.isSelected()) {
+                AlertBox.showErrorDialog("Submit Payment", "No Payment Method", "Please select a payment method.");
+                return;
+            }
+
+            String paymentMethod = bankbox.isSelected() ? "Bank Transfer" :
+                    cashbox.isSelected() ? "Cash" :
+                            mobilebox.isSelected() ? "Mobile Money" : null;
+
+            // Proceed with payment using paymentAmount and paymentMethod
         });
 
     }
 
+
+    private void setupDiscountListener() {
+        discountxt.textProperty().addListener((obs, oldValue, newValue) -> {
+            grandtotallb.setText(String.valueOf(updateFinalTotal()));
+            discountlb.setText(String.valueOf(Double.parseDouble(discountxt.getText())));
+        });
+    }
+
+    private void setupPayListener() {
+        payamountxt.textProperty().addListener((obs, oldValue, newValue) -> {
+            try {
+                // Ensure the new value is not empty or invalid
+                if (newValue == null || newValue.trim().isEmpty()) {
+                    return; // Ignore empty input
+                }
+
+                double payment = Double.parseDouble(newValue.trim());
+
+                String grandTotalText = grandtotallb.getText();
+                if (grandTotalText == null || grandTotalText.trim().isEmpty()) {
+                    return;
+                }
+
+                double grandTotal = Double.parseDouble(grandTotalText.trim());
+
+                if (payment > grandTotal) {
+                    AlertBox.showErrorDialog("Payment Invalid", "Payment", "Payment amount cannot exceed total.");
+                    payamountxt.setText(oldValue); // Revert to previous valid value
+                }
+
+            } catch (NumberFormatException e) {
+                // Optional: prevent non-numeric values
+                payamountxt.setText(oldValue); // Revert to previous valid value
+            }
+        });
+    }
 
 
     private ObservableList<TreatRecordViewModel> loadTreatmentRecords() {
@@ -276,8 +421,6 @@ public class TreatmentInvoiceController implements Initializable {
         return null;
     }
 
-
-
     private void setCount(Label count) {
         if (count != null) {
             count.setText(String.valueOf(treatments.size()));
@@ -293,6 +436,16 @@ public class TreatmentInvoiceController implements Initializable {
 
         totallb.setText(String.valueOf(total));
 
+    }
+
+    private double updateFinalTotal() {
+        String totalText = totallb.getText();
+        String discountText = discountxt.getText();
+
+        double treatmentTotal = (totalText == null || totalText.isEmpty()) ? 0.0 : Double.parseDouble(totalText);
+        double discount = (discountText == null || discountText.isEmpty()) ? 0.0 : Double.parseDouble(discountText);
+
+        return treatmentTotal - discount;
     }
 
 

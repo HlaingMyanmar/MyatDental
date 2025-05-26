@@ -61,12 +61,12 @@ CREATE TABLE invoices (
                           invoice_id INT AUTO_INCREMENT PRIMARY KEY,
                           patient_id INT NOT NULL,
                           appointment_id INT,
-                          other_cost int ,
+                          discount int ,
                           total_amount DECIMAL(12,2) NOT NULL,
                           balance_due DECIMAL(12,2) NOT NULL,
                           status ENUM('Unpaid', 'Partially Paid', 'Paid') DEFAULT 'Unpaid',
                           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                          due_date DATE,
+
                           FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
                           FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id)
 ) ENGINE=InnoDB;

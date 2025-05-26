@@ -25,8 +25,8 @@ public class TreatmentInvoice {
     @Column(name = "invoice_id")
     private Integer invoiceId;
 
-    @Column(name = "other_cost")
-    private Integer otherCost;
+    @Column(name = "discount")
+    private Integer discount;
 
     @Column(name = "total_amount", nullable = false, precision = 12, scale = 2)
     private BigDecimal totalAmount;
@@ -40,9 +40,6 @@ public class TreatmentInvoice {
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
-
-    @Column(name = "due_date")
-    private LocalDate dueDate;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
