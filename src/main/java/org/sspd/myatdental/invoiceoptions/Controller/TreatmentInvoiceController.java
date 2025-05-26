@@ -18,7 +18,9 @@ import org.sspd.myatdental.treatmentoptions.model.Treatment;
 import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
 import org.sspd.myatdental.treatmentoptions.service.TreatmentService;
 
+import java.math.BigDecimal;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -50,6 +52,10 @@ public class TreatmentInvoiceController implements Initializable {
 
 
     @FXML
+    private Button delbtn;
+
+
+    @FXML
     private TableColumn<TreatRecordViewModel, String> noteCol;
 
 
@@ -67,6 +73,12 @@ public class TreatmentInvoiceController implements Initializable {
 
     @FXML
     private TableColumn<TreatRecordViewModel, String> treatmentCol;
+
+    @FXML
+    private Label countlb;
+
+    @FXML
+    private Label totallb;
 
 
     private final TreatmentService treatmentService;
@@ -95,7 +107,7 @@ public class TreatmentInvoiceController implements Initializable {
 
         actionEvent();
 
-        tableIni();
+        initializeTable();
 
 
 
@@ -104,49 +116,100 @@ public class TreatmentInvoiceController implements Initializable {
 
     }
 
-    private void tableIni(){
-
+    private void initializeTable() {
         treatmentCol.setCellValueFactory(new PropertyValueFactory<>("treatmentName"));
         tnumCol.setCellValueFactory(new PropertyValueFactory<>("toothNumber"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        priceCol.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : new DecimalFormat("#,##0.00").format(item));
+            }
+        });
         noteCol.setCellValueFactory(new PropertyValueFactory<>("notes"));
-
+        recordtable.setItems(loadTreatmentRecords());
     }
 
     private void actionEvent() {
 
         addbtn.setOnAction(event -> {
+            String toothNum = toothnumtxt.getText();
+            String note = notetxt.getText() != null ? notetxt.getText() : "";
+            String treatmentName = treatmentComboBox.getValue();
 
-            String toothNum  = toothnumtxt.getText();
-            String note = notetxt.getText();
+            // Validate inputs
+            if (appointment == null) {
+                AlertBox.showErrorDialog("Add Treatment", "Invalid Appointment", "No appointment selected.");
+                return;
+            }
+            if (treatmentName == null || treatmentName.trim().isEmpty()) {
+                AlertBox.showErrorDialog("Add Treatment", "Invalid Treatment", "Please select a treatment.");
+                return;
+            }
+            if (toothNum == null || toothNum.trim().isEmpty()) {
+                AlertBox.showErrorDialog("Add Treatment", "Invalid Tooth Number", "Please enter a valid tooth number.");
+                return;
+            }
 
+            Treatment treatment = getTreatmentByName(treatmentName);
+            if (treatment == null) {
+                AlertBox.showErrorDialog("Add Treatment", "Treatment Not Found", "Selected treatment does not exist.");
+                return;
+            }
 
-            Treatment treatment  = getTreatmentByName(treatmentComboBox.getValue());
-
-            assert treatment != null;
-            TreatmentRecord record = new TreatmentRecord(appointment,treatment,toothNum,note,treatment.getStandard_price());
+            // Create and save TreatmentRecord
+            TreatmentRecord record = new TreatmentRecord(appointment, treatment, toothNum, note, treatment.getStandard_price());
             treatments.add(record);
-            recordtable.setItems(getLoadData());
 
+            recordtable.setItems(loadTreatmentRecords());
+            setCount(countlb);
+            setTotal(totallb);
+            clearFields();
+        });
+
+        delbtn.setOnAction(event -> {
+            TreatRecordViewModel viewModel = recordtable.getSelectionModel().getSelectedItem();
+            if (viewModel == null) {
+                AlertBox.showWarningDialog("Delete", "No Selection", "Please select a treatment record to delete.");
+                return;
+            }
+
+                recordtable.getItems().remove(viewModel);
+            treatments.stream()
+                    .filter(t -> t.getTreatment().getName().equals(viewModel.getTreatmentName()) &&
+                            t.getToothNumber().equals(viewModel.getToothNumber()))
+                    .findFirst().ifPresent(toDelete -> treatments.remove(toDelete));
+            setCount(countlb);
+                setTotal(totallb);
 
         });
 
     }
 
-    private ObservableList<TreatRecordViewModel> getLoadData(){
 
 
-        ObservableList<TreatRecordViewModel> treatmentview = FXCollections.observableArrayList();
-
+    private ObservableList<TreatRecordViewModel> loadTreatmentRecords() {
+        ObservableList<TreatRecordViewModel> treatmentView = FXCollections.observableArrayList();
         treatments.forEach(treatment -> {
-
-            TreatRecordViewModel m1 = new TreatRecordViewModel(treatment.getToothNumber(),treatment.getNotes(),treatment.getPrice(),treatment.getTreatment().getName());
-            treatmentview.add(m1);
+            if (treatment.getTreatment() != null) {
+                TreatRecordViewModel viewModel = new TreatRecordViewModel(
+                        treatment.getToothNumber(),
+                        treatment.getNotes(),
+                        treatment.getPrice() != 0 ? treatment.getPrice() : 0.0,
+                        treatment.getTreatment().getName()
+                );
+                treatmentView.add(viewModel);
+            }
         });
+        return treatmentView;
+    }
 
+    private void clearFields(){
 
-    return treatmentview;
-
+        toothnumtxt.setText("");
+        notetxt.setText("");
+        treatmentComboBox.getItems().clear();
     }
 
     private void fillTreatmentComboBox() {
@@ -211,6 +274,31 @@ public class TreatmentInvoiceController implements Initializable {
                     .orElse(null); // or throw an exception if not found
         }
         return null;
+    }
+
+
+
+    private void setCount(Label count) {
+        if (count != null) {
+            count.setText(String.valueOf(treatments.size()));
+        } else {
+            AlertBox.showWarningDialog("UI Error", "Label Missing", "Count label is not initialized.");
+        }
+    }
+
+    private void setTotal(Label totallb) {
+        double total = treatments.stream()
+                .map(TreatmentRecord::getPrice)
+                .reduce(0.0, Double::sum);
+
+        totallb.setText(String.valueOf(total));
+
+    }
+
+
+    private boolean isValidToothNumber(String toothNum) {
+        // Example: Validate tooth number (customize based on dental standards)
+        return toothNum.matches("\\d{1,2}|[UR|UL|LR|LL]\\d{1,2}");
     }
 
 
