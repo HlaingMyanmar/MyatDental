@@ -12,7 +12,6 @@ import javafx.stage.StageStyle;
 import org.springframework.stereotype.Controller;
 import org.sspd.myatdental.App.App;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
-import org.sspd.myatdental.appointmentsoptions.model.AppointmentView;
 import org.sspd.myatdental.appointmentsoptions.service.AppointmentService;
 import org.sspd.myatdental.patientoptions.model.Patient;
 

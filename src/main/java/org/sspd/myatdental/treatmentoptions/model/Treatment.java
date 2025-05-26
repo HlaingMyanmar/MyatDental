@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "treatments")
 @Component
@@ -24,9 +26,13 @@ public class Treatment {
 
     @Column(name = "description")
     private String description;
+
     @NotNull(message = "Required Standard Price")
     @Column(name = "standard_price")
     private double standard_price;
+
+    @OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<TreatmentRecord> treatmentRecordSet;
 
 
     public Treatment(String name, String description, double standard_price) {

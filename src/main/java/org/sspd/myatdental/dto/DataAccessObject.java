@@ -1,7 +1,10 @@
 package org.sspd.myatdental.dto;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public interface DataAccessObject<T> {
 
     List<T> findAll();

@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public enum Users {
     DR_AUNG("Dr. Aung", "aung123"),
-    DR_MYINT("Dr. Myint", "myint456"),
+    DR_MYINT("Thu Thu Zin", "12345"),
     ADMIN("Admin", "admin123");
 
     private final String displayName;

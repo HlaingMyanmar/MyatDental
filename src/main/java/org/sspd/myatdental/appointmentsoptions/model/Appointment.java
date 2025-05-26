@@ -4,11 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.sspd.myatdental.dentistsoptions.model.Dentist;
+import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
 import org.sspd.myatdental.patientoptions.model.Patient;
+import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Getter@Setter@ToString
 @AllArgsConstructor
@@ -47,6 +50,12 @@ public class Appointment {
     @ManyToOne()
     @JoinColumn(name="dentist_id", nullable = false)
     private Dentist dentist;
+
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<TreatmentInvoice> treatmentInvoiceSet;
+
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<TreatmentRecord> treatmentRecordSet;
 
     public Appointment(Date appointment_date, Time appointment_time, String status, String purpose, String notes, Patient patient, Dentist dentist) {
         this.appointment_date = appointment_date;

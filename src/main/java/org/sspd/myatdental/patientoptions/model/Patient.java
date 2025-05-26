@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.stereotype.Component;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
+import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
 
 import java.sql.Date;
 import java.util.Set;
@@ -54,6 +55,11 @@ public class Patient {
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Appointment> appointmentSet;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<TreatmentInvoice> treatmentInvoiceSet;
+
+
 
     public Patient(String name, String phone, String township, String address, Date date_of_birth, int age, String gender, String medical_history) {
         this.name = name;

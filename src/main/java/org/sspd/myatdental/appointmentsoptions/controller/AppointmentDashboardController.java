@@ -23,6 +23,7 @@ import org.sspd.myatdental.appointmentsoptions.model.Appointment;
 import org.sspd.myatdental.appointmentsoptions.model.AppointmentView;
 import org.sspd.myatdental.appointmentsoptions.service.AppointmentService;
 import org.sspd.myatdental.appointmentsoptions.service.PatientAppointmentService;
+import org.sspd.myatdental.invoiceoptions.Controller.TreatmentInvoiceController;
 import org.sspd.myatdental.patientoptions.model.Patient;
 import org.sspd.myatdental.patientoptions.service.PatientService;
 import org.sspd.myatdental.useroptions.Users;
@@ -148,10 +149,14 @@ public class AppointmentDashboardController implements Initializable {
 
     private final PatientAppointmentService patientAppointmentService;
 
-    public AppointmentDashboardController(AppointmentService appointmentService, PatientService patientService, PatientAppointmentService patientAppointmentService) {
+    private final TreatmentInvoiceController treatmentInvoiceController;
+
+
+    public AppointmentDashboardController(AppointmentService appointmentService, PatientService patientService, PatientAppointmentService patientAppointmentService, TreatmentInvoiceController treatmentInvoiceController) {
         this.appointmentService = appointmentService;
         this.patientService = patientService;
         this.patientAppointmentService = patientAppointmentService;
+        this.treatmentInvoiceController = treatmentInvoiceController;
     }
 
     @Override
@@ -337,9 +342,23 @@ public class AppointmentDashboardController implements Initializable {
 
         invoicebtn.setOnAction(event -> {
 
+            AppointmentView selectedAppointment = appdashboard.getSelectionModel().getSelectedItem();
 
+            if (selectedAppointment != null) {
+                Appointment appointment = getAppointment(selectedAppointment.getAppointment_id());
+                if (appointment != null) {
 
+                    treatmentInvoiceController.setAppointment(appointment);
+                    openInvoiceView();
+                } else {
+                    showErrorDialog("Invoice","Not Found","Appointment not found.");
+                }
+            } else {
+                showErrorDialog("Invoice","Select Invoice","Please select an appointment to view the invoice.");
+            }
         });
+
+
 
     }
 
@@ -355,6 +374,36 @@ public class AppointmentDashboardController implements Initializable {
             case "Dentist" -> Users.DR_MYINT;
             default -> null;
         };
+    }
+
+    private void openInvoiceView() {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/treatmentinvoice/treatementinvoice.fxml"));
+            fxmlLoader.setControllerFactory(App.context::getBean);
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(editAppbtn.getScene().getWindow());
+            stage.setTitle("Treatment Information");
+            stage.setScene(scene);
+            stage.show();
+
+            stage.setOnCloseRequest(event1 -> {
+
+                getFilteredData();
+
+            });
+
+
+
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load Appointmenteditchooseview.fxml", e);
+        }
+
+
     }
 
     private void openTreatmentView() {
@@ -575,6 +624,7 @@ public class AppointmentDashboardController implements Initializable {
         return patientService.getPatients().stream().filter(patient -> patient.getPatient_id() == id).findFirst().orElse(null);
 
     }
+
 
     
 
