@@ -24,8 +24,8 @@ public class Payment {
     private Integer paymentId;
 
 
-    @Column(name = "amount", nullable = false, precision = 12, scale = 2)
-    private BigDecimal amount;
+    @Column(name = "amount", nullable = false)
+    private double amount;
 
     @Column(name = "payment_date", nullable = false)
     private LocalDate paymentDate;
@@ -44,5 +44,13 @@ public class Payment {
 
     public enum PaymentMethod {
         Cash, Bank_Transfer, Mobile_Money
+    }
+
+    public Payment(double amount, LocalDate paymentDate, PaymentMethod paymentMethod, String notes, TreatmentInvoice treatmentInvoice) {
+        this.amount = amount;
+        this.paymentDate = paymentDate;
+        this.paymentMethod = paymentMethod;
+        this.notes = notes;
+        this.treatmentInvoice = treatmentInvoice;
     }
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.invoiceoptions.Controller.TreatmentInvoiceController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="802.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.invoiceoptions.Controller.TreatmentInvoiceController">
    <children>
       <AnchorPane layoutX="-8.0" prefHeight="57.0" prefWidth="749.0" style="-fx-background-color: #1A237E;" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
          <children>
@@ -78,66 +78,21 @@
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="554.0" layoutY="490.0" text="Total Amount    ">
-         <font>
-            <Font name="Pyidaungsu-Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="finaltotallb" layoutX="653.0" layoutY="490.0" text="0.0" textFill="RED">
-         <font>
-            <Font name="Pyidaungsu-Bold" size="12.0" />
-         </font>
-      </Label>
       <TextField fx:id="payamountxt" layoutX="12.0" layoutY="574.0" prefHeight="37.0" prefWidth="223.0" promptText="Pay Amount" />
       <Label layoutX="14.0" layoutY="554.0" text="Pay Amount">
          <font>
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </Label>
-      <JFXCheckBox fx:id="cashbox" layoutX="251.0" layoutY="516.0" text="Cash" />
-      <JFXCheckBox fx:id="bankbox" layoutX="251.0" layoutY="551.0" text="Bank Transfer" />
-      <JFXCheckBox fx:id="mobilebox" layoutX="251.0" layoutY="587.0" text="Mobile Banking" />
-      <Label layoutX="554.0" layoutY="540.0" text="Balance Amount">
-         <font>
-            <Font name="Pyidaungsu-Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="grandtotallb" layoutX="653.0" layoutY="540.0" text="0.0" textFill="RED">
-         <font>
-            <Font name="Pyidaungsu-Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="554.0" layoutY="514.0" text="Discount Amount">
-         <font>
-            <Font name="Pyidaungsu-Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="discountlb" layoutX="653.0" layoutY="514.0" text="0.0" textFill="RED">
-         <font>
-            <Font name="Pyidaungsu-Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="642.0" layoutY="490.0" prefHeight="24.0" prefWidth="6.0" text="-">
-         <font>
-            <Font name="Pyidaungsu-Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="642.0" layoutY="514.0" prefHeight="24.0" prefWidth="6.0" text="-">
-         <font>
-            <Font name="Pyidaungsu-Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="642.0" layoutY="540.0" prefHeight="24.0" prefWidth="6.0" text="-">
-         <font>
-            <Font name="Pyidaungsu-Bold" size="12.0" />
-         </font>
-      </Label>
+      <JFXCheckBox fx:id="cashbox" layoutX="402.0" layoutY="642.0" text="Cash" />
+      <JFXCheckBox fx:id="bankbox" layoutX="402.0" layoutY="677.0" text="Bank Transfer" />
+      <JFXCheckBox fx:id="mobilebox" layoutX="402.0" layoutY="713.0" text="Mobile Banking" />
       <TextArea fx:id="notetxt" layoutX="12.0" layoutY="118.0" prefHeight="77.0" prefWidth="715.0" promptText="note">
          <font>
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </TextArea>
-      <Button fx:id="submitbtn" layoutX="554.0" layoutY="568.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="155.0" style="-fx-background-color: #1A237E;" stylesheets="@../../style/btn2.css" text="Save">
+      <Button fx:id="submitbtn" layoutX="402.0" layoutY="751.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="155.0" style="-fx-background-color: #1A237E;" stylesheets="@../../style/btn2.css" text="Save">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -168,5 +123,75 @@
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </Label>
+      <Separator layoutX="9.0" layoutY="625.0" prefHeight="5.0" prefWidth="715.0" />
+      <TextArea fx:id="paymentNote" layoutX="9.0" layoutY="639.0" prefHeight="155.0" prefWidth="381.0" promptText="Payment Note">
+         <font>
+            <Font name="Pyidaungsu-Bold" size="12.0" />
+         </font>
+      </TextArea>
+      <AnchorPane layoutX="244.0" layoutY="495.0" prefHeight="122.0" prefWidth="484.0" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
+         <children>
+            <Label layoutX="14.0" layoutY="15.0" text="Total Amount    ">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="86.0" text="Balance Amount">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="13.0" layoutY="51.0" text="Discount Amount">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="160.0" layoutY="15.0" prefHeight="24.0" prefWidth="6.0" text="-">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="160.0" layoutY="47.0" prefHeight="24.0" prefWidth="6.0" text="-">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="160.0" layoutY="86.0" prefHeight="24.0" prefWidth="6.0" text="-">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="finaltotallb" layoutX="211.0" layoutY="13.0" text="0.0" textFill="RED">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="discountlb" layoutX="211.0" layoutY="49.0" text="0.0" textFill="RED">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="grandtotallb" layoutX="211.0" layoutY="85.0" text="0.0" textFill="RED">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="420.0" layoutY="15.0" text="MMK" textFill="RED">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="420.0" layoutY="51.0" text="MMK" textFill="RED">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="420.0" layoutY="85.0" text="MMK" textFill="RED">
+               <font>
+                  <Font name="Pyidaungsu-Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

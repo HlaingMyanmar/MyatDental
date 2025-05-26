@@ -24,6 +24,7 @@ import org.sspd.myatdental.treatmentoptions.service.TreatmentService;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -114,6 +115,10 @@ public class TreatmentInvoiceController implements Initializable {
 
     @FXML
     private Button submitbtn;
+
+
+    @FXML
+    private TextArea paymentNote;
 
 
 
@@ -288,9 +293,9 @@ public class TreatmentInvoiceController implements Initializable {
                 return;
             }
 
-            String paymentMethod = bankbox.isSelected() ? "Bank Transfer" :
-                    cashbox.isSelected() ? "Cash" :
-                            mobilebox.isSelected() ? "Mobile Money" : null;
+            Payment.PaymentMethod paymentMethod = bankbox.isSelected() ? Payment.PaymentMethod.Bank_Transfer :
+                    cashbox.isSelected() ?Payment.PaymentMethod.Cash :
+                            mobilebox.isSelected() ? Payment.PaymentMethod.Mobile_Money : null;
 
             double payment = Double.parseDouble(grandtotallb.getText().trim());
 
@@ -325,7 +330,12 @@ public class TreatmentInvoiceController implements Initializable {
 
             TreatmentInvoice ti = new TreatmentInvoice(discount,totalamount,balance,status,appointment.getPatient(),appointment);
 
-            Payment p1 = new Payment();
+
+            String paymentnote = paymentNote.getText();
+            LocalDate date = LocalDate.now();
+
+
+            Payment p1 = new Payment(paymentAmount,date,paymentMethod,paymentnote,ti);
 
 
         });
