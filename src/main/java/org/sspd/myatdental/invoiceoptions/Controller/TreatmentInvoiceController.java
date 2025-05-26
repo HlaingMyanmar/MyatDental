@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.sspd.myatdental.alert.AlertBox;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
+import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
 import org.sspd.myatdental.invoiceoptions.service.TreatmentInvoiceService;
 import org.sspd.myatdental.paymentoptions.model.Payment;
 import org.sspd.myatdental.treatmentoptions.model.TreatRecordViewModel;
@@ -291,10 +292,47 @@ public class TreatmentInvoiceController implements Initializable {
                     cashbox.isSelected() ? "Cash" :
                             mobilebox.isSelected() ? "Mobile Money" : null;
 
-            // Proceed with payment using paymentAmount and paymentMethod
+            double payment = Double.parseDouble(grandtotallb.getText().trim());
+
+            String grandTotalText = grandtotallb.getText();
+            if (grandTotalText == null || grandTotalText.trim().isEmpty()) {
+                return;
+            }
+
+            double grandTotal = Double.parseDouble(grandTotalText.trim());
+
+            // Treatment Record List
+         //   treatments
+
+
+
+
+            int discount  = (int) Double.parseDouble(discountlb.getText());
+            double totalamount  = Double.parseDouble(finaltotallb.getText());
+            double balance =grandTotal -  paymentAmount;
+            TreatmentInvoice.InvoiceStatus status ;
+
+            if(balance==0.0){
+               status = TreatmentInvoice.InvoiceStatus.Paid;
+
+            }
+            else  if (paymentAmount>grandTotal){
+                status = TreatmentInvoice.InvoiceStatus.Partially_Paid;
+            }
+            else {
+                status = TreatmentInvoice.InvoiceStatus.Unpaid;
+            }
+
+            TreatmentInvoice ti = new TreatmentInvoice(discount,totalamount,balance,status,appointment.getPatient(),appointment);
+
+            Payment p1 = new Payment();
+
+
         });
 
     }
+
+
 
 
     private void setupDiscountListener() {
@@ -332,7 +370,6 @@ public class TreatmentInvoiceController implements Initializable {
             }
         });
     }
-
 
     private ObservableList<TreatRecordViewModel> loadTreatmentRecords() {
         ObservableList<TreatRecordViewModel> treatmentView = FXCollections.observableArrayList();

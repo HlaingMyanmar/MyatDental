@@ -4,6 +4,8 @@ package org.sspd.myatdental.paymentoptions.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
+import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -21,8 +23,6 @@ public class Payment {
     @Column(name = "payment_id")
     private Integer paymentId;
 
-    @Column(name = "invoice_id", nullable = false)
-    private Integer invoiceId;
 
     @Column(name = "amount", nullable = false, precision = 12, scale = 2)
     private BigDecimal amount;
@@ -36,6 +36,10 @@ public class Payment {
 
     @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
+
+    @ManyToOne
+    @JoinColumn(name = "invoice_id", nullable = false)
+    private TreatmentInvoice treatmentInvoice;
 
 
     public enum PaymentMethod {
