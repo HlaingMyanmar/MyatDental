@@ -1,4 +1,4 @@
-package org.sspd.myatdental.invoiceoptions.impl;
+package org.sspd.myatdental.treatmentoptions.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

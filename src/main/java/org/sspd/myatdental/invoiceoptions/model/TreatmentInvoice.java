@@ -56,8 +56,11 @@ public class TreatmentInvoice {
     private Set<Payment> paymentSet;
 
     @OneToMany(mappedBy = "treatmentInvoice", cascade = CascadeType.ALL)
-    private  Set<TreatmentInvoiceRecord> treatmentInvoiceRecord ;
+    private  Set<TreatmentRecord> treatmentRecordSet ;
 
+
+    @OneToMany(mappedBy = "treatmentInvoice", cascade = CascadeType.ALL)
+    private Set<TreatmentInvoiceRecord> treatmentInvoiceRecord;
 
 
 
@@ -72,5 +75,10 @@ public class TreatmentInvoice {
         this.status = status;
         this.patient = patient;
         this.appointment = appointment;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
 }

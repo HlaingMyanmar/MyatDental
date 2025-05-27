@@ -4,11 +4,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
-import org.sspd.myatdental.invoiceoptions.impl.TreatmentInvoiceRecordimpl;
+
+import org.sspd.myatdental.alert.AlertBox;
 import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
 import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoiceRecord;
 import org.sspd.myatdental.paymentoptions.model.Payment;
 import org.sspd.myatdental.paymentoptions.service.PaymentService;
+import org.sspd.myatdental.treatmentoptions.impl.TreatmentInvoiceRecordimpl;
+import org.sspd.myatdental.treatmentoptions.model.TreatmentInvoiceRecordId;
 import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
 import org.sspd.myatdental.treatmentoptions.service.TreatmentRecordService;
 
@@ -40,55 +43,65 @@ public class TreatmentInvoiceRecordService {
 
 
 
-    private boolean addTreatmentRecordInvoicePayment(
+    public boolean addTreatmentRecordInvoicePayment(
             List<TreatmentRecord> treatmentRecords,
             TreatmentInvoice treatmentInvoice,
-            Payment payment,
-            TreatmentInvoiceRecord treatmentInvoiceRecord) {
+            Payment payment
+    ) {
         Transaction tx = null;
         try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
 
-            // Validate inputs
-            if ((treatmentRecords == null || treatmentRecords.isEmpty()) && treatmentInvoiceRecord == null) {
-                return false;
+            // Save invoice first so it has ID
+            session.persist(treatmentInvoice);
+            session.flush(); // Ensure invoiceId is generated
+
+            int batchSize = 10;
+            for (int i = 0; i < treatmentRecords.size(); i++) {
+                TreatmentRecord record = treatmentRecords.get(i);
+                record.setTreatmentInvoice(treatmentInvoice);
+                session.persist(record);
+                session.flush(); // ensure recordId is generated
+
+                // Build ID and link record
+                TreatmentInvoiceRecordId id = new TreatmentInvoiceRecordId(
+                        treatmentInvoice.getInvoiceId(),
+                        record.getRecordId()
+                );
+                TreatmentInvoiceRecord tir = new TreatmentInvoiceRecord();
+                tir.setId(id);
+                tir.setTreatmentInvoice(treatmentInvoice);
+                tir.setTreatmentRecord(record);
+
+                session.persist(tir);
+
+                if (i % batchSize == 0 && i > 0) {
+                    session.flush();
+                    session.clear();
+                }
             }
-            if (treatmentInvoice == null || payment == null) {
-                return false;
-            }
 
-
-            double paymentAmount = payment.getAmount();
-            if (paymentAmount == 0.0 || paymentAmount<-0.0) {
-                return false;
-            }
-
-            assert treatmentRecords != null;
-            for(TreatmentRecord record : treatmentRecords) {
-
-                treatmentRecordService.save(record);
-
-            }
-
-            treatmentInvoiceService.createInvoice(treatmentInvoice);
-            paymentService.createPayment(payment);
-
-
-
-
-
-
+            // Link payment to invoice and persist
+            payment.setTreatmentInvoice(treatmentInvoice);
+            session.persist(payment);
 
             tx.commit();
+
+            AlertBox.showInformationDialog("Invoice", "",
+                    "Successfully saved " + treatmentRecords.size() + " treatment records, invoice, and payment.");
             return true;
+
         } catch (Exception e) {
+
+            System.err.println("Error in addTreatmentRecordInvoicePayment: " + e.getMessage());
             if (tx != null && tx.isActive()) {
                 tx.rollback();
             }
-            System.err.println("Error in addTreatmentRecordInvoicePayment: " + e.getMessage());
+
             return false;
         }
     }
+
 
 
 

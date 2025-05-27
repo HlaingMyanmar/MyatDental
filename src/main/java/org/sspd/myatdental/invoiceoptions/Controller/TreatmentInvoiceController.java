@@ -1,6 +1,7 @@
 package org.sspd.myatdental.invoiceoptions.Controller;
 
 import com.jfoenix.controls.JFXCheckBox;
+import jakarta.validation.Validator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,10 +12,13 @@ import javafx.util.StringConverter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.sspd.myatdental.ErrorHandler.Validation.GenericValidator;
 import org.sspd.myatdental.alert.AlertBox;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
 import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
+import org.sspd.myatdental.invoiceoptions.service.TreatmentInvoiceRecordService;
 import org.sspd.myatdental.invoiceoptions.service.TreatmentInvoiceService;
+import org.sspd.myatdental.patientoptions.model.Patient;
 import org.sspd.myatdental.paymentoptions.model.Payment;
 import org.sspd.myatdental.treatmentoptions.model.TreatRecordViewModel;
 import org.sspd.myatdental.treatmentoptions.model.Treatment;
@@ -124,14 +128,17 @@ public class TreatmentInvoiceController implements Initializable {
 
     private final TreatmentService treatmentService;
     private final TreatmentInvoiceService invoiceService;
+    private final TreatmentInvoiceRecordService treatmentInvoiceRecordService;
+    private final Validator validator;
 
     private ObservableList<TreatmentRecord> treatments = FXCollections.observableArrayList();
 
-    @Autowired
-    public TreatmentInvoiceController(TreatmentService treatmentService, TreatmentInvoiceService invoiceService, Payment payment) {
+    public TreatmentInvoiceController(Payment payment, TreatmentService treatmentService, TreatmentInvoiceService invoiceService, TreatmentInvoiceRecordService treatmentInvoiceRecordService, Validator validator) {
+        this.payment = payment;
         this.treatmentService = treatmentService;
         this.invoiceService = invoiceService;
-        this.payment = payment;
+        this.treatmentInvoiceRecordService = treatmentInvoiceRecordService;
+        this.validator = validator;
     }
 
     @Override
@@ -336,6 +343,38 @@ public class TreatmentInvoiceController implements Initializable {
 
 
             Payment p1 = new Payment(paymentAmount,date,paymentMethod,paymentnote,ti);
+
+            boolean tresult = false;
+            for(TreatmentRecord t :treatments){
+
+              tresult   = new GenericValidator<TreatmentRecord>(validator).validate(t);
+
+            }
+
+            boolean tinvoiceresult = new GenericValidator<TreatmentInvoice>(validator).validate(ti);
+
+            boolean paymentresult = new GenericValidator<Payment>(validator).validate(p1);
+
+            if(tresult && tinvoiceresult && paymentresult){
+
+
+                if(treatmentInvoiceRecordService.addTreatmentRecordInvoicePayment(treatments, ti, p1)){
+
+
+                    AlertBox.showInformationDialog("Treatment Record", "Treatment Record", "Treatment Record added successfully.");
+
+
+                }
+                else {
+                    AlertBox.showErrorDialog("Treatment Record", "Treatment Record", "Treatment Record already added.");
+                }
+
+
+            }
+
+
+
+
 
 
         });

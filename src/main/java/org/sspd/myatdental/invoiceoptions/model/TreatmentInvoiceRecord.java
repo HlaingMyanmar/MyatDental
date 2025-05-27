@@ -1,12 +1,9 @@
 package org.sspd.myatdental.invoiceoptions.model;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
+import org.sspd.myatdental.treatmentoptions.model.TreatmentInvoiceRecordId;
 import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
 
 @AllArgsConstructor
@@ -14,22 +11,22 @@ import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
 @Entity
 @Table(name = "invoice_treatment_records")
 @Component
-@Getter@Setter
+@Getter
+@Setter
 public class TreatmentInvoiceRecord {
 
-    @Id
+    @EmbeddedId
+    private TreatmentInvoiceRecordId id;
+
     @ManyToOne
+    @MapsId("treatmentInvoice")
     @JoinColumn(name = "invoice_id", nullable = false)
     private TreatmentInvoice treatmentInvoice;
 
-
     @ManyToOne
+    @MapsId("treatmentRecord")
     @JoinColumn(name = "record_id", nullable = false)
     private TreatmentRecord treatmentRecord;
-
-
-
-
 
 
 

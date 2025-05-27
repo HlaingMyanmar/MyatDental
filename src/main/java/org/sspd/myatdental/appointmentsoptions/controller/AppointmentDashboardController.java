@@ -470,7 +470,7 @@ public class AppointmentDashboardController implements Initializable {
 
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/appointmentlayouts/Appointmenteditchooseview.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/appointmentlayouts/appointmenteditchooseview.fxml"));
             fxmlLoader.setControllerFactory(App.context::getBean);
             Scene scene = new Scene(fxmlLoader.load());
             AppointmentChooseController controller = fxmlLoader.getController();

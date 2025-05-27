@@ -3,8 +3,11 @@ package org.sspd.myatdental.treatmentoptions.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
+import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
+import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoiceRecord;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -37,6 +40,16 @@ public class TreatmentRecord {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "treatment_id", nullable = false)
     private Treatment treatment;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TreatmentRecord", nullable = false)
+    private TreatmentInvoice treatmentInvoice;
+
+
+
+    @OneToMany(mappedBy = "treatmentRecord", cascade = CascadeType.ALL)
+    private Set<TreatmentInvoiceRecord> treatmentInvoiceRecords;
+
 
     public TreatmentRecord(Appointment appointment, Treatment treatment, String toothNumber, String notes, double price) {
         this.appointment = appointment;

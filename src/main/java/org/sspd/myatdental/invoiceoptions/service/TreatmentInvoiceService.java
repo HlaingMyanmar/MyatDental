@@ -1,9 +1,16 @@
 package org.sspd.myatdental.invoiceoptions.service;
 
+import jakarta.persistence.PersistenceException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Service;
+import org.sspd.myatdental.alert.AlertBox;
 import org.sspd.myatdental.dto.DataAccessObject;
 import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
+import org.sspd.myatdental.paymentoptions.model.Payment;
+import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
 
 import java.util.List;
 
@@ -11,82 +18,50 @@ import java.util.List;
 public class TreatmentInvoiceService {
 
     private final DataAccessObject<TreatmentInvoice> invoiceDao;
-
     private final SessionFactory sessionFactory;
-
 
     public TreatmentInvoiceService(DataAccessObject<TreatmentInvoice> invoiceDao, SessionFactory sessionFactory) {
         this.invoiceDao = invoiceDao;
         this.sessionFactory = sessionFactory;
     }
 
-    /**
-     * Retrieves all treatment invoices.
-     * @return List of all TreatmentInvoice entities.
-     */
+    // Save a new invoice
+    public void saveInvoice(TreatmentInvoice invoice) {
+        invoiceDao.save(invoice);
+    }
+
+    // Get all invoices
     public List<TreatmentInvoice> getAllInvoices() {
         return invoiceDao.findAll();
     }
 
-    /**
-     * Retrieves a treatment invoice by its ID.
-     * @param id The ID of the invoice.
-     * @return The TreatmentInvoice if found, or null if not found.
-     */
+    // Get invoice by ID
     public TreatmentInvoice getInvoiceById(int id) {
         return invoiceDao.findById(id);
     }
 
-    /**
-     * Creates a new treatment invoice.
-     * @param treatmentInvoice The TreatmentInvoice to save.
-     * @return true if saved successfully, false otherwise.
-     * @throws IllegalArgumentException if the invoice is invalid.
-     */
-    public boolean createInvoice(TreatmentInvoice treatmentInvoice) {
-        if (treatmentInvoice == null || !isValidInvoice(treatmentInvoice)) {
-            throw new IllegalArgumentException("Invalid invoice data");
+    // Update an invoice
+    public void updateInvoice(TreatmentInvoice invoice) {
+        invoiceDao.update(invoice);
+    }
+
+    // Delete invoice by ID
+    public void deleteInvoice(int id) {
+        TreatmentInvoice invoice = getInvoiceById(id);
+        if (invoice != null) {
+            invoiceDao.delete(invoice);
         }
-        return invoiceDao.save(treatmentInvoice);
     }
 
-    /**
-     * Updates an existing treatment invoice.
-     * @param treatmentInvoice The TreatmentInvoice with updated data.
-     * @return true if updated successfully, false otherwise.
-     * @throws IllegalArgumentException if the invoice is invalid or lacks an ID.
-     */
-    public boolean updateInvoice(TreatmentInvoice treatmentInvoice) {
-        if (treatmentInvoice == null || treatmentInvoice.getInvoiceId() == null || !isValidInvoice(treatmentInvoice)) {
-            throw new IllegalArgumentException("Invalid invoice data or missing ID");
+    // Get invoices by patient ID using Hibernate query
+    public List<TreatmentInvoice> getInvoicesByPatientId(Long patientId) {
+        try (var session = sessionFactory.openSession()) {
+            return session.createQuery(
+                            "FROM TreatmentInvoice WHERE patient.id = :patientId", TreatmentInvoice.class)
+                    .setParameter("patientId", patientId)
+                    .getResultList();
         }
-        return invoiceDao.update(treatmentInvoice);
     }
-
-    /**
-     * Deletes a treatment invoice by its ID.
-     * @param id The ID of the invoice to delete.
-     * @return true if deleted successfully, false otherwise.
-     */
-    public boolean deleteInvoiceById(int id) {
-        return invoiceDao.deleteById(id);
-    }
-
-    /**
-     * Validates a TreatmentInvoice before saving or updating.
-     * @param treatmentInvoice The invoice to validate.
-     * @return true if valid, false otherwise.
-     */
-    private boolean isValidInvoice(TreatmentInvoice treatmentInvoice) {
-        return treatmentInvoice.getPatient().getPatient_id() != 0 &&
-                treatmentInvoice.getTotalAmount() != null &&
-                treatmentInvoice.getBalanceDue() != null &&
-                treatmentInvoice.getStatus() != null;
-    }
-
-
-
-
 
 
 

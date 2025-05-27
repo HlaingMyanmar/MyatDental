@@ -71,13 +71,12 @@ CREATE TABLE invoices (
 ) ENGINE=InnoDB;
 
 CREATE TABLE invoice_treatment_records (
-                           invoice_id INT NOT NULL,
-                           record_id INT NOT NULL,
-                           PRIMARY KEY (invoice_id, record_id),
-                           FOREIGN KEY (invoice_id) REFERENCES invoices(invoice_id) ON DELETE CASCADE,
-                           FOREIGN KEY (record_id) REFERENCES treatment_records(record_id) ON DELETE CASCADE
+                                           invoice_id INT NOT NULL,
+                                           record_id INT NOT NULL,
+                                           PRIMARY KEY (invoice_id, record_id),
+                                           FOREIGN KEY (invoice_id) REFERENCES invoices(invoice_id) ON DELETE CASCADE,
+                                           FOREIGN KEY (record_id) REFERENCES treatment_records(record_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
-
 
 CREATE TABLE payments (
                           payment_id INT AUTO_INCREMENT PRIMARY KEY,
