@@ -1,0 +1,59 @@
+/* Spinner base styling */
+.spinner {
+    -fx-background-color: #f5f7fa; /* Matches TextField and DatePicker background */
+    -fx-border-color: #dcdcdc; /* Matches border color */
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); /* Matches VBox shadow */
+}
+
+/* Spinner text field (editable area) */
+.spinner .text-field {
+    -fx-background-color: #f5f7fa;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-text-fill: #2c3e50; /* Matches Label text color */
+    -fx-prompt-text-fill: #7f8c8d; /* Subtle gray for prompt text */
+}
+
+/* Spinner increment/decrement buttons */
+.spinner .increment-button, .spinner .decrement-button {
+    -fx-background-color: #3498db; /* Matches JFXButton blue */
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+    -fx-padding: 2 8;
+}
+
+/* Hover effect for buttons */
+.spinner .increment-button:hover, .spinner .decrement-button:hover {
+    -fx-background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Pressed effect for buttons */
+.spinner .increment-button:pressed, .spinner .decrement-button:pressed {
+    -fx-background-color: #2c3e50; /* Darker color for pressed state */
+}
+
+/* Arrow icons inside increment/decrement buttons */
+.spinner .increment-button .increment-arrow,
+.spinner .decrement-button .decrement-arrow {
+    -fx-shape: "M 0 0 L 6 6 L 12 0 Z"; /* Triangle shape for arrows */
+    -fx-background-color: #ffffff; /* White arrow */
+}
+
+/* Focus state for the spinner */
+.spinner:focused {
+    -fx-border-color: #3498db; /* Blue border on focus */
+    -fx-border-width: 2;
+}
+
+/* Disabled state */
+.spinner:disabled {
+    -fx-opacity: 0.6;
+    -fx-background-color: #ecf0f1;
+    -fx-border-color: #e0e0e0;
+}

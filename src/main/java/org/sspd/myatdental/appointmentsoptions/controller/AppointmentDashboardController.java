@@ -508,7 +508,7 @@ public class AppointmentDashboardController implements Initializable {
         patNameCol.setCellValueFactory(new PropertyValueFactory<>("patient_name"));
         patPhoneCol.setCellValueFactory(new PropertyValueFactory<>("patient_phone"));
 
-        dobCol.setCellValueFactory(new PropertyValueFactory<>("date_of_birth"));
+          dobCol.setCellValueFactory(new PropertyValueFactory<>("date_of_birth"));
 
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 
