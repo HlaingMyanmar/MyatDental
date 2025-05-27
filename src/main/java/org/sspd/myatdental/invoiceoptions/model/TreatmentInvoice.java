@@ -52,8 +52,13 @@ public class TreatmentInvoice {
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
-    @OneToMany(mappedBy = "treatmentinvoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "treatmentInvoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Payment> paymentSet;
+
+    @OneToMany(mappedBy = "treatmentInvoice", cascade = CascadeType.ALL)
+    private  Set<TreatmentInvoiceRecord> treatmentInvoiceRecord ;
+
+
 
 
     public enum InvoiceStatus {

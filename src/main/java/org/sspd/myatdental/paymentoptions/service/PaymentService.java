@@ -75,9 +75,9 @@ public class PaymentService {
      * @return true if valid, false otherwise.
      */
     private boolean isValidPayment(Payment payment) {
-        return payment.getInvoiceId() != null &&
-                payment.getAmount() != null &&
+        return payment.getPaymentId() != 0 &&
+                payment.getAmount() !=0 &&
                 payment.getPaymentDate() != null &&
-                payment.getAmount().signum() >= 0; // Ensure amount is non-negative
+                payment.getAmount() >= 0; // Ensure amount is non-negative
     }
 }

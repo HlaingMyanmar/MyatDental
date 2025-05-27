@@ -66,10 +66,18 @@ CREATE TABLE invoices (
                           balance_due DECIMAL(12,2) NOT NULL,
                           status ENUM('Unpaid', 'Partially Paid', 'Paid') DEFAULT 'Unpaid',
                           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
                           FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
                           FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE invoice_treatment_records (
+                           invoice_id INT NOT NULL,
+                           record_id INT NOT NULL,
+                           PRIMARY KEY (invoice_id, record_id),
+                           FOREIGN KEY (invoice_id) REFERENCES invoices(invoice_id) ON DELETE CASCADE,
+                           FOREIGN KEY (record_id) REFERENCES treatment_records(record_id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
 
 CREATE TABLE payments (
                           payment_id INT AUTO_INCREMENT PRIMARY KEY,

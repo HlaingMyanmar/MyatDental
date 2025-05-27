@@ -1,6 +1,6 @@
 package org.sspd.myatdental.invoiceoptions.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.sspd.myatdental.dto.DataAccessObject;
 import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
@@ -12,9 +12,12 @@ public class TreatmentInvoiceService {
 
     private final DataAccessObject<TreatmentInvoice> invoiceDao;
 
-    @Autowired
-    public TreatmentInvoiceService(DataAccessObject<TreatmentInvoice> invoiceDao) {
+    private final SessionFactory sessionFactory;
+
+
+    public TreatmentInvoiceService(DataAccessObject<TreatmentInvoice> invoiceDao, SessionFactory sessionFactory) {
         this.invoiceDao = invoiceDao;
+        this.sessionFactory = sessionFactory;
     }
 
     /**
@@ -80,4 +83,12 @@ public class TreatmentInvoiceService {
                 treatmentInvoice.getBalanceDue() != null &&
                 treatmentInvoice.getStatus() != null;
     }
+
+
+
+
+
+
+
+
 }

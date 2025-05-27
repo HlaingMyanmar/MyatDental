@@ -42,6 +42,8 @@ public class Payment {
     private TreatmentInvoice treatmentInvoice;
 
 
+
+
     public enum PaymentMethod {
         Cash, Bank_Transfer, Mobile_Money
     }
