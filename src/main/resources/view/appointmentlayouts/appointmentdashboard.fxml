@@ -170,12 +170,12 @@
                         <TableColumn fx:id="timeCol" prefWidth="100.0" text="Time" />
                      </columns>
                   </TableColumn>
-                  <TableColumn fx:id="drnameCol" prefWidth="120.0" text="Doctor Name" />
-                  <TableColumn fx:id="patNameCol" prefWidth="120.0" text="Patient Name" />
-                  <TableColumn fx:id="patPhoneCol" prefWidth="120.0" text="Patient Phone" />
-                  <TableColumn fx:id="dobCol" prefWidth="120.0" text="Date of Birth" />
-                  <TableColumn fx:id="statusCol" prefWidth="100.0" text="Status" />
-                  <TableColumn fx:id="purposeCol" prefWidth="255.0" text="Purpose" />
+                  <TableColumn fx:id="drnameCol" prefWidth="139.0" text="Doctor Name" />
+                  <TableColumn fx:id="patNameCol" prefWidth="123.0" text="Patient Name" />
+                  <TableColumn fx:id="patPhoneCol" prefWidth="118.0" text="Patient Phone" />
+                  <TableColumn fx:id="dobCol" prefWidth="114.0" text="Date of Birth" />
+                  <TableColumn fx:id="statusCol" prefWidth="128.0" text="Status" />
+                  <TableColumn fx:id="purposeCol" prefWidth="213.0" text="Purpose" />
                </columns>
             </TableView>
             <HBox alignment="CENTER_RIGHT" layoutX="893.0" layoutY="575.0">

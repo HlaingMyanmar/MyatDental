@@ -346,7 +346,9 @@ public class AppointmentDashboardController implements Initializable {
 
             if (selectedAppointment != null) {
                 Appointment appointment = getAppointment(selectedAppointment.getAppointment_id());
-                if (appointment != null) {
+                if (appointment != null &&
+                        !appointment.getStatus().equals("Completed") &&
+                        !appointment.getStatus().equals("Cancelled")) {
 
                     treatmentInvoiceController.setAppointment(appointment);
                     openInvoiceView();

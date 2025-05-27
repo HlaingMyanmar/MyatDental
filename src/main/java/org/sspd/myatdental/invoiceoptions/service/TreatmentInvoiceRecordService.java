@@ -6,8 +6,12 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 
 import org.sspd.myatdental.alert.AlertBox;
+import org.sspd.myatdental.appointmentsoptions.model.Appointment;
+import org.sspd.myatdental.appointmentsoptions.service.AppointmentService;
+import org.sspd.myatdental.dentistsoptions.model.Dentist;
 import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
 import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoiceRecord;
+import org.sspd.myatdental.patientoptions.model.Patient;
 import org.sspd.myatdental.paymentoptions.model.Payment;
 import org.sspd.myatdental.paymentoptions.service.PaymentService;
 import org.sspd.myatdental.treatmentoptions.impl.TreatmentInvoiceRecordimpl;
@@ -16,6 +20,8 @@ import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
 import org.sspd.myatdental.treatmentoptions.service.TreatmentRecordService;
 
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Service
@@ -23,6 +29,8 @@ public class TreatmentInvoiceRecordService {
 
 
     private final SessionFactory sessionFactory;
+
+    private final AppointmentService appointmentService;
 
     private final TreatmentInvoiceRecordimpl treatmentInvoiceRecordDao;
 
@@ -33,15 +41,14 @@ public class TreatmentInvoiceRecordService {
     private final PaymentService paymentService;
 
 
-    public TreatmentInvoiceRecordService(SessionFactory sessionFactory, TreatmentInvoiceRecordimpl treatmentInvoiceRecordDao, TreatmentRecordService treatmentRecordService, TreatmentInvoiceService treatmentInvoiceService, PaymentService paymentService) {
+    public TreatmentInvoiceRecordService(SessionFactory sessionFactory, AppointmentService appointmentService, TreatmentInvoiceRecordimpl treatmentInvoiceRecordDao, TreatmentRecordService treatmentRecordService, TreatmentInvoiceService treatmentInvoiceService, PaymentService paymentService) {
         this.sessionFactory = sessionFactory;
+        this.appointmentService = appointmentService;
         this.treatmentInvoiceRecordDao = treatmentInvoiceRecordDao;
         this.treatmentRecordService = treatmentRecordService;
         this.treatmentInvoiceService = treatmentInvoiceService;
         this.paymentService = paymentService;
     }
-
-
 
     public boolean addTreatmentRecordInvoicePayment(
             List<TreatmentRecord> treatmentRecords,
@@ -84,6 +91,17 @@ public class TreatmentInvoiceRecordService {
             // Link payment to invoice and persist
             payment.setTreatmentInvoice(treatmentInvoice);
             session.persist(payment);
+
+
+
+            // Update appointment status directly
+            Appointment appointment = treatmentInvoice.getAppointment();
+            if (appointment != null) {
+                appointment.setStatus("Completed");
+                session.merge(appointment); // updates existing appointment
+            }
+
+
 
             tx.commit();
 

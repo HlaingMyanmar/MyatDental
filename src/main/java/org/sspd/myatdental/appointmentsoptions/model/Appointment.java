@@ -57,6 +57,9 @@ public class Appointment {
     @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<TreatmentRecord> treatmentRecordSet;
 
+
+
+
     public Appointment(Date appointment_date, Time appointment_time, String status, String purpose, String notes, Patient patient, Dentist dentist) {
         this.appointment_date = appointment_date;
         this.appointment_time = appointment_time;
@@ -86,4 +89,6 @@ public class Appointment {
         this.patient = patient;
         this.dentist = dentist;
     }
+
+
 }
