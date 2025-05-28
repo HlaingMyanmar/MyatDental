@@ -9,9 +9,11 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -139,6 +141,13 @@ public class AppointmentDashboardController implements Initializable {
 
     @FXML
     private JFXButton treatementbtn;
+
+    @FXML
+    private AnchorPane switchPane;
+
+
+    @FXML
+    private JFXButton appointmentreportbtn;
 
 
     public static String _username  = "";
@@ -361,6 +370,13 @@ public class AppointmentDashboardController implements Initializable {
         });
 
 
+        appointmentreportbtn.setOnAction(event -> {
+
+            switchReportView();
+
+        });
+
+
 
     }
 
@@ -436,6 +452,18 @@ public class AppointmentDashboardController implements Initializable {
         }
 
 
+    }
+
+    private void switchReportView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/appointmentlayouts/appointmentreportview.fxml"));
+            fxmlLoader.setControllerFactory(App.context::getBean);
+            Parent root = fxmlLoader.load(); // Load the root node (e.g., a Pane) from FXML
+            switchPane.getChildren().clear(); // Clear existing content
+            switchPane.getChildren().add(root); // Add the loaded FXML root to switchPane
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load appointmentreportview.fxml", e);
+        }
     }
 
     private void openDentistView() {

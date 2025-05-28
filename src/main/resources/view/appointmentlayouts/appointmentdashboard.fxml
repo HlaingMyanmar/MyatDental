@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #f5f7fa;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.appointmentsoptions.controller.AppointmentDashboardController">
+<AnchorPane prefHeight="768.0" prefWidth="1357.0" style="-fx-background-color: #f5f7fa;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.appointmentsoptions.controller.AppointmentDashboardController">
    <children>
-      <AnchorPane fx:id="titlePane" prefHeight="40.0" prefWidth="1371.0" style="-fx-background-color: #1A237E;">
+      <AnchorPane fx:id="titlePane" prefHeight="40.0" prefWidth="1357.0" style="-fx-background-color: #1A237E;">
          <children>
             <Label layoutX="11.0" layoutY="10.0" text="S.S.P.D IT Service &amp; Training " textFill="WHITE">
                <font>
@@ -29,11 +29,11 @@
                   <Font name="Britannic Bold" size="19.0" />
                </font>
             </Label>
-            <FontAwesomeIconView fx:id="closebtn" glyphName="TIMES_CIRCLE" glyphStyle="-fx-fill: #ffffff" layoutX="1344.0" layoutY="29.0" size="24" wrappingWidth="24.14285659790039" />
-            <FontAwesomeIconView fx:id="minimizebtn" glyphName="WINDOW_MINIMIZE" glyphStyle="-fx-fill: #ffffff" layoutX="1302.0" layoutY="22.0" size="24" wrappingWidth="24.14285659790039" />
+            <FontAwesomeIconView fx:id="closebtn" glyphName="TIMES_CIRCLE" glyphStyle="-fx-fill: #ffffff" layoutX="1323.0" layoutY="29.0" size="24" wrappingWidth="24.14285659790039" />
+            <FontAwesomeIconView fx:id="minimizebtn" glyphName="WINDOW_MINIMIZE" glyphStyle="-fx-fill: #ffffff" layoutX="1281.0" layoutY="22.0" size="24" wrappingWidth="24.14285659790039" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-2.0" layoutY="736.0" prefHeight="32.0" prefWidth="1373.0" style="-fx-background-color: #1A237E;">
+      <AnchorPane layoutX="-2.0" layoutY="736.0" prefHeight="32.0" prefWidth="1357.0" style="-fx-background-color: #1A237E;">
          <children>
             <Label fx:id="usernamelb" layoutX="661.0" layoutY="9.0" text="Admin" textFill="WHITE">
                <font>
@@ -45,15 +45,15 @@
                   <Font name="Britannic Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="clockbtn" layoutX="1147.0" layoutY="9.0" text="Version 1.0" textFill="WHITE">
+            <Label fx:id="clockbtn" layoutX="1113.0" layoutY="9.0" text="Version 1.0" textFill="WHITE">
                <font>
                   <Font name="Britannic Bold" size="19.0" />
                </font>
             </Label>
             <FontAwesomeIconView glyphName="USER" glyphStyle="-fx-fill: #ffffff" layoutX="635.0" layoutY="25.0" size="24" wrappingWidth="24.14285659790039" />
-            <FontAwesomeIconView glyphName="CALENDAR" glyphStyle="-fx-fill: #ffffff" layoutX="1119.0" layoutY="25.0" size="24" wrappingWidth="24.14285659790039" />
+            <FontAwesomeIconView glyphName="CALENDAR" glyphStyle="-fx-fill: #ffffff" layoutX="1085.0" layoutY="25.0" size="24" wrappingWidth="24.14285659790039" />
          </children></AnchorPane>
-      <ImageView fitHeight="130.0" fitWidth="135.0" layoutX="40.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="130.0" fitWidth="135.0" layoutX="36.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/sspdlogo.png" />
          </image>
@@ -68,7 +68,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXButton>
-            <JFXButton fx:id="editinvoicebtn1" focusTraversable="false" layoutX="20.0" layoutY="80.0" prefHeight="39.0" prefWidth="171.0" style="-fx-background-color: #1A237E; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Appointment Report">
+            <JFXButton fx:id="appointmentreportbtn" focusTraversable="false" layoutX="20.0" layoutY="80.0" prefHeight="39.0" prefWidth="171.0" style="-fx-background-color: #1A237E; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Appointment Report">
                <graphic>
                   <FontAwesomeIconView glyphName="CALENDAR" glyphStyle="-fx-fill: #ffffff" size="20" />
                </graphic>
@@ -134,7 +134,7 @@
             </JFXButton>
          </children>
       </VBox>
-      <AnchorPane fx:id="switchPane" layoutX="205.0" layoutY="78.0" prefHeight="642.0" prefWidth="1149.0">
+      <AnchorPane fx:id="switchPane" layoutX="205.0" layoutY="47.0" prefHeight="685.0" prefWidth="1149.0">
          <children>
             <VBox layoutX="8.0" layoutY="6.0" prefHeight="65.0" prefWidth="1137.0" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); -fx-background-radius: 5;">
                <children>
@@ -178,7 +178,7 @@
                   <TableColumn fx:id="purposeCol" prefWidth="287.0" text="Purpose" />
                </columns>
             </TableView>
-            <HBox alignment="CENTER_RIGHT" layoutX="1039.0" layoutY="575.0">
+            <HBox alignment="CENTER_RIGHT" layoutX="900.0" layoutY="575.0">
                <children>
                   <Label text="Total Count:" textFill="#2c3e50">
                      <font>
