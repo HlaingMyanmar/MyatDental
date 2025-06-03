@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="switchPane" prefHeight="685.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.appointmentsoptions.controller.AppointmentreportviewController">
+<AnchorPane prefHeight="685.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.appointmentsoptions.controller.AppointmentreportviewController">
    <children>
       <VBox layoutX="5.0" layoutY="64.0" prefHeight="65.0" prefWidth="744.0" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); -fx-background-radius: 5;">
          <children>

@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -35,6 +36,7 @@ import java.net.URL;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -143,11 +145,14 @@ public class AppointmentDashboardController implements Initializable {
     private JFXButton treatementbtn;
 
     @FXML
-    private AnchorPane switchPane;
+    private Pane switchPane;
 
 
     @FXML
     private JFXButton appointmentreportbtn;
+
+    @FXML
+    private JFXButton showbtn;
 
 
     public static String _username  = "";
@@ -175,7 +180,7 @@ public class AppointmentDashboardController implements Initializable {
 
         actionEvent();
 
-        getFilteredData();
+        getFilteredData(getAppointmentFilterView());
 
         Tooltip.install(closebtn, new Tooltip("Close application"));
 
@@ -188,6 +193,18 @@ public class AppointmentDashboardController implements Initializable {
     }
 
     private void actionEvent() {
+
+
+
+
+
+        showbtn.setOnAction(e -> {
+
+
+            appdashboard.setItems(getFilteredData(getAppdashboard()));
+
+
+        });
 
         editAppbtn.setOnAction(event -> {
             AppointmentView selectedAppointment = appdashboard.getSelectionModel().getSelectedItem();
@@ -262,7 +279,7 @@ public class AppointmentDashboardController implements Initializable {
 
                         if (deleted) {
                             showInformationDialog( "Success", "Appointment deleted successfully.","");
-                            getFilteredData();
+                            getFilteredData(getAppointmentFilterView());
                         } else {
                             showErrorDialog( "Error", "Failed to delete the appointment.","");
                         }
@@ -328,7 +345,7 @@ public class AppointmentDashboardController implements Initializable {
             stage.setOnCloseRequest(event1 -> {
 
 
-                getFilteredData();
+                getFilteredData(getAppointmentFilterView());
 
 
             });
@@ -410,7 +427,7 @@ public class AppointmentDashboardController implements Initializable {
 
             stage.setOnCloseRequest(event1 -> {
 
-                getFilteredData();
+                getFilteredData(getAppointmentFilterView());
 
             });
 
@@ -440,7 +457,7 @@ public class AppointmentDashboardController implements Initializable {
 
             stage.setOnCloseRequest(event1 -> {
 
-                getFilteredData();
+                getFilteredData(getAppointmentFilterView());
 
             });
 
@@ -455,16 +472,37 @@ public class AppointmentDashboardController implements Initializable {
     }
 
     private void switchReportView() {
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/appointmentlayouts/appointmentreportview.fxml"));
             fxmlLoader.setControllerFactory(App.context::getBean);
-            Parent root = fxmlLoader.load(); // Load the root node (e.g., a Pane) from FXML
-            switchPane.getChildren().clear(); // Clear existing content
-            switchPane.getChildren().add(root); // Add the loaded FXML root to switchPane
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(editAppbtn.getScene().getWindow());
+            stage.setTitle("Appointment Report");
+            stage.setScene(scene);
+            stage.show();
+
+            stage.setOnCloseRequest(event1 -> {
+
+                getFilteredData(getAppointmentFilterView());
+
+            });
+
+
+
+
         } catch (IOException e) {
-            throw new RuntimeException("Failed to load appointmentreportview.fxml", e);
+            throw new RuntimeException("Failed to load Appointmenteditchooseview.fxml", e);
         }
+
+
     }
+
+
+
 
     private void openDentistView() {
 
@@ -482,7 +520,7 @@ public class AppointmentDashboardController implements Initializable {
 
             stage.setOnCloseRequest(event1 -> {
 
-                getFilteredData();
+                getFilteredData(getAppointmentFilterView());
 
             });
 
@@ -515,7 +553,7 @@ public class AppointmentDashboardController implements Initializable {
 
             stage.setOnCloseRequest(event1 -> {
 
-                getFilteredData();
+                getFilteredData(getAppointmentFilterView());
 
             });
 
@@ -549,8 +587,20 @@ public class AppointmentDashboardController implements Initializable {
     }
 
     private ObservableList<AppointmentView> getAppdashboard() {
+
+
         return FXCollections.observableArrayList(appointmentService.getAppointmentViews());
     }
+
+    private ObservableList<AppointmentView> getAppointmentFilterView() {
+        List<AppointmentView> filteredList = appointmentService.getAppointmentViews()
+                .stream()
+                .filter(app -> "Scheduled".equals(app.getStatus()))
+                .collect(Collectors.toList());
+
+        return FXCollections.observableArrayList(filteredList);
+    }
+
 
     private ObservableList<AppointmentView> getTodayAppdashboard(LocalDate date) {
 
@@ -568,18 +618,13 @@ public class AppointmentDashboardController implements Initializable {
 
     }
 
-    private ObservableList<AppointmentView> getFilteredData() {
+    private ObservableList<AppointmentView> getFilteredData(ObservableList<AppointmentView> filter) {
 
 
         usernamelb.setText(_username);
 
 
-
-
-        ObservableList<AppointmentView> masterData = getAppdashboard();
-
-
-        FilteredList<AppointmentView> filteredData = new FilteredList<>(masterData, p -> true);
+        FilteredList<AppointmentView> filteredData = new FilteredList<>(filter, p -> true);
 
 
         appdashboard.setItems(filteredData);
@@ -631,6 +676,8 @@ public class AppointmentDashboardController implements Initializable {
 
 
         allresetbtn.setOnAction(event -> {
+
+            getFilteredData(getAppointmentFilterView());
             searchapDate.setValue(null);
             allsearchtxt.setText("");
             updatePredicate.run();
@@ -656,7 +703,7 @@ public class AppointmentDashboardController implements Initializable {
     }
 
 
-    
+
 
 
 

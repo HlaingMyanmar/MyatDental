@@ -76,8 +76,7 @@ public class AppointmentreportviewController implements Initializable {
     @FXML
     private TableColumn<AppointmentView, String> statusCol;
 
-    @FXML
-    private AnchorPane switchPane;
+
 
     @FXML
     private TableColumn<AppointmentView, Time> timeCol; // Changed to Time
@@ -242,6 +241,8 @@ public class AppointmentreportviewController implements Initializable {
                 .stream()
                 .filter(app -> app.getPatient_name().toLowerCase().contains(searchText.toLowerCase()) ||
                         app.getDoctor_name().toLowerCase().contains(searchText.toLowerCase()) ||
+                        app.getStatus().toLowerCase().contains(searchText.toLowerCase()) ||
+                        app.getPurpose().toLowerCase().contains(searchText.toLowerCase()) ||
                         String.valueOf(app.getAppointment_id()).contains(searchText))
                 .collect(Collectors.toList());
         appointmentList.setAll(filteredAppointments);

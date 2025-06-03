@@ -12,6 +12,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -60,9 +61,9 @@
       </ImageView>
       <VBox layoutX="5.0" layoutY="184.0" prefHeight="528.0" prefWidth="200.0" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
          <children>
-            <JFXButton fx:id="editinvoicebtn" focusTraversable="false" prefHeight="36.0" prefWidth="171.0" style="-fx-background-color: #1A237E; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Invoice Report">
+            <JFXButton fx:id="editinvoicebtn" focusTraversable="false" prefHeight="36.0" prefWidth="175.0" stylesheets="@../../../../../Jaa/Shop/src/main/resources/org/sspd/shop/style/mainbtn.css" text="Invoice Report">
                <graphic>
-                  <FontAwesomeIconView glyphName="CLIPBOARD" glyphStyle="-fx-fill: #ffffff" size="20" />
+                  <FontAwesomeIconView glyphName="CLIPBOARD" glyphStyle="-fx-fill: #9E9E9E" size="20" />
                </graphic>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -100,9 +101,9 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXButton>
-            <JFXButton fx:id="editinvoicebtn11111" focusTraversable="false" layoutX="10.0" layoutY="230.0" prefHeight="40.0" prefWidth="171.0" style="-fx-background-color: #1A237E; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Revenue Report">
+            <JFXButton fx:id="editinvoicebtn11111" focusTraversable="false" layoutX="10.0" layoutY="230.0" prefHeight="40.0" prefWidth="171.0" style="-fx-background-color: #1A237E; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Setting">
                <graphic>
-                  <FontAwesomeIconView glyphName="CALCULATOR" glyphStyle="-fx-fill: #ffffff" size="20" />
+                  <FontAwesomeIconView glyphName="COG" glyphStyle="-fx-fill: #ffffff" size="20" />
                </graphic>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -124,9 +125,9 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXButton>
-            <JFXButton fx:id="editinvoicebtn11111111" focusTraversable="false" layoutX="20.0" layoutY="440.0" prefHeight="40.0" prefWidth="171.0" style="-fx-background-color: #1A237E; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Setting">
+            <JFXButton focusTraversable="false" layoutX="20.0" layoutY="440.0" prefHeight="40.0" prefWidth="171.0" style="-fx-background-color: #1A237E; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Main Dashboard">
                <graphic>
-                  <FontAwesomeIconView glyphName="COG" glyphStyle="-fx-fill: #ffffff" size="20" />
+                  <FontAwesomeIconView glyphName="CALCULATOR" glyphStyle="-fx-fill: #ffffff" size="20" />
                </graphic>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -134,9 +135,9 @@
             </JFXButton>
          </children>
       </VBox>
-      <AnchorPane fx:id="switchPane" layoutX="205.0" layoutY="47.0" prefHeight="685.0" prefWidth="1149.0">
+      <Pane fx:id="switchPane" layoutX="211.0" layoutY="46.0" prefHeight="665.0" prefWidth="1138.0">
          <children>
-            <VBox layoutX="8.0" layoutY="6.0" prefHeight="65.0" prefWidth="1137.0" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); -fx-background-radius: 5;">
+            <VBox layoutX="1.0" layoutY="-5.0" prefHeight="65.0" prefWidth="1137.0" style="-fx-background-color: #ffffff; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); -fx-background-radius: 5;">
                <children>
                   <HBox alignment="CENTER_LEFT" spacing="10">
                      <children>
@@ -156,12 +157,17 @@
                               <FontAwesomeIconView glyphName="REFRESH" glyphStyle="-fx-fill: #ffffff" size="20" />
                            </graphic>
                         </JFXButton>
+                        <JFXButton fx:id="showbtn" layoutX="859.0" layoutY="10.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #e74c3c; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Edit">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="DOWNLOAD" glyphStyle="-fx-fill: #ffffff" size="20" />
+                           </graphic>
+                        </JFXButton>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="15" />
                </children>
             </VBox>
-            <TableView fx:id="appdashboard" layoutX="8.0" layoutY="82.0" prefHeight="485.0" prefWidth="1137.0" style="-fx-background-color: #ffffff; -fx-border-color: #dcdcdc; -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" stylesheets="@../../style/table.css">
+            <TableView fx:id="appdashboard" layoutX="1.0" layoutY="71.0" prefHeight="541.0" prefWidth="1137.0" style="-fx-background-color: #ffffff; -fx-border-color: #dcdcdc; -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" stylesheets="@../../style/table.css">
                <columns>
                   <TableColumn fx:id="codeCol" prefWidth="49.0" text="Code" />
                   <TableColumn prefWidth="207.0" text="Date &amp; Time">
@@ -178,7 +184,7 @@
                   <TableColumn fx:id="purposeCol" prefWidth="287.0" text="Purpose" />
                </columns>
             </TableView>
-            <HBox alignment="CENTER_RIGHT" layoutX="900.0" layoutY="575.0">
+            <HBox alignment="CENTER_RIGHT" layoutX="889.0" layoutY="640.0">
                <children>
                   <Label text="Total Count:" textFill="#2c3e50">
                      <font>
@@ -195,7 +201,7 @@
                   </Label>
                </children>
             </HBox>
-            <JFXButton fx:id="addAppbtn" layoutX="8.0" layoutY="575.0" prefHeight="40.0" prefWidth="114.0" style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-size: 12; -fx-background-radius: 5;" text="New (Ctrl + N)">
+            <JFXButton fx:id="addAppbtn" layoutX="1.0" layoutY="620.0" prefHeight="40.0" prefWidth="114.0" style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-size: 12; -fx-background-radius: 5;" text="New (Ctrl + N)">
                <graphic>
                   <FontAwesomeIconView glyphName="PLUS" glyphStyle="-fx-fill: #ffffff" size="20" />
                </graphic>
@@ -203,22 +209,22 @@
                   <Font size="9.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="delAppbtn" layoutX="130.0" layoutY="575.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #e74c3c; -fx-text-fill: #ffffff; -fx-font-size: 12; -fx-background-radius: 5;" text="Del (Ctrl + D)">
+            <JFXButton fx:id="delAppbtn" layoutX="123.0" layoutY="620.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #e74c3c; -fx-text-fill: #ffffff; -fx-font-size: 12; -fx-background-radius: 5;" text="Del (Ctrl + D)">
                <graphic>
                   <FontAwesomeIconView glyphName="REMOVE" glyphStyle="-fx-fill: #ffffff" size="20" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="editAppbtn" layoutX="259.0" layoutY="575.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #2ecc71; -fx-text-fill: #ffffff; -fx-font-size: 12; -fx-background-radius: 5;" text="Edit (Ctrl + E)">
+            <JFXButton fx:id="editAppbtn" layoutX="252.0" layoutY="620.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #2ecc71; -fx-text-fill: #ffffff; -fx-font-size: 12; -fx-background-radius: 5;" text="Edit (Ctrl + E)">
                <graphic>
                   <FontAwesomeIconView glyphName="EDIT" glyphStyle="-fx-fill: #ffffff" size="20" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="invoicebtn" layoutX="388.0" layoutY="575.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #f1c40f; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Get Invoice">
+            <JFXButton fx:id="invoicebtn" layoutX="381.0" layoutY="620.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #f1c40f; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Get Invoice">
                <graphic>
                   <FontAwesomeIconView glyphName="MONEY" glyphStyle="-fx-fill: #ffffff" size="20" />
                </graphic>
             </JFXButton>
          </children>
-      </AnchorPane>
+      </Pane>
    </children>
 </AnchorPane>
