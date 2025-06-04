@@ -13,34 +13,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="802.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.invoiceoptions.Controller.TreatmentInvoiceController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.invoiceoptions.Controller.TreatmentInvoiceController">
    <children>
-      <AnchorPane layoutX="-8.0" prefHeight="57.0" prefWidth="749.0" style="-fx-background-color: #1A237E;" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
+      <AnchorPane layoutX="-8.0" prefHeight="37.0" prefWidth="749.0" style="-fx-background-color: #1A237E;" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
          <children>
-            <Label layoutX="14.0" layoutY="16.0" text="Customer Name - " textFill="WHITE">
+            <Label layoutX="14.0" layoutY="3.0" text="Customer Name - " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-            <Label fx:id="patientNamelb" layoutX="166.0" layoutY="16.0" text="Myo Min Aung" textFill="WHITE" underline="true">
+            <Label fx:id="patientNamelb" layoutX="166.0" layoutY="3.0" text="Myo Min Aung" textFill="WHITE" underline="true">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-            <Separator layoutX="372.0" layoutY="5.0" orientation="VERTICAL" prefHeight="46.0" prefWidth="6.0" style="-fx-background-color: wihte;" />
-            <Label layoutX="402.0" layoutY="16.0" text="Appointment Code - " textFill="WHITE">
+            <Separator layoutX="372.0" layoutY="5.0" orientation="VERTICAL" prefHeight="31.0" prefWidth="6.0" style="-fx-background-color: wihte;" />
+            <Label layoutX="402.0" layoutY="3.0" text="Appointment Code - " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-            <Label fx:id="appointmentcodelb" layoutX="571.0" layoutY="16.0" text="1001" textFill="WHITE">
+            <Label fx:id="appointmentcodelb" layoutX="571.0" layoutY="3.0" text="1001" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <TableView fx:id="recordtable" layoutX="8.0" layoutY="199.0" prefHeight="253.0" prefWidth="725.0" stylesheets="@../../style/table.css">
+      <TableView fx:id="recordtable" layoutX="8.0" layoutY="168.0" prefHeight="253.0" prefWidth="725.0" stylesheets="@../../style/table.css">
         <columns>
           <TableColumn fx:id="treatmentCol" prefWidth="241.0" text="Treatement" />
             <TableColumn fx:id="tnumCol" prefWidth="123.0" text="Tooth Number" />
@@ -48,7 +48,7 @@
             <TableColumn fx:id="noteCol" prefWidth="234.0" text="Notes" />
         </columns>
       </TableView>
-      <Button fx:id="addbtn" layoutX="396.0" layoutY="70.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="74.0" style="-fx-background-color: #1A237E;" stylesheets="@../../style/btn2.css" text="Add">
+      <Button fx:id="addbtn" layoutX="396.0" layoutY="44.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="74.0" style="-fx-background-color: #1A237E;" stylesheets="@../../style/btn2.css" text="Add">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -56,7 +56,7 @@
             <FontAwesomeIconView glyphName="PLUS" glyphStyle="-fx-fill:white" size="24" />
          </graphic>
       </Button>
-      <Button fx:id="delbtn" layoutX="479.0" layoutY="70.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="74.0" style="-fx-background-color: #1A237E;" stylesheets="@../../style/btn2.css" text="Del">
+      <Button fx:id="delbtn" layoutX="479.0" layoutY="44.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="74.0" style="-fx-background-color: #1A237E;" stylesheets="@../../style/btn2.css" text="Del">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -64,7 +64,7 @@
             <FontAwesomeIconView glyphName="REMOVE" glyphStyle="-fx-fill:white" size="24" />
          </graphic>
       </Button>
-      <Button layoutX="561.0" layoutY="70.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="74.0" style="-fx-background-color: #1A237E;" stylesheets="@../../style/btn2.css" text="Edit ">
+      <Button layoutX="561.0" layoutY="44.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="74.0" style="-fx-background-color: #1A237E;" stylesheets="@../../style/btn2.css" text="Edit ">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -72,27 +72,27 @@
             <FontAwesomeIconView glyphName="EDIT" glyphStyle="-fx-fill:white" size="24" />
          </graphic>
       </Button>
-      <TextField fx:id="discountxt" layoutX="12.0" layoutY="506.0" prefHeight="37.0" prefWidth="223.0" promptText="Other Cost" />
-      <Label layoutX="14.0" layoutY="486.0" text="Discount">
+      <TextField fx:id="discountxt" layoutX="12.0" layoutY="461.0" prefHeight="37.0" prefWidth="223.0" promptText="Other Cost" />
+      <Label layoutX="14.0" layoutY="441.0" text="Discount">
          <font>
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="payamountxt" layoutX="12.0" layoutY="574.0" prefHeight="37.0" prefWidth="223.0" promptText="Pay Amount" />
-      <Label layoutX="14.0" layoutY="554.0" text="Pay Amount">
+      <TextField fx:id="payamountxt" layoutX="12.0" layoutY="529.0" prefHeight="37.0" prefWidth="223.0" promptText="Pay Amount" />
+      <Label layoutX="14.0" layoutY="509.0" text="Pay Amount">
          <font>
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </Label>
-      <JFXCheckBox fx:id="cashbox" layoutX="402.0" layoutY="642.0" text="Cash" />
-      <JFXCheckBox fx:id="bankbox" layoutX="402.0" layoutY="677.0" text="Bank Transfer" />
-      <JFXCheckBox fx:id="mobilebox" layoutX="402.0" layoutY="713.0" text="Mobile Banking" />
-      <TextArea fx:id="notetxt" layoutX="12.0" layoutY="118.0" prefHeight="77.0" prefWidth="715.0" promptText="note">
+      <JFXCheckBox fx:id="cashbox" layoutX="402.0" layoutY="589.0" text="Cash" />
+      <JFXCheckBox fx:id="bankbox" layoutX="402.0" layoutY="624.0" text="Bank Transfer" />
+      <JFXCheckBox fx:id="mobilebox" layoutX="402.0" layoutY="660.0" text="Mobile Banking" />
+      <TextArea fx:id="notetxt" layoutX="12.0" layoutY="89.0" prefHeight="77.0" prefWidth="715.0" promptText="note">
          <font>
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </TextArea>
-      <Button fx:id="submitbtn" layoutX="402.0" layoutY="751.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="155.0" style="-fx-background-color: #1A237E;" stylesheets="@../../style/btn2.css" text="Save">
+      <Button fx:id="submitbtn" layoutX="541.0" layoutY="624.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="155.0" style="-fx-background-color: #1A237E;" stylesheets="@../../style/btn2.css" text="Save">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -100,36 +100,36 @@
             <FontAwesomeIconView glyphName="SAVE" glyphStyle="-fx-fill:white" size="24" />
          </graphic>
       </Button>
-      <ComboBox fx:id="treatmentComboBox" editable="true" layoutX="10.0" layoutY="70.0" prefHeight="37.0" prefWidth="266.0" promptText="Select Township" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;" stylesheets="@../../style/combobox.css" />
-      <TextField fx:id="toothnumtxt" layoutX="286.0" layoutY="70.0" prefHeight="37.0" prefWidth="97.0" promptText="Tooth Number" />
-      <Separator layoutX="14.0" layoutY="483.0" prefHeight="5.0" prefWidth="715.0" />
-      <Label fx:id="totallb" layoutX="649.0" layoutY="461.0" text="0.0" textFill="RED">
+      <ComboBox fx:id="treatmentComboBox" editable="true" layoutX="10.0" layoutY="44.0" prefHeight="37.0" prefWidth="266.0" promptText="Select Township" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;" stylesheets="@../../style/combobox.css" />
+      <TextField fx:id="toothnumtxt" layoutX="286.0" layoutY="44.0" prefHeight="37.0" prefWidth="97.0" promptText="Tooth Number" />
+      <Separator layoutX="12.0" layoutY="440.0" prefHeight="5.0" prefWidth="715.0" />
+      <Label fx:id="totallb" layoutX="649.0" layoutY="420.0" text="0.0" textFill="RED">
          <font>
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="countlb" layoutX="529.0" layoutY="460.0" text="0" textFill="RED">
+      <Label fx:id="countlb" layoutX="529.0" layoutY="419.0" text="0" textFill="RED">
          <font>
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="486.0" layoutY="459.0" text="Count :">
+      <Label layoutX="486.0" layoutY="418.0" text="Count :">
          <font>
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="605.0" layoutY="460.0" text="Total">
+      <Label layoutX="605.0" layoutY="419.0" text="Total">
          <font>
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </Label>
-      <Separator layoutX="9.0" layoutY="625.0" prefHeight="5.0" prefWidth="715.0" />
-      <TextArea fx:id="paymentNote" layoutX="9.0" layoutY="639.0" prefHeight="155.0" prefWidth="381.0" promptText="Payment Note">
+      <Separator layoutX="9.0" layoutY="579.0" prefHeight="5.0" prefWidth="715.0" />
+      <TextArea fx:id="paymentNote" layoutX="9.0" layoutY="586.0" prefHeight="111.0" prefWidth="381.0" promptText="Payment Note">
          <font>
             <Font name="Pyidaungsu-Bold" size="12.0" />
          </font>
       </TextArea>
-      <AnchorPane layoutX="244.0" layoutY="495.0" prefHeight="122.0" prefWidth="484.0" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
+      <AnchorPane layoutX="244.0" layoutY="450.0" prefHeight="122.0" prefWidth="484.0" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
          <children>
             <Label layoutX="14.0" layoutY="15.0" text="Total Amount    ">
                <font>
