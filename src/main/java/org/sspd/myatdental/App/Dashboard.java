@@ -1,35 +1,60 @@
 package org.sspd.myatdental.App;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.springframework.stereotype.Controller;
+import org.sspd.myatdental.DateTime.TimeComponent;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static org.sspd.myatdental.appointmentsoptions.controller.AppointmentDashboardController._username;
+
 @Controller
 public class Dashboard implements Initializable {
+
+
+    @FXML
+    private Label clockbtn;
+
+    @FXML
+    private FontAwesomeIconView closebtn;
 
     @FXML
     private Button dentistbtn;
 
     @FXML
+    private FontAwesomeIconView minimizebtn;
+
+    @FXML
     private AnchorPane switchPane;
+
+    @FXML
+    private AnchorPane titlePane;
 
     @FXML
     private Button treatmentbtn;
 
+    @FXML
+    private Label usernamelb;
+
+    @FXML
+    private Label usernamelb1;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        new TimeComponent().initializeClock(clockbtn);
+
+        usernamelb.setText(_username);
 
         dentistbtn.setOnAction(e -> {
             loadDentistView();
@@ -37,6 +62,10 @@ public class Dashboard implements Initializable {
 
         treatmentbtn.setOnAction(e -> {
             loadTreatmentView();
+        });
+
+        closebtn.setOnMouseClicked(event -> {
+            Platform.exit();
         });
 
     }
