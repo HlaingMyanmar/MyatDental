@@ -38,16 +38,10 @@ public class Dashboard implements Initializable {
     private AnchorPane switchPane;
 
     @FXML
-    private AnchorPane titlePane;
-
-    @FXML
     private Button treatmentbtn;
 
     @FXML
     private Label usernamelb;
-
-    @FXML
-    private Label usernamelb1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

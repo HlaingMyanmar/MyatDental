@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -11,11 +12,19 @@
 
 <AnchorPane prefHeight="734.0" prefWidth="1357.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.App.Dashboard">
    <children>
-      <AnchorPane layoutY="2.0" prefHeight="710.0" prefWidth="215.0" styleClass="pane-full-shadow" stylesheets="@../style/pane.css">
+      <AnchorPane layoutY="2.0" prefHeight="748.0" prefWidth="215.0" styleClass="pane-full-shadow" stylesheets="@../style/pane.css">
          <children>
             <Separator layoutX="6.0" layoutY="79.0" prefHeight="4.0" prefWidth="204.0" />
-            <Button fx:id="dentistbtn" layoutX="27.0" layoutY="151.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="134.0" text="Dentist" />
-            <Button fx:id="treatmentbtn" layoutX="27.0" layoutY="201.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="134.0" text="Treatment" />
+            <Button fx:id="dentistbtn" layoutX="3.0" layoutY="96.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Dentist">
+               <graphic>
+                  <FontAwesomeIconView glyphName="USER_MD" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="font-icon" />
+                  <String fx:value="btn" />
+                  <String fx:value="pane-full-shadow" />
+               </styleClass>
+            </Button>
             <ImageView fitHeight="62.0" fitWidth="61.0" layoutX="4.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/myatLogo.png" />
@@ -27,44 +36,36 @@
                </font>
             </Label>
             <Label layoutX="70.0" layoutY="50.0" text="Management System" />
+            <Button fx:id="treatmentbtn" layoutX="3.0" layoutY="149.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Dentist">
+               <graphic>
+                  <FontAwesomeIconView glyphName="STETHOSCOPE" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="font-icon" />
+                  <String fx:value="btn" />
+                  <String fx:value="pane-full-shadow" />
+               </styleClass>
+            </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="switchPane" layoutX="219.0" layoutY="41.0" prefHeight="674.0" prefWidth="1136.0" />
-      <AnchorPane layoutY="716.0" prefHeight="32.0" prefWidth="1357.0" style="-fx-background-color: #1A237E;">
+      <AnchorPane fx:id="switchPane" layoutX="218.0" layoutY="28.0" prefHeight="708.0" prefWidth="1136.0" />
+      <AnchorPane layoutX="215.0" layoutY="2.0" prefHeight="40.0" prefWidth="1142.0" style="-fx-background-color: white;">
          <children>
-            <Label fx:id="usernamelb" layoutX="661.0" layoutY="9.0" text="Admin" textFill="WHITE">
+            <FontAwesomeIconView fx:id="minimizebtn" glyphName="WINDOW_MINIMIZE" glyphStyle="-fx-fill: Black" layoutX="1076.0" layoutY="28.0" size="24" wrappingWidth="24.14285659790039" />
+            <FontAwesomeIconView fx:id="closebtn" glyphName="TIMES_CIRCLE" glyphStyle="-fx-fill: BLACK" layoutX="1110.0" layoutY="30.0" size="24" wrappingWidth="24.14285659790039" />
+            <Label fx:id="usernamelb" layoutX="573.0" layoutY="11.0" text="Admin" textFill="#030303">
                <font>
                   <Font name="Britannic Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="usernamelb1" layoutX="14.0" layoutY="9.0" text="Version 1.0" textFill="WHITE">
+            <FontAwesomeIconView glyphName="USER" glyphStyle="-fx-fill: BLACK" layoutX="547.0" layoutY="27.0" size="24" wrappingWidth="24.14285659790039" />
+            <Label fx:id="clockbtn" layoutX="36.0" layoutY="12.0" text="Version 1.0">
                <font>
                   <Font name="Britannic Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="clockbtn" layoutX="1113.0" layoutY="9.0" text="Version 1.0" textFill="WHITE">
-               <font>
-                  <Font name="Britannic Bold" size="19.0" />
-               </font>
-            </Label>
-            <FontAwesomeIconView glyphName="USER" glyphStyle="-fx-fill: #ffffff" layoutX="635.0" layoutY="25.0" size="24" wrappingWidth="24.14285659790039" />
-            <FontAwesomeIconView glyphName="CALENDAR" glyphStyle="-fx-fill: #ffffff" layoutX="1085.0" layoutY="25.0" size="24" wrappingWidth="24.14285659790039" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="titlePane" layoutX="215.0" prefHeight="40.0" prefWidth="1142.0" style="-fx-background-color: #1A237E;">
-         <children>
-            <Label layoutX="14.0" layoutY="10.0" text="S.S.P.D IT Service &amp; Training " textFill="WHITE">
-               <font>
-                  <Font name="Britannic Bold" size="19.0" />
-               </font>
-            </Label>
-            <Label layoutX="645.0" layoutY="10.0" text="Myat Dental Center" textFill="WHITE">
-               <font>
-                  <Font name="Britannic Bold" size="19.0" />
-               </font>
-            </Label>
-            <FontAwesomeIconView fx:id="closebtn" glyphName="TIMES_CIRCLE" glyphStyle="-fx-fill: #ffffff" layoutX="1115.0" layoutY="29.0" size="24" wrappingWidth="24.14285659790039" />
-            <FontAwesomeIconView fx:id="minimizebtn" glyphName="WINDOW_MINIMIZE" glyphStyle="-fx-fill: #ffffff" layoutX="1073.0" layoutY="22.0" size="24" wrappingWidth="24.14285659790039" />
+            <FontAwesomeIconView glyphName="CALENDAR" glyphStyle="-fx-fill: BLACK" layoutX="8.0" layoutY="28.0" size="24" wrappingWidth="24.14285659790039" />
+            <Separator layoutX="3.0" layoutY="34.0" prefHeight="4.0" prefWidth="1136.0" />
          </children>
       </AnchorPane>
    </children>
