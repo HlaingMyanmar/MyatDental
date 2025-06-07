@@ -29,16 +29,37 @@ public class Dashboard implements Initializable {
     private FontAwesomeIconView closebtn;
 
     @FXML
+    private Button dashboardbtn;
+
+    @FXML
     private Button dentistbtn;
 
     @FXML
+    private Button invoicebtn;
+
+    @FXML
+    private Button logoffbtn;
+
+    @FXML
     private FontAwesomeIconView minimizebtn;
+
+    @FXML
+    private Button patientbtn;
+
+    @FXML
+    private Button paymentbtn;
+
+    @FXML
+    private Button reportbtn;
 
     @FXML
     private AnchorPane switchPane;
 
     @FXML
     private Button treatmentbtn;
+
+    @FXML
+    private Button userbtn;
 
     @FXML
     private Label usernamelb;
@@ -77,7 +98,7 @@ public class Dashboard implements Initializable {
             switchPane.getChildren().add(dentistView);
 
             // Optional: anchor it to all sides if it is resizable and supports anchoring
-            AnchorPane.setTopAnchor(dentistView, 0.0);
+            AnchorPane.setTopAnchor(dentistView, 10.5);
             AnchorPane.setBottomAnchor(dentistView, 0.0);
             AnchorPane.setLeftAnchor(dentistView, 0.0);
             AnchorPane.setRightAnchor(dentistView, 0.0);

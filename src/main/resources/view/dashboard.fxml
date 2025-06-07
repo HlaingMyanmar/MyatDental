@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="734.0" prefWidth="1357.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.App.Dashboard">
+<AnchorPane prefHeight="734.0" prefWidth="1357.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.App.Dashboard">
    <children>
       <AnchorPane layoutY="2.0" prefHeight="748.0" prefWidth="215.0" styleClass="pane-full-shadow" stylesheets="@../style/pane.css">
          <children>
             <Separator layoutX="6.0" layoutY="79.0" prefHeight="4.0" prefWidth="204.0" />
-            <Button fx:id="dentistbtn" layoutX="3.0" layoutY="96.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Dentist">
+            <Button fx:id="dentistbtn" alignment="TOP_LEFT" layoutX="8.0" layoutY="183.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Dentist">
                <graphic>
                   <FontAwesomeIconView glyphName="USER_MD" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
                </graphic>
@@ -36,9 +36,89 @@
                </font>
             </Label>
             <Label layoutX="70.0" layoutY="50.0" text="Management System" />
-            <Button fx:id="treatmentbtn" layoutX="3.0" layoutY="149.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Dentist">
+            <Button fx:id="treatmentbtn" alignment="TOP_LEFT" layoutX="5.0" layoutY="232.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Treatment Plans">
                <graphic>
-                  <FontAwesomeIconView glyphName="STETHOSCOPE" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+                  <FontAwesomeIconView glyphName="FILE_TEXT" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="font-icon" />
+                  <String fx:value="btn" />
+                  <String fx:value="pane-full-shadow" />
+               </styleClass>
+            </Button>
+            <Button fx:id="dashboardbtn" alignment="TOP_LEFT" layoutX="7.0" layoutY="93.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Dashboard">
+               <graphic>
+                  <FontAwesomeIconView glyphName="HOME" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="font-icon" />
+                  <String fx:value="btn" />
+                  <String fx:value="pane-full-shadow" />
+               </styleClass>
+            </Button>
+            <Button fx:id="patientbtn" alignment="TOP_LEFT" layoutX="7.0" layoutY="140.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Patients">
+               <graphic>
+                  <FontAwesomeIconView glyphName="USERS" glyphStyle="-fx-fill: BLACK" size="20" wrappingWidth="24.14285659790039" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="font-icon" />
+                  <String fx:value="btn" />
+                  <String fx:value="pane-full-shadow" />
+               </styleClass>
+            </Button>
+            <Button fx:id="invoicebtn" alignment="TOP_LEFT" layoutX="6.0" layoutY="283.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Invoices">
+               <graphic>
+                  <FontAwesomeIconView glyphName="CLIPBOARD" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="font-icon" />
+                  <String fx:value="btn" />
+                  <String fx:value="pane-full-shadow" />
+               </styleClass>
+            </Button>
+            <Button fx:id="paymentbtn" alignment="TOP_LEFT" layoutX="7.0" layoutY="333.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Payments">
+               <graphic>
+                  <FontAwesomeIconView glyphName="DOLLAR" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="font-icon" />
+                  <String fx:value="btn" />
+                  <String fx:value="pane-full-shadow" />
+               </styleClass>
+            </Button>
+            <Button fx:id="reportbtn" alignment="TOP_LEFT" layoutX="8.0" layoutY="432.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Reports">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BAR_CHART" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="font-icon" />
+                  <String fx:value="btn" />
+                  <String fx:value="pane-full-shadow" />
+               </styleClass>
+            </Button>
+            <Button fx:id="userbtn" alignment="TOP_LEFT" layoutX="7.0" layoutY="479.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="User Management ">
+               <graphic>
+                  <FontAwesomeIconView glyphName="USER" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="font-icon" />
+                  <String fx:value="btn" />
+                  <String fx:value="pane-full-shadow" />
+               </styleClass>
+            </Button>
+            <Button fx:id="logoffbtn" alignment="TOP_LEFT" layoutX="6.0" layoutY="529.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Logo Out">
+               <graphic>
+                  <FontAwesomeIconView glyphName="POWER_OFF" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="font-icon" />
+                  <String fx:value="btn" />
+                  <String fx:value="pane-full-shadow" />
+               </styleClass>
+            </Button>
+            <Button fx:id="appointmentbtn" alignment="TOP_LEFT" layoutX="8.0" layoutY="382.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="204.0" stylesheets="@../style/normalbtn.css" text="Appointment">
+               <graphic>
+                  <FontAwesomeIconView glyphName="CALENDAR" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
                </graphic>
                <styleClass>
                   <String fx:value="font-icon" />
