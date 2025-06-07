@@ -33,6 +33,7 @@ module org.sspd.myatdental {
     opens org.sspd.myatdental.App to javafx.fxml ,spring.core, spring.beans, org.hibernate.orm.core;
     exports org.sspd.myatdental.App;
 
+
     opens org.sspd.myatdental.Configuration to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core;
     exports org.sspd.myatdental.Configuration;
 

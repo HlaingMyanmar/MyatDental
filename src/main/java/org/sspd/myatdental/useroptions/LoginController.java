@@ -71,7 +71,7 @@ public class LoginController implements Initializable {
                 Stage stage = new Stage();
 
                 // Load FXML with Spring's ApplicationContext
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/appointmentlayouts/appointmentdashboard.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/dashboard.fxml"));
                 fxmlLoader.setControllerFactory(context::getBean); // Set before load()
 
                 Scene scene = null;
