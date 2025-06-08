@@ -1,14 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.patients.Patientviewbyid"
-            prefHeight="400.0" prefWidth="600.0" >
 
+<AnchorPane prefHeight="573.0" prefWidth="1104.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.patients.Patientviewbyid">
+   <children>
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="543.0" prefWidth="1077.0" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <children>
+            <Label layoutX="18.0" layoutY="6.0" text="Patients Dashboard">
+               <font>
+                  <Font name="AdobeGothicStd-Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="46.0" text="Patient Name :">
+               <font>
+                  <Font name="ACaslonPro-Semibold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="133.0" layoutY="47.0" text="Myo Min Aung" underline="true">
+               <font>
+                  <Font name="ACaslonPro-Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="287.0" layoutY="47.0" text="Phone :">
+               <font>
+                  <Font name="ACaslonPro-Semibold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="353.0" layoutY="47.0" text="0932222222" underline="true">
+               <font>
+                  <Font name="ACaslonPro-Regular" size="18.0" />
+               </font>
+            </Label>
+            <Separator layoutX="18.0" layoutY="83.0" prefHeight="2.0" prefWidth="446.0" />
+            <Label layoutX="18.0" layoutY="94.0" text="Appointment Summary">
+               <font>
+                  <Font name="AdobeGothicStd-Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="136.0" text="Total Appointment :">
+               <font>
+                  <Font name="ACaslonPro-Semibold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="183.0" layoutY="136.0" text="5">
+               <font>
+                  <Font name="ACaslonPro-Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="249.0" text="Completed Appointment :">
+               <font>
+                  <Font name="ACaslonPro-Semibold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="224.0" layoutY="249.0" text="3">
+               <font>
+                  <Font name="ACaslonPro-Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="210.0" text="Cancel Appointment :">
+               <font>
+                  <Font name="ACaslonPro-Semibold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="188.0" layoutY="210.0" text="2" textFill="RED">
+               <font>
+                  <Font name="ACaslonPro-Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="174.0" text="Schedule Appointment :">
+               <font>
+                  <Font name="ACaslonPro-Semibold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="201.0" layoutY="174.0" text="1">
+               <font>
+                  <Font name="ACaslonPro-Regular" size="18.0" />
+               </font>
+            </Label>
+            <Separator layoutX="17.0" layoutY="285.0" prefHeight="2.0" prefWidth="446.0" />
+            <Label layoutX="18.0" layoutY="294.0" text="Without Tratement Plan">
+               <font>
+                  <Font name="AdobeGothicStd-Bold" size="26.0" />
+               </font>
+            </Label>
+            <TableView layoutX="16.0" layoutY="327.0" prefHeight="200.0" prefWidth="446.0" stylesheets="@../../style/table.css">
+              <columns>
+                <TableColumn prefWidth="166.0" text="Treatment Name" />
+                <TableColumn prefWidth="105.0" text="Time Used" />
+                  <TableColumn prefWidth="160.0" text="Total Amount" />
+              </columns>
+            </TableView>
+            <Separator layoutX="493.0" layoutY="7.0" orientation="VERTICAL" prefHeight="520.0" prefWidth="0.0" />
+            <Label layoutX="501.0" layoutY="14.0" text="Tratement Plan Progress">
+               <font>
+                  <Font name="AdobeGothicStd-Bold" size="26.0" />
+               </font>
+            </Label>
+            <TableView layoutX="499.0" layoutY="47.0" prefHeight="200.0" prefWidth="507.0" stylesheets="@../../style/table.css">
+               <columns>
+                  <TableColumn prefWidth="166.0" text="Plan Title" />
+                  <TableColumn prefWidth="105.0" text="Completion %" />
+                  <TableColumn prefWidth="96.0" text="Total Items" />
+                  <TableColumn prefWidth="120.0" text="Completed Items" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>
