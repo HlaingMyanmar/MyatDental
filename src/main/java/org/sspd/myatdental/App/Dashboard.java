@@ -83,6 +83,12 @@ public class Dashboard implements Initializable {
             Platform.exit();
         });
 
+        patientbtn.setOnAction(e -> {
+
+            loadPatientView();
+
+        });
+
     }
     private void loadDentistView() {
 
@@ -129,6 +135,30 @@ public class Dashboard implements Initializable {
 
         } catch (IOException e) {
             throw new RuntimeException("Failed to load treatmentregister.fxml", e);
+        }
+    }
+
+    private void loadPatientView() {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/patients/patientview.fxml"));
+            fxmlLoader.setControllerFactory(App.context::getBean);
+            Parent dentistView = fxmlLoader.load();
+
+            // Clear existing content in switchPane
+            switchPane.getChildren().clear();
+
+            // Add dentistView to switchPane
+            switchPane.getChildren().add(dentistView);
+
+            // Optional: anchor it to all sides if it is resizable and supports anchoring
+            AnchorPane.setTopAnchor(dentistView, 10.5);
+            AnchorPane.setBottomAnchor(dentistView, 0.0);
+            AnchorPane.setLeftAnchor(dentistView, 0.0);
+            AnchorPane.setRightAnchor(dentistView, 0.0);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load dentailregister.fxml", e);
         }
     }
 

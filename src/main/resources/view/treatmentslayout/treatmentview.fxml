@@ -82,17 +82,17 @@
             </HBox>
          </bottom>
       </BorderPane>
-      <Button fx:id="newplanbtn" layoutX="694.0" layoutY="561.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="New Plan">
+      <Button fx:id="newplanbtn" layoutX="694.0" layoutY="576.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="New Plan">
          <graphic>
             <FontAwesomeIconView glyphName="PLUS_CIRCLE" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
          </graphic>
       </Button>
-      <Button fx:id="removebtn" layoutX="814.0" layoutY="561.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Remove">
+      <Button fx:id="removebtn" layoutX="814.0" layoutY="576.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Remove">
          <graphic>
             <FontAwesomeIconView glyphName="REMOVE" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
          </graphic>
       </Button>
-      <Button fx:id="editbtn" layoutX="932.0" layoutY="561.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Edit">
+      <Button fx:id="editbtn" layoutX="932.0" layoutY="576.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Edit">
          <graphic>
             <FontAwesomeIconView glyphName="EDIT" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
          </graphic>
