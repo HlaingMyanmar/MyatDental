@@ -7,17 +7,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="296.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.treatmentslayout.Treatmentcat">
+<AnchorPane prefHeight="296.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.treatmentoptions.controller.TreatmentCategoryController">
    <children>
-      <TableView layoutX="10.0" layoutY="9.0" prefHeight="216.0" prefWidth="366.0" stylesheets="@../../style/table.css">
+      <TableView fx:id="cattable" layoutX="10.0" layoutY="9.0" prefHeight="216.0" prefWidth="366.0" stylesheets="@../../style/table.css">
         <columns>
-          <TableColumn prefWidth="75.0" text="Code" />
-          <TableColumn prefWidth="281.0" text="Name" />
+          <TableColumn fx:id="codeCol" prefWidth="75.0" text="Code" />
+          <TableColumn fx:id="nameCol" prefWidth="281.0" text="Name" />
         </columns>
       </TableView>
-      <TextField layoutX="12.0" layoutY="240.0" prefHeight="33.0" prefWidth="249.0" />
-      <Button fx:id="newplanbtn" layoutX="269.0" layoutY="240.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="ADD">
+      <TextField fx:id="nametxt" layoutX="12.0" layoutY="240.0" prefHeight="33.0" prefWidth="249.0" />
+      <Button fx:id="addbtn" layoutX="269.0" layoutY="240.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="ADD">
          <graphic>
             <FontAwesomeIconView glyphName="PLUS_CIRCLE" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
          </graphic>
