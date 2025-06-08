@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="687.0" prefWidth="485.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.treatmentoptions.controller.TreatmentPlanAddController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Treatment Plan Register">
+         <font>
+            <Font name="AdobeGothicStd-Bold" size="17.0" />
+         </font>
+      </Label>
+      <VBox layoutX="14.0" layoutY="49.0" prefHeight="238.0" prefWidth="461.0" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
+         <children>
+            <HBox prefHeight="55.0" prefWidth="399.0" style="-fx-background-color: white;">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="61.0" text="Patient">
+                     <font>
+                        <Font name="AdobeGothicStd-Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="patientbox" prefHeight="33.0" prefWidth="315.0" stylesheets="@../../style/combobox.css">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="55.0" prefWidth="399.0" style="-fx-background-color: white;">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="79.0" text="Plan Title">
+                     <font>
+                        <Font name="AdobeGothicStd-Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="plantitletxt" prefHeight="32.0" prefWidth="272.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+                  <JFXCheckBox fx:id="istemplatecheck" text="Template">
+                     <HBox.margin>
+                        <Insets bottom="6.0" left="5.0" right="5.0" top="6.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXCheckBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="65.0" prefHeight="55.0" prefWidth="399.0" style="-fx-background-color: white;">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="72.0" text="Total Cost">
+                     <font>
+                        <Font name="AdobeGothicStd-Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="totalcost" prefHeight="32.0" prefWidth="192.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+                  <JFXCheckBox fx:id="isinstallmentscheck" text="Installments Allowed">
+                     <HBox.margin>
+                        <Insets bottom="6.0" left="5.0" right="5.0" top="6.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXCheckBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="120.0" prefHeight="55.0" prefWidth="399.0" style="-fx-background-color: white; -fx-alignment: center;">
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <children>
+                  <ComboBox fx:id="treatmentbox" prefHeight="32.0" prefWidth="238.0" stylesheets="@../../style/combobox.css">
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <Button fx:id="addtreatmentbtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="170.0" text="Add Treatment to Plan">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="PLUS_CIRCLE" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <Separator layoutX="14.0" layoutY="298.0" prefHeight="4.0" prefWidth="461.0" />
+      <Label layoutX="14.0" layoutY="302.0" prefHeight="33.0" prefWidth="190.0" text="Plan Items Table">
+         <font>
+            <Font name="AdobeGothicStd-Bold" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="treatmentplantable" layoutX="14.0" layoutY="335.0" prefHeight="332.0" prefWidth="461.0" stylesheets="@../../style/table.css">
+        <columns>
+          <TableColumn fx:id="nameCol" prefWidth="121.0" text="Treatment Name" />
+          <TableColumn fx:id="priceCol" prefWidth="137.0" text="Estimated Price" />
+            <TableColumn fx:id="noteCol" prefWidth="195.0" text="Note" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

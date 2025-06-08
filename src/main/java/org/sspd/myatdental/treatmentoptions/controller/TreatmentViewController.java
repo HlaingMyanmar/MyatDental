@@ -80,15 +80,19 @@ public class TreatmentViewController  implements Initializable {
 
         categorybtn.setOnAction(event -> {
 
-            openInvoiceView();
+            openCategoryView();
 
 
 
 
         });
 
+        newplanbtn.setOnAction(event -> {
+            openAddPlanView();
+        });
+
     }
-    private void openInvoiceView() {
+    private void openCategoryView() {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/treatmentslayout/treatmentcat.fxml"));
@@ -99,6 +103,36 @@ public class TreatmentViewController  implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(removebtn.getScene().getWindow());
             stage.setTitle("Treatment Category");
+            stage.setScene(scene);
+            stage.show();
+
+            stage.setOnCloseRequest(event1 -> {
+
+
+
+            });
+
+
+
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load Appointmenteditchooseview.fxml", e);
+        }
+
+
+    }
+
+    private void openAddPlanView() {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/treatmentslayout/treatmentplanview.fxml"));
+            fxmlLoader.setControllerFactory(App.context::getBean);
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(removebtn.getScene().getWindow());
+            stage.setTitle("Add Treatment Plan");
             stage.setScene(scene);
             stage.show();
 

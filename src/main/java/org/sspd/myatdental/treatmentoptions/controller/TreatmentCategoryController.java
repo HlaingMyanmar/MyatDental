@@ -7,6 +7,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.springframework.stereotype.Controller;
+import org.sspd.myatdental.treatmentoptions.model.TreatmentCategory;
+import org.sspd.myatdental.treatmentoptions.service.TreatmentCategoryService;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,16 +20,23 @@ public class TreatmentCategoryController implements Initializable {
     private Button addbtn;
 
     @FXML
-    private TableView<?> cattable;
+    private TableView<TreatmentCategory> cattable;
 
     @FXML
-    private TableColumn<?, ?> codeCol;
+    private TableColumn<TreatmentCategory, Integer> codeCol;
 
     @FXML
-    private TableColumn<?, ?> nameCol;
+    private TableColumn<TreatmentCategory, String> nameCol;
 
     @FXML
     private TextField nametxt;
+
+
+    private TreatmentCategoryService treatmentCategoryService;
+
+    public TreatmentCategoryController(TreatmentCategoryService treatmentCategoryService) {
+        this.treatmentCategoryService = treatmentCategoryService;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
