@@ -111,7 +111,7 @@ public class Dashboard implements Initializable {
     private void loadTreatmentView() {
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/treatmentslayout/treatmentregister.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/treatmentslayout/treatmentview.fxml"));
             fxmlLoader.setControllerFactory(App.context::getBean);
             Parent treatmentView = fxmlLoader.load();
 
