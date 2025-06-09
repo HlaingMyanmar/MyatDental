@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.sspd.myatdental.dentistsoptions.model.Dentist;
-import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoice;
 import org.sspd.myatdental.patientoptions.model.Patient;
 import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
 

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.invoiceoptions.Controller.TreatmentInvoiceController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.treatmentinvoiceoptions.Controller.TreatmentInvoiceController">
    <children>
       <AnchorPane layoutX="-8.0" prefHeight="37.0" prefWidth="749.0" style="-fx-background-color: #1A237E;" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
          <children>

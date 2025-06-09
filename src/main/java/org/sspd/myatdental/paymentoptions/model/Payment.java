@@ -4,9 +4,8 @@ package org.sspd.myatdental.paymentoptions.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
-import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoice;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Component

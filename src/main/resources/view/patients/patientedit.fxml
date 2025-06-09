@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="555.0" prefWidth="885.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.patientoptions.controller.PatientEditController">
+   <children>
+      <Label layoutX="13.0" layoutY="9.0" text="Patient Information">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="14.0" layoutY="33.0" prefHeight="516.0" prefWidth="386.0" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
+         <children>
+            <Label layoutX="11.0" layoutY="6.0" text="Patient Name">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField layoutX="11.0" layoutY="27.0" prefHeight="37.0" prefWidth="357.0">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="11.0" layoutY="73.0" text="Phone Number">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField layoutX="11.0" layoutY="94.0" prefHeight="37.0" prefWidth="357.0">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="9.0" layoutY="142.0" text="D.O.B">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <DatePicker layoutX="11.0" layoutY="164.0" prefHeight="37.0" prefWidth="150.0" />
+            <TextField layoutX="170.0" layoutY="164.0" prefHeight="37.0" prefWidth="64.0">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="172.0" layoutY="142.0" text="Age">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <JFXCheckBox layoutX="249.0" layoutY="174.0" text="Male" />
+            <JFXCheckBox layoutX="313.0" layoutY="174.0" text="Female" />
+            <ComboBox editable="true" layoutX="12.0" layoutY="242.0" prefHeight="37.0" prefWidth="150.0" />
+            <Label layoutX="12.0" layoutY="214.0" text="Township">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextArea layoutX="15.0" layoutY="314.0" prefHeight="81.0" prefWidth="338.0" />
+            <Label layoutX="15.0" layoutY="288.0" text="Medical History">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextArea layoutX="15.0" layoutY="426.0" prefHeight="81.0" prefWidth="338.0" />
+            <Label layoutX="15.0" layoutY="400.0" text="Address">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="408.0" layoutY="7.0" text="Treatment Plan Register">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <VBox layoutX="410.0" layoutY="33.0" prefHeight="238.0" prefWidth="461.0" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
+         <children>
+            <HBox prefHeight="55.0" prefWidth="399.0" style="-fx-background-color: white;">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="61.0" text="Plan Lists">
+                     <font>
+                        <Font name="AdobeGothicStd-Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="patientbox" prefHeight="33.0" prefWidth="315.0" stylesheets="@../../style/combobox.css">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="55.0" prefWidth="399.0" style="-fx-background-color: white;">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="79.0" text="Plan Title">
+                     <font>
+                        <Font name="AdobeGothicStd-Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="plantitletxt" prefHeight="32.0" prefWidth="272.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+                  <JFXCheckBox fx:id="istemplatecheck" text="Template">
+                     <HBox.margin>
+                        <Insets bottom="6.0" left="5.0" right="5.0" top="6.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXCheckBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="65.0" prefHeight="55.0" prefWidth="399.0" style="-fx-background-color: white;">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="72.0" text="Total Cost">
+                     <font>
+                        <Font name="AdobeGothicStd-Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="totalcost" prefHeight="32.0" prefWidth="192.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+                  <JFXCheckBox fx:id="isinstallmentscheck" text="Installments Allowed">
+                     <HBox.margin>
+                        <Insets bottom="6.0" left="5.0" right="5.0" top="6.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXCheckBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="120.0" prefHeight="55.0" prefWidth="399.0" style="-fx-background-color: white; -fx-alignment: center;">
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <children>
+                  <ComboBox fx:id="treatmentbox" prefHeight="32.0" prefWidth="238.0" stylesheets="@../../style/combobox.css">
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <Button fx:id="addtreatmentbtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="170.0" text="Add Treatment to Plan">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="PLUS_CIRCLE" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="410.0" layoutY="286.0" prefHeight="33.0" prefWidth="190.0" text="Plan Items Table">
+         <font>
+            <Font name="AdobeGothicStd-Bold" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="treatmentplantable" layoutX="410.0" layoutY="319.0" prefHeight="231.0" prefWidth="461.0" stylesheets="@../../style/table.css">
+         <columns>
+            <TableColumn fx:id="nameCol" prefWidth="121.0" text="Treatment Name" />
+            <TableColumn fx:id="priceCol" prefWidth="137.0" text="Estimated Price" />
+            <TableColumn fx:id="noteCol" prefWidth="195.0" text="Note" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

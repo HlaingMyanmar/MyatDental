@@ -1,4 +1,4 @@
-package org.sspd.myatdental.invoiceoptions.model;
+package org.sspd.myatdental.treatmentinvoiceoptions.model;
 
 import jakarta.persistence.*;
 import lombok.*;

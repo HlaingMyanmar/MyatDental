@@ -1,16 +1,9 @@
-package org.sspd.myatdental.invoiceoptions.service;
+package org.sspd.myatdental.treatmentinvoiceoptions.service;
 
-import jakarta.persistence.PersistenceException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Service;
-import org.sspd.myatdental.alert.AlertBox;
 import org.sspd.myatdental.dto.DataAccessObject;
-import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
-import org.sspd.myatdental.paymentoptions.model.Payment;
-import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoice;
 
 import java.util.List;
 

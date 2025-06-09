@@ -89,6 +89,13 @@ public class Dashboard implements Initializable {
 
         });
 
+        paymentbtn.setOnAction(e -> {
+
+            loadPaymentView();
+
+
+        });
+
     }
     private void loadDentistView() {
 
@@ -142,6 +149,30 @@ public class Dashboard implements Initializable {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/patients/patientview.fxml"));
+            fxmlLoader.setControllerFactory(App.context::getBean);
+            Parent dentistView = fxmlLoader.load();
+
+            // Clear existing content in switchPane
+            switchPane.getChildren().clear();
+
+            // Add dentistView to switchPane
+            switchPane.getChildren().add(dentistView);
+
+            // Optional: anchor it to all sides if it is resizable and supports anchoring
+            AnchorPane.setTopAnchor(dentistView, 10.5);
+            AnchorPane.setBottomAnchor(dentistView, 0.0);
+            AnchorPane.setLeftAnchor(dentistView, 0.0);
+            AnchorPane.setRightAnchor(dentistView, 0.0);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load dentailregister.fxml", e);
+        }
+    }
+
+    private void loadPaymentView() {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/payment/paymentview.fxml"));
             fxmlLoader.setControllerFactory(App.context::getBean);
             Parent dentistView = fxmlLoader.load();
 

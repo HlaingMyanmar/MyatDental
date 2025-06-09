@@ -1,4 +1,4 @@
-package org.sspd.myatdental.invoiceoptions.model;
+package org.sspd.myatdental.treatmentinvoiceoptions.model;
 
 import lombok.*;
 import org.springframework.stereotype.Component;
@@ -8,8 +8,6 @@ import org.sspd.myatdental.patientoptions.model.Patient;
 import org.sspd.myatdental.paymentoptions.model.Payment;
 import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 

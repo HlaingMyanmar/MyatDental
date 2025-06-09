@@ -115,17 +115,17 @@ module org.sspd.myatdental {
 
 
 
-    opens org.sspd.myatdental.invoiceoptions.model to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core,org.hibernate.validator;
-    exports org.sspd.myatdental.invoiceoptions.model to javafx.fxml,javafx.base;
+    opens org.sspd.myatdental.treatmentinvoiceoptions.model to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core,org.hibernate.validator;
+    exports org.sspd.myatdental.treatmentinvoiceoptions.model to javafx.fxml,javafx.base;
 
-    exports org.sspd.myatdental.invoiceoptions.Controller to javafx.fxml;
-    opens org.sspd.myatdental.invoiceoptions.Controller to javafx.fxml,javafx.base, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
+    exports org.sspd.myatdental.treatmentinvoiceoptions.Controller to javafx.fxml;
+    opens org.sspd.myatdental.treatmentinvoiceoptions.Controller to javafx.fxml,javafx.base, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
 
-    exports org.sspd.myatdental.invoiceoptions.impl to javafx.fxml;
-    opens org.sspd.myatdental.invoiceoptions.impl to javafx.fxml,javafx.base, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
+    exports org.sspd.myatdental.treatmentinvoiceoptions.impl to javafx.fxml;
+    opens org.sspd.myatdental.treatmentinvoiceoptions.impl to javafx.fxml,javafx.base, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
 
-    exports org.sspd.myatdental.invoiceoptions.service to javafx.fxml;
-    opens org.sspd.myatdental.invoiceoptions.service to javafx.fxml,javafx.base, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
+    exports org.sspd.myatdental.treatmentinvoiceoptions.service to javafx.fxml;
+    opens org.sspd.myatdental.treatmentinvoiceoptions.service to javafx.fxml,javafx.base, org.hibernate.orm.core, org.hibernate.validator, spring.beans, spring.core;
 
 
     opens org.sspd.myatdental.paymentoptions.model to javafx.fxml, spring.core, spring.beans, org.hibernate.orm.core,org.hibernate.validator;

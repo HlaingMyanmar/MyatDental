@@ -1,11 +1,11 @@
-package org.sspd.myatdental.invoiceoptions.impl;
+package org.sspd.myatdental.treatmentinvoiceoptions.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.sspd.myatdental.dto.DataAccessObject;
-import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoice;
 
 import java.util.List;
 

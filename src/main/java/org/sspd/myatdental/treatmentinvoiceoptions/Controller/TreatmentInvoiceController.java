@@ -1,4 +1,4 @@
-package org.sspd.myatdental.invoiceoptions.Controller;
+package org.sspd.myatdental.treatmentinvoiceoptions.Controller;
 
 import com.jfoenix.controls.JFXCheckBox;
 import jakarta.validation.Validator;
@@ -10,27 +10,23 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.sspd.myatdental.ErrorHandler.Validation.GenericValidator;
 import org.sspd.myatdental.alert.AlertBox;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
-import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
-import org.sspd.myatdental.invoiceoptions.service.TreatmentInvoiceRecordService;
-import org.sspd.myatdental.invoiceoptions.service.TreatmentInvoiceService;
-import org.sspd.myatdental.patientoptions.model.Patient;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoice;
+import org.sspd.myatdental.treatmentinvoiceoptions.service.TreatmentInvoiceRecordService;
+import org.sspd.myatdental.treatmentinvoiceoptions.service.TreatmentInvoiceService;
 import org.sspd.myatdental.paymentoptions.model.Payment;
 import org.sspd.myatdental.treatmentoptions.model.TreatRecordViewModel;
 import org.sspd.myatdental.treatmentoptions.model.Treatment;
 import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
 import org.sspd.myatdental.treatmentoptions.service.TreatmentService;
 
-import java.math.BigDecimal;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 

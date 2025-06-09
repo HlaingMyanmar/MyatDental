@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.stereotype.Component;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
-import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoice;
 
 import java.sql.Date;
 import java.util.Set;

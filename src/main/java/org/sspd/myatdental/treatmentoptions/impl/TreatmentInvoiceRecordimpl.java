@@ -6,7 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.sspd.myatdental.dto.DataAccessObject;
-import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoiceRecord;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoiceRecord;
 
 import java.util.List;
 

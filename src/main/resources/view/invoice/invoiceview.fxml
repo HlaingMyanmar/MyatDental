@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="693.0" prefWidth="1118.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.treatmentinvoiceoptions.Controller.InvoiceView">
+   <children>
+      <Label layoutX="13.0" layoutY="9.0" text="Invoices">
+         <font>
+            <Font name="AdobeGothicStd-Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="43.0" text="Manage invoice records and information">
+         <font>
+            <Font name="ACaslonPro-Regular" size="18.0" />
+         </font>
+      </Label>
+      <Pane layoutX="15.0" layoutY="80.0" prefHeight="66.0" prefWidth="1091.0" styleClass="pane-full-shadow" stylesheets="@../../style/pane.css">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <children>
+            <TextField fx:id="searchtxt" layoutX="14.0" layoutY="14.0" prefHeight="39.0" prefWidth="617.0" promptText="Search Patients . . . . ">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <ComboBox fx:id="townshopbox" layoutX="639.0" layoutY="14.0" prefHeight="39.0" prefWidth="181.0" promptText="Invoice Code" style="-fx-background-color: white; -fx-border-color: #BDBDBD; -fx-background-radius: 5; -fx-border-radius: 5;" />
+            <ComboBox fx:id="genderbox" layoutX="829.0" layoutY="14.0" prefHeight="39.0" prefWidth="181.0" promptText="Patient Code" style="-fx-background-color: white; -fx-border-color: #BDBDBD; -fx-background-radius: 5; -fx-border-radius: 5;" />
+            <Button fx:id="filterbtn" alignment="CENTER" layoutX="1018.0" layoutY="16.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" style="-fx-background-color: white;">
+               <graphic>
+                  <FontAwesomeIconView glyphName="FILTER" glyphStyle="-fx-fill: BLACK" size="28" wrappingWidth="24.14285659790039" />
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <TableView layoutX="15.0" layoutY="164.0" prefHeight="517.0" prefWidth="1091.0" stylesheets="@../../style/table.css">
+        <columns>
+            <TableColumn prefWidth="112.0" text="Date" />
+          <TableColumn prefWidth="95.0" text="Invoice Code" />
+          <TableColumn prefWidth="159.0" text="Patient Name" />
+            <TableColumn prefWidth="150.0" text="Dentist" />
+            <TableColumn prefWidth="111.0" text="App:ID" />
+            <TableColumn prefWidth="130.0" text="Plan / Not Plan" />
+            <TableColumn prefWidth="128.0" text="Additional_Fees" />
+            <TableColumn prefWidth="96.0" text="Payment " />
+            <TableColumn prefWidth="93.0" text="Amount " />
+        </columns>
+      </TableView>
+      <Button fx:id="addpatientbtn" layoutX="968.0" layoutY="19.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="139.0" text="Get Invoice">
+         <graphic>
+            <FontAwesomeIconView glyphName="PLUS_CIRCLE" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

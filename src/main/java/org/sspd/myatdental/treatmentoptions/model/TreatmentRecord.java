@@ -3,10 +3,9 @@ package org.sspd.myatdental.treatmentoptions.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
-import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
-import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoiceRecord;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoice;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoiceRecord;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 @Getter

@@ -1,4 +1,4 @@
-package org.sspd.myatdental.invoiceoptions.service;
+package org.sspd.myatdental.treatmentinvoiceoptions.service;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 import org.sspd.myatdental.alert.AlertBox;
 import org.sspd.myatdental.appointmentsoptions.model.Appointment;
 import org.sspd.myatdental.appointmentsoptions.service.AppointmentService;
-import org.sspd.myatdental.dentistsoptions.model.Dentist;
-import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoice;
-import org.sspd.myatdental.invoiceoptions.model.TreatmentInvoiceRecord;
-import org.sspd.myatdental.patientoptions.model.Patient;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoice;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoiceRecord;
 import org.sspd.myatdental.paymentoptions.model.Payment;
 import org.sspd.myatdental.paymentoptions.service.PaymentService;
 import org.sspd.myatdental.treatmentoptions.impl.TreatmentInvoiceRecordimpl;
@@ -20,8 +18,6 @@ import org.sspd.myatdental.treatmentoptions.model.TreatmentRecord;
 import org.sspd.myatdental.treatmentoptions.service.TreatmentRecordService;
 
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 
 @Service

@@ -1,0 +1,18 @@
+.table-view {
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-background-color: #fafafa;
+    -fx-font-size: 14px;
+}
+
+.table-column-header {
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #dddddd;
+}
+
+.table-cell {
+    -fx-padding: 8px;
+    -fx-border-color: #e0e0e0;
+}
