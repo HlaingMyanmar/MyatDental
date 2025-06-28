@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="693.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.appointment.Appointmentdashboard">
+   <children>
+      <TableView fx:id="appdashboard" layoutX="4.0" layoutY="52.0" prefHeight="608.0" prefWidth="1137.0" style="-fx-background-color: #ffffff; -fx-border-color: #dcdcdc; -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" stylesheets="@../../style/table.css">
+         <columns>
+            <TableColumn fx:id="codeCol" prefWidth="49.0" text="Code" />
+            <TableColumn prefWidth="207.0" text="Date &amp; Time">
+               <columns>
+                  <TableColumn fx:id="dateCol" prefWidth="102.0" text="Date" />
+                  <TableColumn fx:id="timeCol" prefWidth="87.0" text="Time" />
+               </columns>
+            </TableColumn>
+            <TableColumn fx:id="drnameCol" prefWidth="139.0" text="Dr.Name" />
+            <TableColumn fx:id="patNameCol" prefWidth="123.0" text="Patient Name" />
+            <TableColumn fx:id="patPhoneCol" prefWidth="118.0" text="Patient Phone" />
+            <TableColumn fx:id="dobCol" prefWidth="58.0" text="Age" />
+            <TableColumn fx:id="dobCol1" prefWidth="117.0" text="Plan" />
+            <TableColumn fx:id="statusCol" prefWidth="62.0" text="Status" />
+            <TableColumn fx:id="purposeCol" prefWidth="143.0" text="Purpose" />
+            <TableColumn fx:id="purposeCol1" prefWidth="121.0" text="Medical History" />
+         </columns>
+      </TableView>
+      <Button fx:id="addbtn" layoutX="947.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="174.0" text="New Appointment">
+         <graphic>
+            <FontAwesomeIconView glyphName="PLUS_CIRCLE" glyphStyle="-fx-fill: BLACK" size="24" wrappingWidth="24.14285659790039" />
+         </graphic>
+      </Button>
+      <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="10">
+         <children>
+            <DatePicker fx:id="searchapDate" prefHeight="40.0" prefWidth="200.0" promptText="Search by Appointment Date" style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;" />
+            <TextField fx:id="allsearchtxt" prefHeight="40.0" prefWidth="505.0" promptText="Search by Appointment " style="-fx-background-color: #f5f7fa; -fx-border-color: #dcdcdc; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System" size="14.0" />
+               </font>
+            </TextField>
+            <JFXButton fx:id="allresetbtn" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #e74c3c; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 5;" text="Reset Filters">
+               <graphic>
+                  <FontAwesomeIconView glyphName="REFRESH" glyphStyle="-fx-fill: #ffffff" size="20" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+      <Label layoutX="1079.0" layoutY="668.0" text="Count :" />
+      <Label layoutX="1123.0" layoutY="668.0" text="7" />
+   </children>
+</AnchorPane>

@@ -128,7 +128,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="switchPane" layoutX="236.0" layoutY="56.0" prefHeight="693.0" prefWidth="1118.0" />
+      <AnchorPane fx:id="switchPane" layoutX="224.0" layoutY="56.0" prefHeight="693.0" prefWidth="1130.0" />
       <AnchorPane layoutX="215.0" layoutY="2.0" prefHeight="42.0" prefWidth="1142.0" style="-fx-background-color: white;">
          <children>
             <FontAwesomeIconView fx:id="minimizebtn" glyphName="WINDOW_MINIMIZE" glyphStyle="-fx-fill: Black" layoutX="1076.0" layoutY="28.0" size="24" wrappingWidth="24.14285659790039" />
