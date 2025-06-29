@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="693.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.appointment.Appointmentdashboard">
+<AnchorPane prefHeight="693.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sspd.myatdental.appointmentsoptions.controller.AppMainController">
    <children>
       <TableView fx:id="appdashboard" layoutX="4.0" layoutY="52.0" prefHeight="608.0" prefWidth="1137.0" style="-fx-background-color: #ffffff; -fx-border-color: #dcdcdc; -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" stylesheets="@../../style/table.css">
          <columns>
@@ -28,10 +27,10 @@
             <TableColumn fx:id="patNameCol" prefWidth="123.0" text="Patient Name" />
             <TableColumn fx:id="patPhoneCol" prefWidth="118.0" text="Patient Phone" />
             <TableColumn fx:id="dobCol" prefWidth="58.0" text="Age" />
-            <TableColumn fx:id="dobCol1" prefWidth="117.0" text="Plan" />
+            <TableColumn fx:id="planCol" prefWidth="117.0" text="Plan" />
             <TableColumn fx:id="statusCol" prefWidth="62.0" text="Status" />
             <TableColumn fx:id="purposeCol" prefWidth="143.0" text="Purpose" />
-            <TableColumn fx:id="purposeCol1" prefWidth="121.0" text="Medical History" />
+            <TableColumn fx:id="actionCol" prefWidth="126.0" text="Action" />
          </columns>
       </TableView>
       <Button fx:id="addbtn" layoutX="947.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="174.0" text="New Appointment">
