@@ -3,6 +3,9 @@ package org.sspd.myatdental.treatmentoptions.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.sspd.myatdental.treatmentinvoiceoptions.model.TreatmentInvoice;
+
+import java.util.Set;
 
 @Getter@Setter
 @ToString
@@ -19,6 +22,10 @@ public class TreatmentCategory {
 
     @Column(name = "name")
     private String name;
+
+
+    @OneToMany(mappedBy = "treatmentcategory", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<TreatmentCategory> treatmentCategorySet;
 
 
 

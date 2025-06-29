@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.stereotype.Component;
+import org.sspd.myatdental.dentistsoptions.model.Dentist;
 
 import java.util.Set;
 
@@ -31,8 +32,13 @@ public class Treatment {
     @Column(name = "standard_price")
     private double standard_price;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id",nullable = false)
+    private TreatmentCategory treatmentCategory;
+
     @OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<TreatmentRecord> treatmentRecordSet;
+
 
 
     public Treatment(String name, String description, double standard_price) {

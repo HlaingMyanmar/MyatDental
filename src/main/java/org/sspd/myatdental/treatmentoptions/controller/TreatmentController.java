@@ -7,11 +7,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
@@ -22,11 +18,14 @@ import org.springframework.stereotype.Controller;
 import org.sspd.myatdental.ErrorHandler.Validation.GenericValidator;
 import org.sspd.myatdental.dentistsoptions.model.Dentist;
 import org.sspd.myatdental.treatmentoptions.model.Treatment;
+import org.sspd.myatdental.treatmentoptions.model.TreatmentCategory;
+import org.sspd.myatdental.treatmentoptions.service.TreatmentCategoryService;
 import org.sspd.myatdental.treatmentoptions.service.TreatmentService;
 
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import static org.sspd.myatdental.alert.AlertBox.showErrorDialog;
 import static org.sspd.myatdental.alert.AlertBox.showInformationDialog;
@@ -36,6 +35,10 @@ public class TreatmentController implements Initializable {
 
     @FXML
     private Label countxt;
+
+
+    @FXML
+    private ComboBox<String> listcatbox;
 
     @FXML
     private Button deletebtn;
@@ -77,10 +80,13 @@ public class TreatmentController implements Initializable {
 
     private final Validator validator;
 
-    public TreatmentController(TreatmentService treatmentService, GenericValidator<Dentist> genericValidator, Validator validator) {
+    private TreatmentCategoryService treatmentCategoryService;
+
+    public TreatmentController(TreatmentService treatmentService, GenericValidator<Dentist> genericValidator, Validator validator, TreatmentCategoryService treatmentCategoryService) {
         this.treatmentService = treatmentService;
         this.genericValidator = genericValidator;
         this.validator = validator;
+        this.treatmentCategoryService = treatmentCategoryService;
     }
 
     @Override
@@ -123,8 +129,39 @@ public class TreatmentController implements Initializable {
 
         initializeColumns();
 
+        TextField editor = listcatbox.getEditor();
+        editor.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue == null || newValue.isEmpty()) {
+                listcatbox.setItems(getTreatmentCategoryList());
+            } else {
+                String filter = newValue.toLowerCase();
+                ObservableList<String> filteredList = getTreatmentCategoryList().stream()
+                        .filter(township -> township.toLowerCase().contains(filter))
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                listcatbox.setItems(filteredList);
+                listcatbox.show();
+            }
+        });
+
 
     }
+
+    private ObservableList<String>getTreatmentCategoryList() {
+
+        return treatmentCategoryService.getAllTreatmentCategories().stream()
+                .map(TreatmentCategory::getName).collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+    }
+    private int getTreatmentCategoryID(String name) {
+
+        return treatmentCategoryService.getAllTreatmentCategories()
+                .stream()
+                .filter(t -> t.getName().equals(name))
+                .map(TreatmentCategory::getCategory_id)
+                .findFirst().orElse(-1);
+    }
+
+
 
     private void initializeColumns() {
         setCellFactoryColumn(nameCol, "name");
@@ -217,9 +254,12 @@ public class TreatmentController implements Initializable {
 
     private void saveAction() {
 
+        //getTreatmentCategoryID
+
         String name =  nametxt.getText();
         String desc =  desctxt.getText();
         double price = 0;
+
         if(pricetxt.getText().isEmpty()){
 
             showErrorDialog("Treatment","Notice","Please Fill Standard Price");return;
