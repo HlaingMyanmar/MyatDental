@@ -152,16 +152,15 @@ public class TreatmentController implements Initializable {
                 .map(TreatmentCategory::getName).collect(Collectors.toCollection(FXCollections::observableArrayList));
 
     }
-    private int getTreatmentCategoryID(String name) {
+    private TreatmentCategory getTreatmentCategoryID(String name) {
 
         return treatmentCategoryService.getAllTreatmentCategories()
                 .stream()
                 .filter(t -> t.getName().equals(name))
-                .map(TreatmentCategory::getCategory_id)
-                .findFirst().orElse(-1);
+                .findFirst().orElse(null);
+
+
     }
-
-
 
     private void initializeColumns() {
         setCellFactoryColumn(nameCol, "name");
@@ -259,18 +258,25 @@ public class TreatmentController implements Initializable {
         String name =  nametxt.getText();
         String desc =  desctxt.getText();
         double price = 0;
+        String treatmentCat = listcatbox.getValue();
 
-        if(pricetxt.getText().isEmpty()){
+        if(pricetxt.getText().isEmpty() ){
 
             showErrorDialog("Treatment","Notice","Please Fill Standard Price");return;
+        }
+        else if( treatmentCat.isEmpty()){
+
+            showErrorDialog("Treatment","Notice","Please Fill Treatment Category");return;
+
         }
         else {
             price =  Double.parseDouble(pricetxt.getText());
         }
 
 
+        TreatmentCategory  treatmentCategory  = getTreatmentCategoryID(treatmentCat);
 
-       Treatment treatment = new Treatment(name, desc, price);
+        Treatment treatment = new Treatment(name, desc, price,treatmentCategory);
 
         boolean validatecheck = new GenericValidator<Treatment>(validator).validate(treatment);
 
@@ -290,6 +296,8 @@ public class TreatmentController implements Initializable {
         }
 
     }
+
+
 
     private void deleteAction() {
 

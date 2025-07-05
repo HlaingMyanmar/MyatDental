@@ -16,6 +16,7 @@ import java.util.Set;
 @Getter@Setter@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Treatment {
 
     @Id
@@ -33,17 +34,16 @@ public class Treatment {
     private double standard_price;
 
     @ManyToOne
-    @JoinColumn(name = "category_id",nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private TreatmentCategory treatmentCategory;
 
     @OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<TreatmentRecord> treatmentRecordSet;
 
-
-
-    public Treatment(String name, String description, double standard_price) {
+    public Treatment(String name, String description, double standard_price, TreatmentCategory treatmentCategory) {
         this.name = name;
         this.description = description;
         this.standard_price = standard_price;
+        this.treatmentCategory = treatmentCategory;
     }
 }

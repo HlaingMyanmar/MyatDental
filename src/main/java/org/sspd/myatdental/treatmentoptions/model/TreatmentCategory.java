@@ -24,8 +24,8 @@ public class TreatmentCategory {
     private String name;
 
 
-    @OneToMany(mappedBy = "treatmentcategory", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Set<TreatmentCategory> treatmentCategorySet;
+    @OneToMany(mappedBy = "treatmentCategory", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private Set<Treatment> treatments;
 
 
 

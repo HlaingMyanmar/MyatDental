@@ -2,9 +2,11 @@ package org.sspd.myatdental.treatmentoptions.service;
 
 import org.springframework.stereotype.Service;
 import org.sspd.myatdental.treatmentoptions.impl.TreatmentCategoryImpl;
+import org.sspd.myatdental.treatmentoptions.model.Treatment;
 import org.sspd.myatdental.treatmentoptions.model.TreatmentCategory;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TreatmentCategoryService {
@@ -14,6 +16,29 @@ public class TreatmentCategoryService {
     public TreatmentCategoryService(TreatmentCategoryImpl treatmentCategoryDAO) {
         this.treatmentCategoryDAO = treatmentCategoryDAO;
     }
+
+    /**
+     * Gets a list of treatment names under the given category.
+     * @param categoryId the ID of the treatment category
+     * @return List of treatment names, or empty list if none
+     */
+    public List<String> getTreatmentNamesByCategoryId(int categoryId) {
+        if (categoryId <= 0) {
+            throw new IllegalArgumentException("Invalid treatment category ID: " + categoryId);
+        }
+
+        TreatmentCategory category = treatmentCategoryDAO.findById(categoryId);
+        if (category == null) {
+            return Collections.emptyList(); // or throw exception if needed
+        }
+
+        Set<Treatment> treatmentSet = category.getTreatments();
+
+        return treatmentSet.stream()
+                .map(Treatment::getName)
+                .collect(Collectors.toList());
+    }
+
 
     /**
      * Retrieves all treatment categories.

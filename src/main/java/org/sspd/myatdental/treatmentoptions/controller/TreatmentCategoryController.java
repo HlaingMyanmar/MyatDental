@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
@@ -19,6 +16,9 @@ import org.sspd.myatdental.treatmentoptions.service.TreatmentCategoryService;
 
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static org.sspd.myatdental.alert.AlertBox.showInformationDialog;
@@ -37,6 +37,8 @@ public class TreatmentCategoryController implements Initializable {
 
     @FXML
     private TableColumn<TreatmentCategory, String> nameCol;
+
+
 
     @FXML
     private TextField nametxt;
@@ -91,23 +93,61 @@ public class TreatmentCategoryController implements Initializable {
 
             TreatmentCategory tc = cattable.getSelectionModel().getSelectedItem();
 
-                if(event.getCode() == KeyCode.DELETE){
 
-                    if(tc!=null){
 
-                        boolean result = treatmentCategoryService.deleteTreatmentCategory(tc);
+            if (event.getCode() == KeyCode.DELETE && tc != null) {
 
-                        if(result){
+                try {
+                    List<String> treatments = treatmentCategoryService.getTreatmentNamesByCategoryId(tc.getCategory_id());
 
-                            AlertBox.showInformationDialog("Treatment Options","Treatment Category", "Successful Operation");
-                            cattable.getItems().clear();
-                            cattable.setItems(getDataList());
-                        }
-                    }
 
+
+
+
+//                    StringBuilder message = new StringBuilder();
+//                    message.append("❗ \"").append(tc.getName()).append("\" ကိုဖျက်လိုက်လျှင် \nအောက်ပါ Treatments များလည်း ဖျက်လိမ့်မည်:\n\n");
+//                    for (int i = 0; i < treatments.size(); i++) {
+//                        message.append(i + 1).append(". ").append(treatments.get(i)).append("\n");
+//                    }
+//                    message.append("\n👉 သေချာဖျက်ချင်ပါသလား?");
+
+//                    StringBuilder message = new StringBuilder();
+//                    message.append("❗ \"").append(categoryName).append("\" ကိုဖျက်လိုက်လျှင် \nအောက်ပါ Treatments များလည်း ဖျက်လိမ့်မည်:\n\n");
+//                    for (int i = 0; i < treatments.size(); i++) {
+//                        message.append(i + 1).append(". ").append(treatments.get(i)).append("\n");
+//                    }
+//                    message.append("\n👉 သေချာဖျက်ချင်ပါသလား?");
+//
+//                    // 2. Confirm Dialog ပြမယ်
+//                    Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+//                    confirm.setTitle("Confirm Deletion");
+//                    confirm.setHeaderText("Delete Category Confirmation");
+//                    confirm.setContentText(message.toString());
+//
+//                    Optional<ButtonType> result = confirm.showAndWait();
+//                    if (result.isPresent() && result.get() == ButtonType.OK) {
+//
+//                        // 3. ဖျက်မယ်
+//                        boolean success = treatmentCategoryService.deleteTreatmentCategory(tc);
+//
+//                        if (success) {
+//                            AlertBox.showInformationDialog("Treatment Options", "Treatment Category", "Successful Operation");
+//                            cattable.getItems().clear();
+//                            cattable.setItems(getDataList());
+//                        } else {
+//                            AlertBox.showErrorDialog("Delete Failed","Treatment Category" ,"Unable to delete category.");
+//                        }
+//                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    AlertBox.showErrorDialog("Exception", "Treatment Category","Error: " + e.getMessage());
                 }
 
+            }
+
         });
+
 
 
         cattable.setEditable(true);
@@ -122,6 +162,7 @@ public class TreatmentCategoryController implements Initializable {
         codeCol.setCellValueFactory(new PropertyValueFactory<>("category_id"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+
     }
 
     private ObservableList getDataList(){
@@ -131,6 +172,7 @@ public class TreatmentCategoryController implements Initializable {
     }
 
     private void initializeColumns() {
+
         setCellFactoryColumn(nameCol, "Name");
 
 
@@ -152,6 +194,7 @@ public class TreatmentCategoryController implements Initializable {
             }
         });
     }
+
     private void updateField(TreatmentCategory treatment, String fieldName, Object value) {
         try {
             Field field = Treatment.class.getDeclaredField(fieldName);

@@ -116,4 +116,8 @@ public class TreatmentCategoryImpl implements DataAccessObject<TreatmentCategory
             throw new RuntimeException("Error updating treatment category by ID: " + treatmentCategory.getCategory_id(), e);
         }
     }
+
+
+
+
 }
